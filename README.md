@@ -21,6 +21,10 @@ Participação no Piazza 1
 Video 2  
 TOTAL: #TODO   
 
+# Dicionario Dados
+
+https://github.com/dssg-pt/covid19pt-data#-dicion%C3%A1rio-dos-dados
+
 ## Introdução
 Face ao excelente desempenho dos alunos no projeto anterior, a empresa
 iQueChumbei decidiu adjudicar outro projecto à universidade 😁. Nos dias que correm a
