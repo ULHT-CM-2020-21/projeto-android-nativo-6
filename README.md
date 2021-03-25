@@ -35,3 +35,9 @@ pandemia no país (apenas em Portugal).
 O nome da aplicação assim como o esquema de cores ficarão completamente a cargo
 da criatividade dos alunos.
 
+# Bibliografia & Links 
+
+https://android-arsenal.com/  
+https://github.com/dssg-pt/covid19pt-data/blob/master/data.csv
+
+
