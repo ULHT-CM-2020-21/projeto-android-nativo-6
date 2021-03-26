@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Projeto-android-nativo-6</string>
+    <string name="confirmados">CONFIRMADOS</string>
+    <string name="recuperados">RECUPERADOS</string>
+    <string name="mortes">ÓBITOS</string>
+    <string name="internados">INTERNADOS</string>
+
+
 </resources>

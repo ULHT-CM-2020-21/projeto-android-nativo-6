@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Projeto-android-nativo-6</string>
+    <string name="confirmados">CONFIRMED</string>
+    <string name="recuperados">RECOVERED</string>
+    <string name="mortes">DEATHS</string>
+    <string name="internados">HOSPITALIZED</string>
+
 </resources>
