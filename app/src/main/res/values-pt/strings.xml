@@ -5,6 +5,9 @@
     <string name="recuperados">RECUPERADOS</string>
     <string name="mortes">ÓBITOS</string>
     <string name="internados">INTERNADOS</string>
+    <string name="casosRegiao">Casos por Região</string>
+    <string name="casosTotais">Casos Totais: </string>
+    <string name="casos24">Ultimas 24 horas: </string>
 
 
 </resources>
