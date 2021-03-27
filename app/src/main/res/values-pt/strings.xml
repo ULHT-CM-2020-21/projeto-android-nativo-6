@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Projeto-android-nativo-6</string>
+    <string name="registoTeste">Registo do Teste</string>
+    <string name="localTeste">Local do Teste</string>
+    <string name="localTesteEx">Farmácia X</string>
+    <string name="localTesteErro">O local não pode ficar vazio!</string>
+    <string name="dataTeste">Data do Teste</string>
+    <string name="dataTesteEx">DIA/MÊS/ANO</string>
+    <string name="dataTesteErro">A data não pode ficar vazia!</string>
+    <string name="resultadoTeste">Resultado do Teste</string>
+    <string name="resultadoTestePositivo">Positivo</string>
+    <string name="resultadoTesteNegativo">Negativo</string>
+    <string name="resultadoTesteErro">O resultado não pode ser vazio!</string>
+    <string name="fotoTeste">Fotografia do Teste</string>
+    <string name="submeterRegisto">SUBMETER</string>
 </resources>

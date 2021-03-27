@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Projeto-android-nativo-6</string>
+    <string name="registoTeste">Register a new Test</string>
+    <string name="localTeste">Test Location</string>
+    <string name="localTesteEx">Farmacy X</string>
+    <string name="localTesteErro">Test location cannot be empty!</string>
+    <string name="dataTeste">Test Date</string>
+    <string name="dataTesteEx">DAY/MONTH/YEAR</string>
+    <string name="dataTesteErro">Test date cannot be empty!</string>
+    <string name="resultadoTeste">Test Result</string>
+    <string name="resultadoTestePositivo">Positive</string>
+    <string name="resultadoTesteNegativo">Negative</string>
+    <string name="resultadoTesteErro">Test result cannot be empty!</string>
+    <string name="fotoTeste">Test Photo</string>
+    <string name="submeterRegisto">SUBMIT</string>
 </resources>
