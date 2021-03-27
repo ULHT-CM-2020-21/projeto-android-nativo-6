@@ -14,4 +14,10 @@
     <string name="resultadoTesteErro">O resultado não pode ser vazio!</string>
     <string name="fotoTeste">Fotografia do Teste</string>
     <string name="submeterRegisto">SUBMETER</string>
+    <string name="confirmados">CONFIRMADOS</string>
+    <string name="recuperados">RECUPERADOS</string>
+    <string name="mortes">ÓBITOS</string>
+    <string name="internados">INTERNADOS</string>
+
+
 </resources>

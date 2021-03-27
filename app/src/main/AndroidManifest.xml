@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pt.ulusofona.deisi.a2020.cm.g6">
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,16 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projetoandroidnativo6">
         <activity
-            android:name=".RegistoActivity"
-            android:label="YourAppName">
+            android:name=".Dashboard"
+            android:label="Nome Aplicação">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD7TrYf9lH_HmTlJY6otpRVNgkABTaL3nY" />
+
     </application>
 
 
 
 </manifest>
+
