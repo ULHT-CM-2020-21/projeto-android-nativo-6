@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projetoandroidnativo6">
         <activity
-            android:name=".RegistoActivity"
+            android:name=".Dashboard"
             android:label="Nome Aplicação">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

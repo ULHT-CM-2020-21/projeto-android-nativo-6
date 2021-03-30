@@ -17,5 +17,8 @@
     <string name="recuperados">RECOVERED</string>
     <string name="mortes">DEATHS</string>
     <string name="internados">HOSPITALIZED</string>
+    <string name="casosRegiao">Cases by Region</string>
+    <string name="casosTotais">Total Cases: </string>
+    <string name="casos24">Last 24 hours: </string>
 
 </resources>
