@@ -21,11 +21,15 @@
     <string name="casosRegiao">Casos por Região</string>
     <string name="casosTotais">Casos Totais:\u0020</string>
     <string name="casos24">Ultimas 24 horas:\u0020</string>
+    <string name="tests">Testes</string>
+    <string name="localTesteShow">Local: \u0020</string>
+    <string name="dataTesteShow">Data: \u0020</string>
 
     <!-- Drawer -->
 
     <string name="dashboard">Dashboard</string>
     <string name="registoteste">Novo Teste</string>
+    <string name="listTest">Lista Testes</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 

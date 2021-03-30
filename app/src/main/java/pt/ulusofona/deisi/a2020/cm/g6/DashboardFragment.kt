@@ -1,7 +1,6 @@
 package pt.ulusofona.deisi.a2020.cm.g6
 
 import android.os.Bundle
-import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View

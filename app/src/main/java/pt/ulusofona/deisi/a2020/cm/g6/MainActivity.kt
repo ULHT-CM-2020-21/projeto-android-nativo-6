@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
             R.id.nav_dashboard -> NavigationManager.goToDashboardFragment(supportFragmentManager)
             R.id.nav_Test -> NavigationManager.goToRegisto(supportFragmentManager)
+            R.id.list_tests -> NavigationManager.goToListTestes(supportFragmentManager)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
