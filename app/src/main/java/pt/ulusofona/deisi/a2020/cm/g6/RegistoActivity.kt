@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputType
 import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
@@ -18,9 +19,9 @@ import java.util.*
 
 
 class RegistoActivity : AppCompatActivity() {
-    var editData: EditText? = dataTeste
+    val testeSubmete: TesteCovid = TesteCovid()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registo)
     }
@@ -33,7 +34,7 @@ class RegistoActivity : AppCompatActivity() {
         }
 
         dataTeste.setOnClickListener {
-            /*showPicker()*/
+                showPicker()
         }
 
         button_camera.setOnClickListener {
@@ -50,12 +51,16 @@ class RegistoActivity : AppCompatActivity() {
 
             when (view.getId()) {
                 R.id.radio_positivo ->
-                    if (!checked) {
+                    if (checked) {
+                        testeSubmete.resultadoTesteCovid = true
+                    } else {
                         radio_positivo.setError(getString(R.string.resultadoTesteErro))
                     }
 
                 R.id.radio_negativo ->
-                    if (!checked) {
+                    if (checked) {
+                        testeSubmete.resultadoTesteCovid = false
+                    } else {
                         radio_negativo.setError(getString(R.string.resultadoTesteErro))
                     }
             }
@@ -63,30 +68,27 @@ class RegistoActivity : AppCompatActivity() {
     }
 
 
-    /*fun showPicker() {
-        val picker: DatePickerDialog? = null
+    fun showPicker() {
+        val picker: DatePickerDialog?
+        val editDate: EditText? = dataTeste
         val calendar: Calendar = Calendar.getInstance()
         val dia: Int = calendar.get(Calendar.DAY_OF_MONTH)
         val mes: Int = calendar.get(Calendar.MONTH)
         val ano: Int = calendar.get(Calendar.YEAR)
 
 
-        picker = DatePickerDialog(
-            this,
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-
-                // Display Selected date in textbox
-                lblDate.setText("" + dayOfMonth + " " + MONTHS[monthOfYear] + ", " + year)
-
+        picker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                editDate!!.setText("" + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)
             },
-            year,
-            month,
-            day
+            ano,
+            mes,
+            dia
         )
 
-        dpd.show()
+        picker!!.show()
+        testeSubmete.data = picker
 
-    }*/
+    }
 
 
     fun submeterTeste() {
@@ -98,11 +100,12 @@ class RegistoActivity : AppCompatActivity() {
         val editLocalString: String = editLocal.text.toString()
         val editDataString: String = editData.text.toString()
 
-        if (editLocalString == "") {
+
+        if (editLocalString == "" || editLocalString.isEmpty()) {
             editLocal.setError(getString(R.string.localTesteErro))
         }
 
-        if (editDataString == "") {
+        if (editDataString == "" || editDataString.isEmpty()) {
             editData.setError(getString(R.string.dataTesteErro))
         }
 
@@ -110,6 +113,11 @@ class RegistoActivity : AppCompatActivity() {
             editResultados.resultadoTesteErro.isVisible = true
         }
 
+        if ((editPositivo.isChecked()) || (editNegativo.isChecked())) {
+            editResultados.resultadoTesteErro.isVisible = false
+        }
 
+        //TODO: ADICIONAR TESTE À LISTA DE TESTES DEPOIS DE VALIDAR AS COISAS
+        testeSubmete.local = editLocalString
     }
 }
