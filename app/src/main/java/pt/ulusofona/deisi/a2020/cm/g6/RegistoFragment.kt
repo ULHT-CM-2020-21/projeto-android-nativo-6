@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.core.view.isVisible
+import butterknife.ButterKnife
+import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_registo.*
 import kotlinx.android.synthetic.main.fragment_registo.view.*
 
@@ -20,7 +22,9 @@ import java.util.*
 class RegistoFragment : Fragment() {
     val testeSubmete: TesteCovid = TesteCovid()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_registo, container, false)
+       val view = inflater.inflate(R.layout.fragment_registo,container,false)
+        ButterKnife.bind(this,view)
+        return view
     }
 
     override fun onStart() {
@@ -41,7 +45,7 @@ class RegistoFragment : Fragment() {
 
     }
 
-
+    @OnClick(R.id.radio_positivo,R.id.radio_negativo)
     fun onRadioButtonClicked(view: View) {
         if (view is RadioButton) {
             val checked = view.isChecked
@@ -83,7 +87,6 @@ class RegistoFragment : Fragment() {
         )
 
         picker!!.show()
-        testeSubmete.data = picker
 
     }
 
@@ -116,6 +119,8 @@ class RegistoFragment : Fragment() {
 
         //TODO: ADICIONAR TESTE À LISTA DE TESTES DEPOIS DE VALIDAR AS COISAS
         testeSubmete.local = editLocalString
+        testeSubmete.data = editDataString
+        println(testeSubmete.toString())
     }
 
 

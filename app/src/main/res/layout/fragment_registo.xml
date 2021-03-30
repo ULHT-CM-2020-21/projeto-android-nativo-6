@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".RegistoActivity">
+    android:orientation="vertical">
 
 
     <TextView
@@ -80,7 +79,6 @@
             android:id="@+id/radio_positivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:textColor="@color/black"
             android:text="@string/resultadoTestePositivo"
             android:textSize="20sp" />
@@ -90,7 +88,6 @@
             android:id="@+id/radio_negativo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:textColor="@color/black"
             android:text="@string/resultadoTesteNegativo"
             android:textSize="20sp" />

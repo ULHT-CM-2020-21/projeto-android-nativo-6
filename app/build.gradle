@@ -1,3 +1,4 @@
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -5,6 +6,7 @@ plugins {
 }
 
 android {
+    apply plugin: 'kotlin-kapt'
     compileSdkVersion 28
     buildToolsVersion "30.0.3"
 
@@ -55,5 +57,6 @@ dependencies {
     implementation 'com.github.furkanaskin:ClickablePieChart:1.0.8'
     implementation 'com.github.swapnil1104:LinearGraphView:0.0.1'
     implementation 'com.google.android.material:material:1.1.0'
-
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    kapt 'com.jakewharton:butterknife-compiler:10.0.0'
 }

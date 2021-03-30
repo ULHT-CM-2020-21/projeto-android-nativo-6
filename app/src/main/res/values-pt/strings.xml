@@ -6,7 +6,7 @@
     <string name="localTesteEx">Farmácia X</string>
     <string name="localTesteErro">O local não pode ficar vazio!</string>
     <string name="dataTeste">Data do Teste</string>
-    <string name="dataTesteEx">DIA/MÊS/ANO</string>
+    <string name="dataTesteEx">DD/MM/AAAA</string>
     <string name="dataTesteErro">A data não pode ficar vazia!</string>
     <string name="resultadoTeste">Resultado do Teste</string>
     <string name="resultadoTestePositivo">Positivo</string>

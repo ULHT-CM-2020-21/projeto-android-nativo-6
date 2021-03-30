@@ -5,7 +5,7 @@
     <string name="localTesteEx">Farmacy X</string>
     <string name="localTesteErro">Test location cannot be empty!</string>
     <string name="dataTeste">Test Date</string>
-    <string name="dataTesteEx">DAY/MONTH/YEAR</string>
+    <string name="dataTesteEx">DD/MM/YYYY</string>
     <string name="dataTesteErro">Test date cannot be empty!</string>
     <string name="resultadoTeste">Test Result</string>
     <string name="resultadoTestePositivo">Positive</string>
