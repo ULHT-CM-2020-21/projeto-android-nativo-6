@@ -18,7 +18,15 @@
     <string name="mortes">DEATHS</string>
     <string name="internados">HOSPITALIZED</string>
     <string name="casosRegiao">Cases by Region</string>
-    <string name="casosTotais">Total Cases: </string>
-    <string name="casos24">Last 24 hours: </string>
+    <string name="casosTotais">Total Cases:\u0020</string>
+    <string name="casos24">Last 24 hours:\u0020</string>
+
+    <!-- Drawer -->
+
+    <string name="dashboard">Dashboard</string>
+    <string name="registoteste">New Test</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
 
 </resources>

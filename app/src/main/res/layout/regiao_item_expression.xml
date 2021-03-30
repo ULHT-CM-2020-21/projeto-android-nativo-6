@@ -15,7 +15,7 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="90dp"
-            android:src="@drawable/mapa_porto_norte">
+            android:id="@+id/image_list">
 
         </ImageView>
         <LinearLayout

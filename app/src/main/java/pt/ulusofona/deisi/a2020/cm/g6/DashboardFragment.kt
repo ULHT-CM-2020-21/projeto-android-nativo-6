@@ -1,22 +1,24 @@
 package pt.ulusofona.deisi.a2020.cm.g6
 
 import android.os.Bundle
+import android.view.ContextMenu
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
-import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 import java.util.ArrayList
 
-
-class Dashboard : AppCompatActivity() {
-
+class DashboardFragment : Fragment() {
 
     private var historyAdapter: RegiaoAdapter? = null
     private var covidHoje:CovidData = CovidData()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
 
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_dashboard, container, false)
     }
 
     override fun onStart() {
@@ -39,11 +41,12 @@ class Dashboard : AppCompatActivity() {
         numero_novos_obitos.text = "+ " + covidHoje.novos_obitos
         numero_novos_recuperados.text = "+ " + covidHoje.novos_recuperados
 
-        historyAdapter = RegiaoAdapter(this, R.layout.regiao_item_expression, list as ArrayList<Regiao>)
+        historyAdapter = RegiaoAdapter(context as MainActivity, R.layout.regiao_item_expression, list as ArrayList<Regiao>)
         list_historic.adapter = historyAdapter
         list_historic.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, position, id ->
             //click
         })
     }
+
 
 }
