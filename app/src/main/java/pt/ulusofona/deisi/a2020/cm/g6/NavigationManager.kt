@@ -20,5 +20,9 @@ abstract class NavigationManager {
         fun goToRegisto(fm: FragmentManager){
             placeFragment(fm, RegistoFragment())
         }
+
+        fun goToDetalhe(fm: FragmentManager){
+            placeFragment(fm, DetalheTesteFragment())
+        }
     }
 }

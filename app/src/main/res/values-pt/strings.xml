@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Projeto-android-nativo-6</string>
+    <string name="detalheTeste">Detalhe do teste</string>
     <string name="registoTeste">Registo do Teste</string>
     <string name="localTeste">Local do Teste</string>
     <string name="localTesteEx">Farmácia X</string>

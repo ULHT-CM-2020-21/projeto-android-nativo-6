@@ -6,7 +6,7 @@ import java.util.*
 
 class TesteCovid (
     var local: String = "",
-    var data: String = "DD-MM-YYYY",
+    var data: String = "DD/MM/YYYY",
     var resultadoTesteCovid: Boolean = false,
     val fotoPath: String = "/drawable/teste_negativo",
     val foto: File= File(fotoPath)){
