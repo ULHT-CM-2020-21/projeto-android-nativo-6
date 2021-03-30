@@ -24,5 +24,9 @@ abstract class NavigationManager {
         fun goToDetalhe(fm: FragmentManager){
             placeFragment(fm, DetalheTesteFragment())
         }
+
+        fun goToListTestes(fm: FragmentManager){
+            placeFragment(fm, ListaTestesFragment())
+        }
     }
 }

@@ -12,6 +12,11 @@
             android:icon="@drawable/ic_test"
             android:title="@string/registoTeste"
             />
+        <item
+            android:id="@+id/list_tests"
+            android:icon="@drawable/ic_list"
+            android:title="@string/listTest"
+            />
 
     </group>
 
