@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.fragment.app.FragmentManager
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
 import java.util.ArrayList
+
 
 
 class ListaTestesFragment : Fragment() {
@@ -30,7 +33,7 @@ class ListaTestesFragment : Fragment() {
         testAdapter = TestAdapter(context as MainActivity, R.layout.teste_item_expression, list as ArrayList<TesteCovid>)
         list_test.adapter = testAdapter
         list_test.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, position, id ->
-            //click
+            //navegar como nao sei?
         })
 
     }

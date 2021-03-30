@@ -21,12 +21,14 @@ abstract class NavigationManager {
             placeFragment(fm, RegistoFragment())
         }
 
-        fun goToDetalhe(fm: FragmentManager){
-            placeFragment(fm, DetalheTesteFragment())
-        }
-
         fun goToListTestes(fm: FragmentManager){
             placeFragment(fm, ListaTestesFragment())
         }
+
+        fun goToTest(fm: FragmentManager,test: TesteCovid){
+            placeFragment(fm, DetalheTesteFragment(test))
+        }
+
+
     }
 }
