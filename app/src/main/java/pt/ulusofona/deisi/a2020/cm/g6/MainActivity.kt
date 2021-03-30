@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.nav_dashboard -> NavigationManager.goToDashboardFragment(supportFragmentManager)
+            R.id.nav_Test -> NavigationManager.goToRegisto(supportFragmentManager)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
