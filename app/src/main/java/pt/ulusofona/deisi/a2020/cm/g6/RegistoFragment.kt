@@ -15,6 +15,7 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_registo.*
 import kotlinx.android.synthetic.main.fragment_registo.view.*
+import pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource
 
 import java.util.*
 
@@ -121,6 +122,7 @@ class RegistoFragment : Fragment() {
         testeSubmete.local = editLocalString
         testeSubmete.data = editDataString
         println(testeSubmete.toString())
+        TesteSource.addTest(testeSubmete)
     }
 
 

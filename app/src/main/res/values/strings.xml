@@ -43,8 +43,6 @@
     <string name="INFOemailCovidDuvidas">SNS 24 channel for clarification of doubts. Do not use for medical diagnosis</string>
 
 
-
-
     <!-- Drawer -->
 
     <string name="dashboard">Dashboard</string>
@@ -53,7 +51,8 @@
     <string name="contactos">Contacts</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

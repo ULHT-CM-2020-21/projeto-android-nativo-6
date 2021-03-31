@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
+import pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource
 import java.util.ArrayList
-
+import javax.sql.DataSource
 
 
 class ListaTestesFragment : Fragment() {
@@ -31,7 +32,7 @@ class ListaTestesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val list = mutableListOf(TesteCovid("Farmacia Maria Ines Abuelia Toma","12-11-2021",true,""),TesteCovid("Farmacia 2","11-01-2020",false,""))
+        val list = TesteSource.getAllTeste()
 
         /*
         testAdapter = TestAdapter(context as MainActivity, R.layout.teste_item_expression, list as ArrayList<TesteCovid>)
