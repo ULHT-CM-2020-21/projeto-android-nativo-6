@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Projeto-android-nativo-6</string>
+    <string name="app_name">COVID 19 PORTUGAL</string>
     <string name="detalheTeste">Detalhe do teste</string>
     <string name="registoTeste">Registo do Teste</string>
     <string name="localTeste">Local do Teste</string>
@@ -31,6 +31,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="registoteste">Novo Teste</string>
     <string name="listTest">Lista Testes</string>
+    <string name="contactos">Contactos</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 

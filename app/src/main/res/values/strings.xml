@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Projeto-android-nativo-6</string>
+    <string name="app_name">COVID 19 PORTUGAL</string>
     <string name="detalheTeste">Test Detail</string>
     <string name="registoTeste">Register a new Test</string>
     <string name="localTeste">Test Location</string>
@@ -30,6 +30,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="registoteste">New Test</string>
     <string name="listTest">List Tests</string>
+    <string name="contactos">Contacts</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 

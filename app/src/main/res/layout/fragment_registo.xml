@@ -27,8 +27,7 @@
         android:text="@string/localTeste"
         android:layout_marginStart="12dp"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/localTeste"
@@ -46,8 +45,7 @@
         android:text="@string/dataTeste"
         android:layout_marginStart="12dp"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/dataTeste"
@@ -66,8 +64,10 @@
         android:layout_marginStart="12dp"
         android:text="@string/resultadoTeste"
         android:textColor="@color/black"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="25sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
     <RadioGroup
         android:id="@+id/escolhaResultados"
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:layout_marginStart="12dp"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radio_positivo"
@@ -106,6 +106,8 @@
             android:visibility="invisible">
         </TextView>
 
+
+
     </RadioGroup>
 
     <TextView
@@ -117,7 +119,7 @@
         android:text="@string/fotoTeste"
         android:textColor="@color/black"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -135,7 +137,12 @@
             android:layout_marginBottom="12dp"
             android:src="@drawable/camera"/>
 
+
     </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray" />
 
 
     <Button
