@@ -2,14 +2,17 @@ package pt.ulusofona.deisi.a2020.cm.g6
 
 
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.teste_item_expression.view.*
 import java.util.ArrayList
 
-
+/*
 class TestAdapter(context: MainActivity, private val layout: Int, items: ArrayList<TesteCovid>) : ArrayAdapter<TesteCovid> (context,layout,items) {
 
     override fun getCount(): Int {
@@ -30,5 +33,29 @@ class TestAdapter(context: MainActivity, private val layout: Int, items: ArrayLi
         view.data?.text = getItem(position)?.data
         return view
     }
+
+}
+*/
+class TestAdapter(private val context: Context, private val layout: Int, private val items: MutableList<TesteCovid>): RecyclerView.Adapter<TestAdapter.TestViewHolder>(){
+
+    class TestViewHolder(view: View): RecyclerView.ViewHolder(view){
+        val data: TextView = view.data
+        val local: TextView = view.localTeste
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestAdapter.TestViewHolder {
+        return TestViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
+    }
+
+    override fun onBindViewHolder(holder: TestAdapter.TestViewHolder, position: Int) {
+        holder.data.text = items[position].data
+        holder.local.text = items[position].local
+    }
+
+    override fun getItemCount(): Int {
+        return items.size
+    }
+
+
 
 }

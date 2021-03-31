@@ -26,6 +26,21 @@
     <string name="localTesteShow">Local: \u0020</string>
     <string name="dataTesteShow">Data: \u0020</string>
 
+    <string name="contactoSNS24">+351 808242424</string>
+    <string name="contactoSeguSocial">+351 300502502</string>
+    <string name="contactoEmergenciaConsular01">+351 217929714</string>
+    <string name="contactoEmergenciaConsular02">+351 961706472</string>
+    <string name="websiteCovid">covid19.min-saude.pt</string>
+    <string name="emailCovidDuvidas">atendimento@SNS24.gov.pt</string>
+    <string name="emailEmerConsular">gec@mne.pt</string>
+    <string name="websiteLegislacaoCovid">dre.pt/legislacao-covid-19</string>
+
+    <string name="INFOcontactoSNS24">Linha SNS 24 para triagem de sintomas e esclarecimento de dúvidas sobre COVID-19</string>
+    <string name="INFOcontactoSeguSocial">Linha Segurança Social para esclarecimentos sobre assistência à família, subsidio de doença e quarentena</string>
+    <string name="INFOEmergenciaConsular">Gabinete de Emergência Consular</string>
+    <string name="INFOemailCovid">Plataforma da DGS para esclarecimentos sobre a COVID-19</string>
+    <string name="INFOemailCovidDuvidas">Canal SNS 24 para esclarecimentos de dúvidas. Não utilizar para diagnóstico médico</string>
+    <string name="INFOLegislacao">Área do Diário da República Eletrónico dedicada à legislação relativa à pandemia</string>
     <!-- Drawer -->
 
     <string name="dashboard">Dashboard</string>

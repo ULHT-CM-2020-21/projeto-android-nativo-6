@@ -86,7 +86,7 @@ class RegistoFragment : Fragment() {
             dia
         )
 
-        picker!!.show()
+        picker.show()
 
     }
 
