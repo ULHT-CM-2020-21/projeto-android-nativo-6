@@ -42,6 +42,7 @@ class ListaTestesFragment : Fragment() {
         */
         list_test.layoutManager = LinearLayoutManager(context as MainActivity)
         list_test.adapter = TestAdapter(context as MainActivity,R.layout.teste_item_expression,list as ArrayList<TesteCovid>)
+
     }
 
 
