@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">COVID 19 PORTUGAL</string>
+    <string name="app_name">COVID INFO</string>
     <string name="detalheTeste">Detalhe do teste</string>
     <string name="registoTeste">Registo do Teste</string>
     <string name="localTeste">Local do Teste</string>
@@ -26,6 +26,8 @@
     <string name="localTesteShow">Local: \u0020</string>
     <string name="dataTesteShow">Data: \u0020</string>
     <string name="dataUpdate">DADOS ATUALIZADOS A: 10/02/2021</string>
+    <string name="danger">PERIGO</string>
+    <string name="NOdanger">SEM PERIGO</string>
 
     <string name="contactoSNS24">+351 808242424</string>
     <string name="contactoSeguSocial">+351 300502502</string>

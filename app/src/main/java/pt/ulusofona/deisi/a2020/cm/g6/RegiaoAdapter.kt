@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.regiao_item_expression.view.*
 import java.util.ArrayList
 
-
+// WARNING PROFESSOR - Região não implementa RecyclerView porque é uma lista com entradas ESTATICAS, são sempre as mesma regiões...
 class RegiaoAdapter(context: MainActivity, private val layout: Int, items: ArrayList<Regiao>) : ArrayAdapter<Regiao> (context,layout,items) {
 
     override fun getCount(): Int {

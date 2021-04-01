@@ -29,6 +29,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        val rnds = (0..1).random()
+        if(rnds == 0){
+            text_perigo.setText( R.string.NOdanger)
+            imagePerigo.setImageResource(R.drawable.green)
+        }else{
+            text_perigo.setText( R.string.danger)
+            imagePerigo.setImageResource(R.drawable.red)
+        }
+    }
+
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

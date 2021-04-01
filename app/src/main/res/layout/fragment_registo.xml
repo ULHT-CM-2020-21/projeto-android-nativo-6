@@ -78,12 +78,7 @@
             android:gravity="start"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:gravity="start"
-                android:orientation="horizontal">
+
 
                 <RadioButton
                     android:id="@+id/radio_positivo"
@@ -102,7 +97,7 @@
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
-            </LinearLayout>
+
 
 
             <TextView

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">COVID 19 PORTUGAL</string>
+    <string name="app_name">COVID INFO</string>
     <string name="detalheTeste">Test Detail</string>
     <string name="registoTeste">Register a new Test</string>
     <string name="localTeste">Test Location</string>
@@ -25,6 +25,8 @@
     <string name="localTesteShow">Location: \u0020</string>
     <string name="dataTesteShow">Date: \u0020</string>
     <string name="dataUpdate">LAST UPDATE: 10/02/2021</string>
+    <string name="danger">(DANGER)</string>
+    <string name="NOdanger">(NO DANGER)</string>
 
     <string name="contactoSNS24">+351 808242424</string>
     <string name="contactoSeguSocial">+351 300502502</string>
