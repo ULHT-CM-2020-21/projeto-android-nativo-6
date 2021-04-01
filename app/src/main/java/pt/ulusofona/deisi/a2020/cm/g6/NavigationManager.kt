@@ -33,6 +33,11 @@ abstract class NavigationManager {
             placeFragment(fm, ContactosFragment())
         }
 
+        fun goToGraficos(fm: FragmentManager){
+            placeFragment(fm, GraficosFragment())
+        }
+
+
 
 
     }

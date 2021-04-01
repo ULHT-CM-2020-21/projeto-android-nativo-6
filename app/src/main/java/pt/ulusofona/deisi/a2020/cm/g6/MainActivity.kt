@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_Test -> NavigationManager.goToRegisto(supportFragmentManager)
             R.id.list_tests -> NavigationManager.goToListTestes(supportFragmentManager)
             R.id.nav_contactos -> NavigationManager.goToContactos(supportFragmentManager)
+            R.id.nav_graph -> NavigationManager.goToGraficos(supportFragmentManager)
         }
         drawer.closeDrawer(GravityCompat.START)
         return true
