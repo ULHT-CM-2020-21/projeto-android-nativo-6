@@ -1,5 +1,6 @@
 package pt.ulusofona.deisi.a2020.cm.g6
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.RadioButton
 import androidx.core.view.isVisible
@@ -36,6 +38,7 @@ class RegistoFragment : Fragment() {
         }
 
         dataTeste.setOnClickListener {
+           hideKeyboard(dataTeste)
             showPicker()
         }
 
@@ -125,5 +128,9 @@ class RegistoFragment : Fragment() {
         TesteSource.addTest(testeSubmete)
     }
 
+    fun hideKeyboard(view: View){
+        val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 
 }
