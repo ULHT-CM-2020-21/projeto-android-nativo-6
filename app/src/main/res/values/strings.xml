@@ -29,6 +29,13 @@
     <string name="NOdanger">(NO DANGER)</string>
     <string name="contactosTitulo">CONTACTS</string>
     <string name="listaTestesTitulo">Test List</string>
+    <string name="dias">DAYS</string>
+
+    <string name="graficoConfirmados">Confirmed Chart</string>
+    <string name="graficoRecuperados">Recovered Chart</string>
+    <string name="graficoObitos">Deaths chart</string>
+    <string name="graficoInternados">Hospitalized Chart</string>
+
 
     <string name="contactoSNS24">+351 808 24 24 24</string>
     <string name="contactoSeguSocial">+351 300 502 502</string>
@@ -52,6 +59,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="registoteste">New Test</string>
     <string name="listTest">List Tests</string>
+    <string name="drawer_graficos">Charts</string>
     <string name="contactos">Contacts</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
