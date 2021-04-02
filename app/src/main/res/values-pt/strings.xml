@@ -30,6 +30,7 @@
     <string name="NOdanger">SEM PERIGO</string>
     <string name="contactosTitulo">CONTACTOS</string>
     <string name="listaTestesTitulo">Lista de Testes</string>
+    <string name="testeSubmetido">Teste Submetido!</string>
 
     <string name="contactoSNS24">+351 808 24 24 24</string>
     <string name="contactoSeguSocial">+351 300 502 502</string>

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.core.view.isVisible
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -30,11 +31,13 @@ class RegistoFragment : Fragment() {
         return view
     }
 
+
     override fun onStart() {
         super.onStart()
 
         submeterTeste.setOnClickListener {
             submeterTeste()
+
         }
 
         dataTeste.setOnClickListener {
@@ -83,7 +86,7 @@ class RegistoFragment : Fragment() {
 
 
         picker = DatePickerDialog(context as MainActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            editDate!!.setText("" + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year)
+            editDate!!.setText("" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year)
         },
             ano,
             mes,
@@ -121,11 +124,12 @@ class RegistoFragment : Fragment() {
             editResultados.resultadoTesteErro.isVisible = false
         }
 
-        //TODO: ADICIONAR TESTE À LISTA DE TESTES DEPOIS DE VALIDAR AS COISAS
+
         testeSubmete.local = editLocalString
         testeSubmete.data = editDataString
         println(testeSubmete.toString())
         TesteSource.addTest(testeSubmete)
+        Toast.makeText(context as MainActivity, getString(R.string.testeSubmetido), Toast.LENGTH_SHORT).show()
     }
 
     fun hideKeyboard(view: View){
