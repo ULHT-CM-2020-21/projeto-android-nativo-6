@@ -121,6 +121,25 @@ class DataSource {
         return novos_confirmados_madeira;
     }
 
+    fun get15DiasConfirmados(data: String): MutableList<Int> {
+        return mutableListOf(123,456,345,222,546,112,765,434,212,445,678,323,642,345,521);
+    }
+
+    fun get15DiasRecuperados(data: String): MutableList<Int> {
+        return mutableListOf(223,456,245,159,446,112,654,753,412,322,256,125,456,657,125);
+    }
+
+
+    fun get15DiasObitos(data: String): MutableList<Int> {
+        return mutableListOf(23,56,45,22,46,12,75,44,12,45,68,23,62,45,21);
+    }
+
+
+    fun get15DiasInternados(data: String): MutableList<Int> {
+        return mutableListOf(13,45,34,22,54,11,76,43,21,44,67,32,64,34,52);
+    }
+
+
 
 
 

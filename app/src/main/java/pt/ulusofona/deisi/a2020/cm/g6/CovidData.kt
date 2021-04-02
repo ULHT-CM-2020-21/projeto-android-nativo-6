@@ -29,6 +29,11 @@ class CovidData {
     var novos_confirmados_arsalgarve: Int = 0
     var novos_confirmados_acores: Int = 0
     var novos_confirmados_madeira: Int = 0
+    var listDiasConfirmados: MutableList<Int> = mutableListOf()
+    var listDiasRecuperados: MutableList<Int> = mutableListOf()
+    var listDiasObitos: MutableList<Int> = mutableListOf()
+    var listDiasInternados: MutableList<Int> = mutableListOf()
+
 
     constructor(data: String) : this() {
         dataPublicacao = data;
@@ -67,6 +72,10 @@ class CovidData {
         novos_confirmados_arsalgarve = DataSource().getNovos_confirmados_arsalgarve(dataPublicacao)
         novos_confirmados_acores = DataSource().getNovos_confirmados_acores(dataPublicacao)
         novos_confirmados_madeira = DataSource().getNovos_confirmados_madeira(dataPublicacao)
+        listDiasConfirmados = DataSource().get15DiasConfirmados(dataPublicacao)
+        listDiasRecuperados = DataSource().get15DiasRecuperados(dataPublicacao)
+        listDiasObitos = DataSource().get15DiasObitos(dataPublicacao)
+        listDiasInternados= DataSource().get15DiasInternados(dataPublicacao)
     }
 
 

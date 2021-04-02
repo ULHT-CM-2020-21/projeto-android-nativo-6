@@ -31,6 +31,12 @@
     <string name="contactosTitulo">CONTACTOS</string>
     <string name="listaTestesTitulo">Lista de Testes</string>
     <string name="testeSubmetido">Teste Submetido!</string>
+    <string name="dias">DIAS</string>
+
+    <string name="graficoConfirmados">Gráfico Confirmados</string>
+    <string name="graficoRecuperados">Gráfico Recuperados</string>
+    <string name="graficoObitos">Gráfico Obitos</string>
+    <string name="graficoInternados">Gráfico Internados</string>
 
     <string name="contactoSNS24">+351 808 24 24 24</string>
     <string name="contactoSeguSocial">+351 300 502 502</string>
@@ -55,6 +61,7 @@
     <string name="registoteste">Novo Teste</string>
     <string name="listTest">Lista Testes</string>
     <string name="contactos">Contactos</string>
+    <string name="drawer_graficos">Gráficos</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
