@@ -27,23 +27,24 @@
     <string name="dataUpdate">LAST UPDATE: 10/02/2021</string>
     <string name="danger">(DANGER)</string>
     <string name="NOdanger">(NO DANGER)</string>
+    <string name="contactosTitulo">CONTACTS</string>
+    <string name="listaTestesTitulo">Test List</string>
 
-    <string name="contactoSNS24">+351 808242424</string>
-    <string name="contactoSeguSocial">+351 300502502</string>
-    <string name="contactoEmergenciaConsular01">+351 217929714</string>
-    <string name="contactoEmergenciaConsular02">+351 961706472</string>
+    <string name="contactoSNS24">+351 808 24 24 24</string>
+    <string name="contactoSeguSocial">+351 300 502 502</string>
+    <string name="contactoEmergenciaConsular01">+351 217 929 714</string>
+    <string name="contactoEmergenciaConsular02">+351 961 706 472</string>
     <string name="websiteCovid">covid19.min-saude.pt</string>
     <string name="emailCovidDuvidas">atendimento@SNS24.gov.pt</string>
     <string name="emailEmerConsular">gec@mne.pt</string>
     <string name="websiteLegislacaoCovid">dre.pt/legislacao-covid-19</string>
-    <string name="INFOLegislacao">Area dedicated to pandemic legislation</string>
-
 
     <string name="INFOcontactoSNS24">Line SNS 24 for screening symptoms and clarifying doubts about COVID-19</string>
     <string name="INFOcontactoSeguSocial">Social Security Line for clarifications on family assistance, sickness benefits and quarantine</string>
     <string name="INFOEmergenciaConsular">Consular Emergency Office</string>
     <string name="INFOemailCovid">DGS platform for clarification on COVID-19</string>
-    <string name="INFOemailCovidDuvidas">SNS 24 channel for clarification of doubts. Do not use for medical diagnosis</string>
+    <string name="INFOemailCovidDuvidas">SNS 24 channel for clarification of doubts.\nDo not use it for medical diagnosis</string>
+    <string name="INFOLegislacao">Area dedicated to pandemic legislation</string>
 
 
     <!-- Drawer -->
@@ -54,8 +55,5 @@
     <string name="contactos">Contacts</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>
