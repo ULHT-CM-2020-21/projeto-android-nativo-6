@@ -99,6 +99,7 @@ class RegistoFragment : Fragment() {
 
 
     fun submeterTeste() {
+        var check = true
         val editLocal = localTeste
         val editData = dataTeste
         val editPositivo = radio_positivo
@@ -107,29 +108,37 @@ class RegistoFragment : Fragment() {
         val editLocalString: String = editLocal.text.toString()
         val editDataString: String = editData.text.toString()
 
-
         if (editLocalString == "" || editLocalString.isEmpty()) {
             editLocal.setError(getString(R.string.localTesteErro))
+            check = false
         }
 
         if (editDataString == "" || editDataString.isEmpty()) {
             editData.setError(getString(R.string.dataTesteErro))
+            check = false
         }
 
         if (!(editPositivo.isChecked()) && !(editNegativo.isChecked())) {
             editResultados.resultadoTesteErro.isVisible = true
+            check = false
         }
 
         if ((editPositivo.isChecked()) || (editNegativo.isChecked())) {
             editResultados.resultadoTesteErro.isVisible = false
         }
 
+        if (check) {
+            testeSubmete.local = editLocalString
+            testeSubmete.data = editDataString
+            TesteSource.addTest(testeSubmete)
+            Toast.makeText(
+                context as MainActivity,
+                getString(R.string.testeSubmetido),
+                Toast.LENGTH_SHORT
+            ).show()
+            activity?.let { NavigationManager.goToListTestes(it.supportFragmentManager) }
+        }
 
-        testeSubmete.local = editLocalString
-        testeSubmete.data = editDataString
-        TesteSource.addTest(testeSubmete)
-        Toast.makeText(context as MainActivity, getString(R.string.testeSubmetido), Toast.LENGTH_SHORT).show()
-        activity?.let { NavigationManager.goToListTestes(it.supportFragmentManager) }
 
     }
 
