@@ -32,6 +32,7 @@
     <string name="testeSubmetido">Test Submited!</string>
     <string name="dias">DAYS</string>
     <string name="ordenarLista">Sort by Date</string>
+    <string name="photo">OPEN PHOTO!</string>
 
     <string name="graficoConfirmados">Confirmed Chart</string>
     <string name="graficoRecuperados">Recovered Chart</string>

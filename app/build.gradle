@@ -60,6 +60,8 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:10.0.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'me.ithebk:barchart:0.9'
+    implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
+
 
 
 

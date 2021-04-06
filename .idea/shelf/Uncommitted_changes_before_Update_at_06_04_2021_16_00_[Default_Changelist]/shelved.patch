@@ -1,0 +1,419 @@
+Index: app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/RegistoFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.deisi.a2020.cm.g6\r\n\r\nimport android.app.Activity\r\nimport android.app.DatePickerDialog\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.provider.MediaStore\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.view.inputmethod.InputMethodManager\r\nimport android.widget.EditText\r\nimport android.widget.RadioButton\r\nimport androidx.core.view.isVisible\r\nimport butterknife.ButterKnife\r\nimport butterknife.OnClick\r\nimport kotlinx.android.synthetic.main.fragment_registo.*\r\nimport kotlinx.android.synthetic.main.fragment_registo.view.*\r\nimport pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource\r\n\r\nimport java.util.*\r\n\r\n\r\nclass RegistoFragment : Fragment() {\r\n    val testeSubmete: TesteCovid = TesteCovid()\r\n    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {\r\n       val view = inflater.inflate(R.layout.fragment_registo,container,false)\r\n        ButterKnife.bind(this,view)\r\n        return view\r\n    }\r\n\r\n    override fun onStart() {\r\n        super.onStart()\r\n\r\n        submeterTeste.setOnClickListener {\r\n            submeterTeste()\r\n        }\r\n\r\n        dataTeste.setOnClickListener {\r\n           hideKeyboard(dataTeste)\r\n            showPicker()\r\n        }\r\n\r\n        button_camera.setOnClickListener {\r\n            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)\r\n            startActivity(intent)\r\n        }\r\n\r\n    }\r\n\r\n    @OnClick(R.id.radio_positivo,R.id.radio_negativo)\r\n    fun onRadioButtonClicked(view: View) {\r\n        if (view is RadioButton) {\r\n            val checked = view.isChecked\r\n\r\n            when (view.getId()) {\r\n                R.id.radio_positivo ->\r\n                    if (checked) {\r\n                        testeSubmete.resultadoTesteCovid = true\r\n                    } else {\r\n                        radio_positivo.setError(getString(R.string.resultadoTesteErro))\r\n                    }\r\n\r\n                R.id.radio_negativo ->\r\n                    if (checked) {\r\n                        testeSubmete.resultadoTesteCovid = false\r\n                    } else {\r\n                        radio_negativo.setError(getString(R.string.resultadoTesteErro))\r\n                    }\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n    fun showPicker() {\r\n        val picker: DatePickerDialog?\r\n        val editDate: EditText? = dataTeste\r\n        val calendar: Calendar = Calendar.getInstance()\r\n        val dia: Int = calendar.get(Calendar.DAY_OF_MONTH)\r\n        val mes: Int = calendar.get(Calendar.MONTH)\r\n        val ano: Int = calendar.get(Calendar.YEAR)\r\n\r\n\r\n        picker = DatePickerDialog(context as MainActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->\r\n            editDate!!.setText(\"\" + dayOfMonth + \"/\" + (monthOfYear + 1) + \"/\" + year)\r\n        },\r\n            ano,\r\n            mes,\r\n            dia\r\n        )\r\n\r\n        picker.show()\r\n\r\n    }\r\n\r\n\r\n    fun submeterTeste() {\r\n        val editLocal = localTeste\r\n        val editData = dataTeste\r\n        val editPositivo = radio_positivo\r\n        val editNegativo = radio_negativo\r\n        val editResultados = escolhaResultados\r\n        val editLocalString: String = editLocal.text.toString()\r\n        val editDataString: String = editData.text.toString()\r\n\r\n\r\n        if (editLocalString == \"\" || editLocalString.isEmpty()) {\r\n            editLocal.setError(getString(R.string.localTesteErro))\r\n        }\r\n\r\n        if (editDataString == \"\" || editDataString.isEmpty()) {\r\n            editData.setError(getString(R.string.dataTesteErro))\r\n        }\r\n\r\n        if (!(editPositivo.isChecked()) && !(editNegativo.isChecked())) {\r\n            editResultados.resultadoTesteErro.isVisible = true\r\n        }\r\n\r\n        if ((editPositivo.isChecked()) || (editNegativo.isChecked())) {\r\n            editResultados.resultadoTesteErro.isVisible = false\r\n        }\r\n\r\n        //TODO: ADICIONAR TESTE À LISTA DE TESTES DEPOIS DE VALIDAR AS COISAS\r\n        testeSubmete.local = editLocalString\r\n        testeSubmete.data = editDataString\r\n        println(testeSubmete.toString())\r\n        TesteSource.addTest(testeSubmete)\r\n    }\r\n\r\n    fun hideKeyboard(view: View){\r\n        val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager\r\n        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/RegistoFragment.kt	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/RegistoFragment.kt	(date 1617721207655)
+@@ -12,6 +12,7 @@
+ import android.view.inputmethod.InputMethodManager
+ import android.widget.EditText
+ import android.widget.RadioButton
++import android.widget.Toast
+ import androidx.core.view.isVisible
+ import butterknife.ButterKnife
+ import butterknife.OnClick
+@@ -121,11 +122,12 @@
+             editResultados.resultadoTesteErro.isVisible = false
+         }
+ 
+-        //TODO: ADICIONAR TESTE À LISTA DE TESTES DEPOIS DE VALIDAR AS COISAS
+         testeSubmete.local = editLocalString
+         testeSubmete.data = editDataString
+         println(testeSubmete.toString())
+         TesteSource.addTest(testeSubmete)
++        Toast.makeText(context as MainActivity, getString(R.string.testeSubmetido), Toast.LENGTH_SHORT).show()
++        activity?.let { NavigationManager.goToListTestes(it.supportFragmentManager) }
+     }
+ 
+     fun hideKeyboard(view: View){
+Index: app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/TestAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.deisi.a2020.cm.g6\r\n\r\n\r\nimport android.content.Context\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.ArrayAdapter\r\nimport android.widget.TextView\r\nimport android.widget.Toast\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport kotlinx.android.synthetic.main.teste_item_expression.view.*\r\nimport java.util.ArrayList\r\n\r\n/*\r\nclass TestAdapter(context: MainActivity, private val layout: Int, items: ArrayList<TesteCovid>) : ArrayAdapter<TesteCovid> (context,layout,items) {\r\n\r\n    override fun getCount(): Int {\r\n        return super.getCount()\r\n    }\r\n\r\n    override fun getItem(position: Int): TesteCovid? {\r\n        return super.getItem(position)\r\n    }\r\n\r\n    override fun getItemId(position: Int): Long {\r\n        return super.getItemId(position)\r\n    }\r\n\r\n    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {\r\n        val view = convertView ?: LayoutInflater.from(context).inflate(layout,parent,false)\r\n        view.localTeste?.text = getItem(position)?.local\r\n        view.data?.text = getItem(position)?.data\r\n        return view\r\n    }\r\n\r\n}\r\n*/\r\nclass TestAdapter(\r\n    private val context: Context,\r\n    private val layout: Int,\r\n    private val items: MutableList<TesteCovid>\r\n) : RecyclerView.Adapter<TestAdapter.TestViewHolder>() {\r\n\r\n    class TestViewHolder(view: View) : RecyclerView.ViewHolder(view) {\r\n        val data: TextView = view.data\r\n        val local: TextView = view.localTeste\r\n    }\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestAdapter.TestViewHolder {\r\n        //return TestViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))\r\n\r\n        val inflater = LayoutInflater.from(parent!!.getContext())\r\n        val view = inflater.inflate(R.layout.teste_item_expression, parent, false)\r\n        return TestViewHolder(view).listen { pos, type ->\r\n            val item = items.get(pos)\r\n            Toast.makeText(context as MainActivity, item.local, Toast.LENGTH_SHORT).show()\r\n\r\n        }\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: TestAdapter.TestViewHolder, position: Int) {\r\n        holder.data.text = items[position].data\r\n        holder.local.text = items[position].local\r\n    }\r\n\r\n    override fun getItemCount(): Int {\r\n        return items.size\r\n    }\r\n\r\n    fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {\r\n        itemView.setOnClickListener {\r\n            event.invoke(getAdapterPosition(), getItemViewType())\r\n        }\r\n        return this\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/TestAdapter.kt	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/TestAdapter.kt	(date 1617716517533)
+@@ -5,12 +5,11 @@
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+-import android.widget.ArrayAdapter
+ import android.widget.TextView
+ import android.widget.Toast
+ import androidx.recyclerview.widget.RecyclerView
+ import kotlinx.android.synthetic.main.teste_item_expression.view.*
+-import java.util.ArrayList
++
+ 
+ /*
+ class TestAdapter(context: MainActivity, private val layout: Int, items: ArrayList<TesteCovid>) : ArrayAdapter<TesteCovid> (context,layout,items) {
+@@ -42,21 +41,25 @@
+     private val items: MutableList<TesteCovid>
+ ) : RecyclerView.Adapter<TestAdapter.TestViewHolder>() {
+ 
++
++
+     class TestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+         val data: TextView = view.data
+         val local: TextView = view.localTeste
+     }
+ 
+     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestAdapter.TestViewHolder {
+-        //return TestViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
+ 
+-        val inflater = LayoutInflater.from(parent!!.getContext())
+-        val view = inflater.inflate(R.layout.teste_item_expression, parent, false)
+-        return TestViewHolder(view).listen { pos, type ->
+-            val item = items.get(pos)
+-            Toast.makeText(context as MainActivity, item.local, Toast.LENGTH_SHORT).show()
+ 
+-        }
++     return TestViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
++
++//        val inflater = LayoutInflater.from(parent!!.getContext())
++//        val view = inflater.inflate(R.layout.teste_item_expression, parent, false)
++//        return TestViewHolder(view).listen { pos, type ->
++//            val item = items.get(pos)
++//
++//
++//        }
+     }
+ 
+     override fun onBindViewHolder(holder: TestAdapter.TestViewHolder, position: Int) {
+@@ -76,4 +79,7 @@
+     }
+ 
+ 
++
++
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/NavigationManager.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.deisi.a2020.cm.g6\r\n\r\nimport androidx.fragment.app.Fragment\r\nimport androidx.fragment.app.FragmentManager\r\n\r\nabstract class NavigationManager {\r\n\r\n    companion object{\r\n        private fun placeFragment(fm: FragmentManager, fragment: Fragment){\r\n            val transition = fm.beginTransaction()\r\n            transition.replace(R.id.frame, fragment)\r\n            transition.addToBackStack(null)\r\n            transition.commit()\r\n        }\r\n\r\n        fun goToDashboardFragment(fm: FragmentManager){\r\n            placeFragment(fm, DashboardFragment())\r\n        }\r\n\r\n        fun goToRegisto(fm: FragmentManager){\r\n            placeFragment(fm, RegistoFragment())\r\n        }\r\n\r\n        fun goToListTestes(fm: FragmentManager){\r\n            placeFragment(fm, ListaTestesFragment())\r\n        }\r\n\r\n        fun goToTest(fm: FragmentManager,test: TesteCovid){\r\n            placeFragment(fm, DetalheTesteFragment(test))\r\n        }\r\n\r\n        fun goToContactos(fm: FragmentManager){\r\n            placeFragment(fm, ContactosFragment())\r\n        }\r\n\r\n        fun goToGraficos(fm: FragmentManager){\r\n            placeFragment(fm, GraficosFragment())\r\n        }\r\n\r\n\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/NavigationManager.kt	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/NavigationManager.kt	(date 1617717547307)
+@@ -25,7 +25,7 @@
+             placeFragment(fm, ListaTestesFragment())
+         }
+ 
+-        fun goToTest(fm: FragmentManager,test: TesteCovid){
++        fun goToTest(fm: FragmentManager, test: TesteCovid){
+             placeFragment(fm, DetalheTesteFragment(test))
+         }
+ 
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    package=\"pt.ulusofona.deisi.a2020.cm.g6\">\r\n    <uses-permission android:name=\"android.permission.ACTION_DIAL\" />\r\n    <uses-permission android:name=\"android.permission.ACTION_VIEW\" />\r\n    <uses-permission android:name=\"android.permission.ACTION_SENDTO\" />\r\n    <application\r\n\r\n        android:allowBackup=\"true\"\r\n        android:icon=\"@mipmap/ic_covid\"\r\n        android:label=\"@string/app_name\"\r\n        android:theme=\"@style/Theme.AppCompat.Light.NoActionBar\"\r\n        android:supportsRtl=\"true\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:label=\"@string/app_name\">\r\n\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/AndroidManifest.xml	(date 1617720669912)
+@@ -13,7 +13,8 @@
+         android:supportsRtl="true">
+         <activity
+             android:name=".MainActivity"
+-            android:label="@string/app_name">
++            android:label="@string/app_name"
++            android:screenOrientation="portrait">
+ 
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+Index: app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.deisi.a2020.cm.g6\r\n\r\nimport android.os.Bundle\r\nimport android.view.Gravity\r\nimport android.view.MenuItem\r\nimport androidx.appcompat.app.ActionBarDrawerToggle\r\nimport com.google.android.material.floatingactionbutton.FloatingActionButton\r\nimport com.google.android.material.snackbar.Snackbar\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.view.GravityCompat\r\nimport com.google.android.material.navigation.NavigationView\r\nimport kotlinx.android.synthetic.main.activity_main.*\r\n\r\nclass MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_main)\r\n        setSupportActionBar(toolbar)\r\n        setupDrawerMenu()\r\n        NavigationManager.goToDashboardFragment(supportFragmentManager)\r\n    }\r\n\r\n    private fun setupDrawerMenu(){\r\n        val toggle = ActionBarDrawerToggle(this,drawer,toolbar,R.string.drawer_open,R.string.drawer_close)\r\n        nav_drawer.setNavigationItemSelectedListener(this)\r\n        drawer.addDrawerListener(toggle)\r\n        toggle.syncState()\r\n    }\r\n\r\n\r\n    override fun onResume() {\r\n        super.onResume()\r\n        val rnds = (0..1).random()\r\n        if(rnds == 0){\r\n            text_perigo.setText( R.string.NOdanger)\r\n            imagePerigo.setImageResource(R.drawable.green)\r\n        }else{\r\n            text_perigo.setText( R.string.danger)\r\n            imagePerigo.setImageResource(R.drawable.red)\r\n        }\r\n    }\r\n\r\n\r\n\r\n    override fun onNavigationItemSelected(item: MenuItem): Boolean {\r\n        when(item.itemId){\r\n            R.id.nav_dashboard -> NavigationManager.goToDashboardFragment(supportFragmentManager)\r\n            R.id.nav_Test -> NavigationManager.goToRegisto(supportFragmentManager)\r\n            R.id.list_tests -> NavigationManager.goToListTestes(supportFragmentManager)\r\n            R.id.nav_contactos -> NavigationManager.goToContactos(supportFragmentManager)\r\n            R.id.nav_graph -> NavigationManager.goToGraficos(supportFragmentManager)\r\n        }\r\n        drawer.closeDrawer(GravityCompat.START)\r\n        return true\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/MainActivity.kt	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/MainActivity.kt	(date 1617717580927)
+@@ -1,11 +1,8 @@
+ package pt.ulusofona.deisi.a2020.cm.g6
+ 
+ import android.os.Bundle
+-import android.view.Gravity
+ import android.view.MenuItem
+ import androidx.appcompat.app.ActionBarDrawerToggle
+-import com.google.android.material.floatingactionbutton.FloatingActionButton
+-import com.google.android.material.snackbar.Snackbar
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.view.GravityCompat
+ import com.google.android.material.navigation.NavigationView
+@@ -22,7 +19,13 @@
+     }
+ 
+     private fun setupDrawerMenu(){
+-        val toggle = ActionBarDrawerToggle(this,drawer,toolbar,R.string.drawer_open,R.string.drawer_close)
++        val toggle = ActionBarDrawerToggle(
++            this,
++            drawer,
++            toolbar,
++            R.string.drawer_open,
++            R.string.drawer_close
++        )
+         nav_drawer.setNavigationItemSelectedListener(this)
+         drawer.addDrawerListener(toggle)
+         toggle.syncState()
+@@ -33,10 +36,10 @@
+         super.onResume()
+         val rnds = (0..1).random()
+         if(rnds == 0){
+-            text_perigo.setText( R.string.NOdanger)
++            text_perigo.setText(R.string.NOdanger)
+             imagePerigo.setImageResource(R.drawable.green)
+         }else{
+-            text_perigo.setText( R.string.danger)
++            text_perigo.setText(R.string.danger)
+             imagePerigo.setImageResource(R.drawable.red)
+         }
+     }
+@@ -56,4 +59,5 @@
+     }
+ 
+ 
++
+ }
+\ No newline at end of file
+Index: app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/DetalheTesteFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.deisi.a2020.cm.g6\r\n\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport kotlinx.android.synthetic.main.fragment_detalhe_teste.*\r\n\r\nclass DetalheTesteFragment(var teste: TesteCovid) : Fragment() {\r\n\r\n    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {\r\n        return inflater.inflate(R.layout.fragment_detalhe_teste, container, false)\r\n    }\r\n\r\n    override fun onStart() {\r\n        super.onStart()\r\n            detalheTesteLocal.text = teste.local\r\n            detalheTesteData.text = teste.data\r\n            detalheTesteResultado.text = teste.resultadoTesteCovid.toString()\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/DetalheTesteFragment.kt	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/DetalheTesteFragment.kt	(date 1617721027013)
+@@ -1,23 +1,53 @@
+ package pt.ulusofona.deisi.a2020.cm.g6
+ 
++
+ import android.os.Bundle
+-import androidx.fragment.app.Fragment
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
++import androidx.fragment.app.Fragment
++import com.ceylonlabs.imageviewpopup.ImagePopup
+ import kotlinx.android.synthetic.main.fragment_detalhe_teste.*
++import kotlinx.android.synthetic.main.fragment_registo.*
++
+ 
+ class DetalheTesteFragment(var teste: TesteCovid) : Fragment() {
+ 
+-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
++    override fun onCreateView(
++        inflater: LayoutInflater,
++        container: ViewGroup?,
++        savedInstanceState: Bundle?
++    ): View? {
+         return inflater.inflate(R.layout.fragment_detalhe_teste, container, false)
+     }
+ 
+     override fun onStart() {
+         super.onStart()
+-            detalheTesteLocal.text = teste.local
+-            detalheTesteData.text = teste.data
+-            detalheTesteResultado.text = teste.resultadoTesteCovid.toString()
+-    }
++        detalheTesteLocal.text = teste.local
++        detalheTesteData.text = teste.data
++        if(teste.resultadoTesteCovid){
++            detalheTesteResultado.text = getString(R.string.resultadoTestePositivo)
++        }else{
++            detalheTesteResultado.text = getString(R.string.resultadoTesteNegativo)
++        }
++
++
++        var imagePopup =  ImagePopup(context)
++
++        imagePopup.setFullScreen(true); // Optional
++        imagePopup.setHideCloseIcon(true);  // Optional
++        imagePopup.setImageOnClickClose(true);  // Optional
++
++        imagePopup.initiatePopup(image_view.getDrawable())
++        image_view.setOnClickListener(View.OnClickListener {
++            imagePopup.viewPopup()
++        })
++        open_photo.setOnClickListener {
++            imagePopup.viewPopup()
++        }
+ 
++    }
++
++
++
+ }
+\ No newline at end of file
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n    id 'kotlin-android'\r\n    id 'kotlin-android-extensions'\r\n}\r\n\r\nandroid {\r\n    apply plugin: 'kotlin-kapt'\r\n    compileSdkVersion 28\r\n    buildToolsVersion \"30.0.3\"\r\n\r\n    defaultConfig {\r\n        applicationId \"pt.ulusofona.deisi.a2020.cm.g6\"\r\n        minSdkVersion 23\r\n        targetSdkVersion 28\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    kotlinOptions {\r\n        jvmTarget = '1.8'\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation \"org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version\"\r\n    implementation 'androidx.core:core-ktx:1.3.2'\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'androidx.cardview:cardview:1.0.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'androidx.wear:wear:1.1.0'\r\n    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'\r\n    implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    testImplementation 'junit:junit:4.+'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation \"com.furkanakdemir:surroundcardview:1.0.2\"\r\n    implementation 'com.android.support:cardview-v7'\r\n    implementation \"androidx.cardview:cardview:1.0.0\"\r\n    implementation 'com.github.furkanaskin:ClickablePieChart:1.0.8'\r\n    implementation 'com.github.swapnil1104:LinearGraphView:0.0.1'\r\n    implementation 'com.google.android.material:material:1.1.0'\r\n    implementation 'com.jakewharton:butterknife:10.0.0'\r\n    kapt 'com.jakewharton:butterknife-compiler:10.0.0'\r\n    implementation 'com.android.support:recyclerview-v7:28.0.0'\r\n    implementation 'me.ithebk:barchart:0.9'\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/build.gradle	(date 1617719032827)
+@@ -60,6 +60,7 @@
+     kapt 'com.jakewharton:butterknife-compiler:10.0.0'
+     implementation 'com.android.support:recyclerview-v7:28.0.0'
+     implementation 'me.ithebk:barchart:0.9'
++    implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
+ 
+ 
+ 
+Index: app/src/main/res/layout/fragment_detalhe_teste.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"fill_parent\"\r\n    android:layout_height=\"fill_parent\"\r\n    android:fillViewport=\"true\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:orientation=\"vertical\">\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"5dp\"\r\n            android:gravity=\"center\"\r\n            android:text=\"@string/detalheTeste\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"30sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"15dp\"\r\n            android:gravity=\"start\"\r\n            android:text=\"@string/localTeste\"\r\n            android:layout_marginStart=\"12dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"24sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/detalheTesteLocal\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"start\"\r\n            android:layout_marginStart=\"12dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"13sp\"/>\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"start\"\r\n            android:text=\"@string/dataTeste\"\r\n            android:layout_marginStart=\"12dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"24sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/detalheTesteData\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"start\"\r\n            android:layout_marginStart=\"12dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"13sp\"/>\r\n\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"start\"\r\n            android:layout_marginStart=\"12dp\"\r\n            android:text=\"@string/resultadoTeste\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"25sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/detalheTesteResultado\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"start\"\r\n            android:layout_marginStart=\"12dp\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"13sp\"/>\r\n\r\n\r\n        <TextView\r\n            android:layout_marginStart=\"12dp\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:gravity=\"start\"\r\n            android:text=\"@string/fotoTeste\"\r\n            android:textColor=\"@color/black\"\r\n            android:textSize=\"24sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <ImageView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:src=\"@drawable/happy_balltze\"/>\r\n\r\n    </LinearLayout>\r\n</ScrollView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_detalhe_teste.xml	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/res/layout/fragment_detalhe_teste.xml	(date 1617720745244)
+@@ -37,7 +37,7 @@
+             android:gravity="start"
+             android:layout_marginStart="12dp"
+             android:textColor="@color/black"
+-            android:textSize="13sp"/>
++            android:textSize="20sp"/>
+ 
+         <TextView
+             android:layout_width="match_parent"
+@@ -56,7 +56,7 @@
+             android:gravity="start"
+             android:layout_marginStart="12dp"
+             android:textColor="@color/black"
+-            android:textSize="13sp"/>
++            android:textSize="20sp"/>
+ 
+ 
+         <TextView
+@@ -76,7 +76,7 @@
+             android:gravity="start"
+             android:layout_marginStart="12dp"
+             android:textColor="@color/black"
+-            android:textSize="13sp"/>
++            android:textSize="20sp"/>
+ 
+ 
+         <TextView
+@@ -91,9 +91,17 @@
+             android:textStyle="bold" />
+ 
+         <ImageView
+-            android:layout_width="match_parent"
++            android:layout_width="200dp"
++            android:layout_height="200dp"
++            android:layout_gravity="center"
++            android:id="@+id/image_view"
++            android:src="@drawable/covidresult"/>
++        <Button
++            android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:src="@drawable/happy_balltze"/>
++            android:id="@+id/open_photo"
++            android:text="@string/photo"
++            android:layout_gravity="center"/>
+ 
+     </LinearLayout>
+ </ScrollView>
+\ No newline at end of file
+Index: app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/ListaTestesFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package pt.ulusofona.deisi.a2020.cm.g6\r\n\r\nimport android.os.Bundle\r\nimport androidx.fragment.app.Fragment\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.AdapterView\r\nimport android.widget.LinearLayout\r\nimport androidx.fragment.app.FragmentManager\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.google.android.material.navigation.NavigationView\r\nimport kotlinx.android.synthetic.main.fragment_lista_testes.*\r\nimport pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource\r\nimport java.util.ArrayList\r\nimport javax.sql.DataSource\r\n\r\n\r\nclass ListaTestesFragment : Fragment() {\r\n    private var testAdapter: TestAdapter? = null\r\n\r\n\r\n\r\n    override fun onCreateView(\r\n        inflater: LayoutInflater,\r\n        container: ViewGroup?,\r\n        savedInstanceState: Bundle?\r\n    ): View? {\r\n        return inflater.inflate(R.layout.fragment_lista_testes, container, false)\r\n    }\r\n\r\n    override fun onStart() {\r\n        super.onStart()\r\n        val list = TesteSource.getAllTeste()\r\n\r\n        /*\r\n        testAdapter = TestAdapter(context as MainActivity, R.layout.teste_item_expression, list as ArrayList<TesteCovid>)\r\n        list_test.adapter = testAdapter\r\n        list_test.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, position, id ->\r\n            //navegar como nao sei?\r\n        })\r\n        */\r\n        list_test.layoutManager = LinearLayoutManager(context as MainActivity)\r\n        list_test.adapter = TestAdapter(context as MainActivity,R.layout.teste_item_expression,list as ArrayList<TesteCovid>)\r\n\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/ListaTestesFragment.kt	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/java/pt/ulusofona/deisi/a2020/cm/g6/ListaTestesFragment.kt	(date 1617717384486)
+@@ -1,20 +1,14 @@
+ package pt.ulusofona.deisi.a2020.cm.g6
+ 
+ import android.os.Bundle
+-import androidx.fragment.app.Fragment
+ import android.view.LayoutInflater
+ import android.view.View
+ import android.view.ViewGroup
+-import android.widget.AdapterView
+-import android.widget.LinearLayout
+-import androidx.fragment.app.FragmentManager
++import androidx.fragment.app.Fragment
+ import androidx.recyclerview.widget.LinearLayoutManager
+-import androidx.recyclerview.widget.RecyclerView
+-import com.google.android.material.navigation.NavigationView
+ import kotlinx.android.synthetic.main.fragment_lista_testes.*
+ import pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource
+-import java.util.ArrayList
+-import javax.sql.DataSource
++import java.util.*
+ 
+ 
+ class ListaTestesFragment : Fragment() {
+@@ -42,7 +36,35 @@
+         })
+         */
+         list_test.layoutManager = LinearLayoutManager(context as MainActivity)
+-        list_test.adapter = TestAdapter(context as MainActivity,R.layout.teste_item_expression,list as ArrayList<TesteCovid>)
++        list_test.adapter = TestAdapter(
++            context as MainActivity,
++            R.layout.teste_item_expression,
++            list as ArrayList<TesteCovid>
++        )
++
++        list_test.addOnItemTouchListener(
++            RecyclerItemClickListener(
++                context,
++                list_test,
++                object : RecyclerItemClickListener.OnItemClickListener {
++                    override fun onItemClick(view: View?, position: Int) {
++                        activity?.let {
++                            NavigationManager.goToTest(
++                                it.supportFragmentManager, list.elementAt(
++                                    position
++                                )
++                            )
++                        }
++                    }
++
++                    override fun onLongItemClick(view: View?, position: Int) {
++                        // nada?
++                    }
++                })
++        )
++
++
++
+ 
+     }
+ 
+Index: app/src/main/res/values-pt/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <string name=\"app_name\">COVID INFO</string>\r\n    <string name=\"detalheTeste\">Detalhe do teste</string>\r\n    <string name=\"registoTeste\">Registo do Teste</string>\r\n    <string name=\"localTeste\">Local do Teste</string>\r\n    <string name=\"localTesteEx\">Farmácia X</string>\r\n    <string name=\"localTesteErro\">O local não pode ficar vazio!</string>\r\n    <string name=\"dataTeste\">Data do Teste</string>\r\n    <string name=\"dataTesteEx\">DD/MM/AAAA</string>\r\n    <string name=\"dataTesteErro\">A data não pode ficar vazia!</string>\r\n    <string name=\"resultadoTeste\">Resultado do Teste</string>\r\n    <string name=\"resultadoTestePositivo\">Positivo</string>\r\n    <string name=\"resultadoTesteNegativo\">Negativo</string>\r\n    <string name=\"resultadoTesteErro\">O resultado não pode ser vazio!</string>\r\n    <string name=\"fotoTeste\">Fotografia do Teste</string>\r\n    <string name=\"submeterRegisto\">SUBMETER</string>\r\n    <string name=\"confirmados\">CONFIRMADOS</string>\r\n    <string name=\"recuperados\">RECUPERADOS</string>\r\n    <string name=\"mortes\">ÓBITOS</string>\r\n    <string name=\"internados\">INTERNADOS</string>\r\n    <string name=\"casosRegiao\">Casos por Região</string>\r\n    <string name=\"casosTotais\">Casos Totais:\\u0020</string>\r\n    <string name=\"casos24\">Ultimas 24 horas:\\u0020</string>\r\n    <string name=\"tests\">Testes</string>\r\n    <string name=\"localTesteShow\">Local: \\u0020</string>\r\n    <string name=\"dataTesteShow\">Data: \\u0020</string>\r\n    <string name=\"dataUpdate\">DADOS ATUALIZADOS A: 10/02/2021</string>\r\n    <string name=\"danger\">PERIGO</string>\r\n    <string name=\"NOdanger\">SEM PERIGO</string>\r\n    <string name=\"contactosTitulo\">CONTACTOS</string>\r\n    <string name=\"listaTestesTitulo\">Lista de Testes</string>\r\n    <string name=\"dias\">DIAS</string>\r\n\r\n    <string name=\"graficoConfirmados\">Gráfico Confirmados</string>\r\n    <string name=\"graficoRecuperados\">Gráfico Recuperados</string>\r\n    <string name=\"graficoObitos\">Gráfico Obitos</string>\r\n    <string name=\"graficoInternados\">Gráfico Internados</string>\r\n\r\n    <string name=\"contactoSNS24\">+351 808 24 24 24</string>\r\n    <string name=\"contactoSeguSocial\">+351 300 502 502</string>\r\n    <string name=\"contactoEmergenciaConsular01\">+351 217 929 714</string>\r\n    <string name=\"contactoEmergenciaConsular02\">+351 961 706 472</string>\r\n    <string name=\"websiteCovid\">covid19.min-saude.pt</string>\r\n    <string name=\"emailCovidDuvidas\">atendimento@SNS24.gov.pt</string>\r\n    <string name=\"emailEmerConsular\">gec@mne.pt</string>\r\n    <string name=\"websiteLegislacaoCovid\">dre.pt/legislacao-covid-19</string>\r\n\r\n    <string name=\"INFOcontactoSNS24\">Linha SNS 24 para triagem de sintomas e esclarecimento de dúvidas sobre COVID-19</string>\r\n    <string name=\"INFOcontactoSeguSocial\">Linha Segurança Social para esclarecimentos sobre assistência à família, subsídio de doença e quarentena</string>\r\n    <string name=\"INFOEmergenciaConsular\">Gabinete de Emergência Consular</string>\r\n    <string name=\"INFOemailCovid\">Plataforma da DGS para esclarecimentos sobre a COVID-19</string>\r\n    <string name=\"INFOemailCovidDuvidas\">Canal SNS 24 para esclarecimentos de dúvidas. Não utilizar para diagnóstico médico</string>\r\n    <string name=\"INFOLegislacao\">Área do Diário da República Eletrónico dedicada à legislação relativa à pandemia</string>\r\n\r\n\r\n    <!-- Drawer -->\r\n\r\n    <string name=\"dashboard\">Dashboard</string>\r\n    <string name=\"registoteste\">Novo Teste</string>\r\n    <string name=\"listTest\">Lista Testes</string>\r\n    <string name=\"contactos\">Contactos</string>\r\n    <string name=\"drawer_graficos\">Gráficos</string>\r\n    <string name=\"drawer_open\">Open</string>\r\n    <string name=\"drawer_close\">Close</string>\r\n\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values-pt/strings.xml	(revision 75ea9f10e929294a054fd264357350ad3a96b966)
++++ app/src/main/res/values-pt/strings.xml	(date 1617720556449)
+@@ -31,6 +31,7 @@
+     <string name="contactosTitulo">CONTACTOS</string>
+     <string name="listaTestesTitulo">Lista de Testes</string>
+     <string name="dias">DIAS</string>
++    <string name="photo">ABRIR FOTO!</string>
+ 
+     <string name="graficoConfirmados">Gráfico Confirmados</string>
+     <string name="graficoRecuperados">Gráfico Recuperados</string>
