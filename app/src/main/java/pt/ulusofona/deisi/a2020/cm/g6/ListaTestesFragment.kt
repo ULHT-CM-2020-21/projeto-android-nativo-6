@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
 import pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource
 import java.text.SimpleDateFormat
@@ -28,6 +29,7 @@ class ListaTestesFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val listaOrdenada = TesteSource.getAllTeste()
+        var imagemOrdenar = true
 
         /*
         testAdapter = TestAdapter(context as MainActivity, R.layout.teste_item_expression, list as ArrayList<TesteCovid>)
@@ -43,7 +45,7 @@ class ListaTestesFragment : Fragment() {
             listaOrdenada as ArrayList<TesteCovid>
         )
 
-        mySortBtn.setOnClickListener {
+        ordenar_lista.setOnClickListener {
             listaOrdenada.reverse()
             list_test.layoutManager = LinearLayoutManager(context as MainActivity)
             list_test.adapter = TestAdapter(
@@ -51,6 +53,13 @@ class ListaTestesFragment : Fragment() {
                 R.layout.teste_item_expression,
                 listaOrdenada
             )
+            if (imagemOrdenar) {
+                ordenar_lista.setImageResource(R.drawable.ordenar_crescente)
+                imagemOrdenar = false
+            }else{
+                ordenar_lista.setImageResource(R.drawable.ordenar_decrescente)
+                imagemOrdenar = true
+            }
         }
 
     }

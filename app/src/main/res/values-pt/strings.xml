@@ -32,6 +32,7 @@
     <string name="listaTestesTitulo">Lista de Testes</string>
     <string name="testeSubmetido">Teste Submetido!</string>
     <string name="dias">DIAS</string>
+    <string name="ordenarLista">Ordenar por Data</string>
 
     <string name="graficoConfirmados">Gráfico Confirmados</string>
     <string name="graficoRecuperados">Gráfico Recuperados</string>

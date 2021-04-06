@@ -127,7 +127,6 @@ class RegistoFragment : Fragment() {
 
         testeSubmete.local = editLocalString
         testeSubmete.data = editDataString
-        println(testeSubmete.toString())
         TesteSource.addTest(testeSubmete)
         Toast.makeText(context as MainActivity, getString(R.string.testeSubmetido), Toast.LENGTH_SHORT).show()
     }
