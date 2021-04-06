@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="5dp"
     android:orientation="vertical">
 
 
@@ -11,18 +12,18 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="80dp"
+            android:id="@+id/image_list"
+            android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="20dp"
-            android:id="@+id/image_list"
-            android:src="@drawable/teste_negativo">
+            android:src="@drawable/nasaltest">
 
         </ImageView>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
 
             <LinearLayout
@@ -34,34 +35,36 @@
                     android:id="@+id/localTeste"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="18sp" />
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:drawableBottom="@drawable/ic_opennew"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/dataTeste"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
                     android:text="@string/dataTesteShow"
                     android:textColor="@color/black"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/grey" />
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+
             </LinearLayout>
-
-
-
-
 
 
         </LinearLayout>
