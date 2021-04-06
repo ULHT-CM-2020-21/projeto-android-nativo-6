@@ -1,17 +1,17 @@
 package pt.ulusofona.deisi.a2020.cm.g6
 
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
 import pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ListaTestesFragment : Fragment() {
@@ -42,6 +42,21 @@ class ListaTestesFragment : Fragment() {
             R.layout.teste_item_expression,
             listaOrdenada as ArrayList<TesteCovid>
         )
+        list_test.addOnItemTouchListener(
+            RecyclerItemClickListener(
+                context,
+                list_test,
+                object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View?, position: Int) {
+                        activity?.let { NavigationManager.goToTest(it.supportFragmentManager,listaOrdenada.elementAt(position)) }
+                    }
+
+                    override fun onLongItemClick(view: View?, position: Int) {
+                        // do whatever
+                    }
+                })
+        )
+
 
         mySortBtn.setOnClickListener {
             listaOrdenada.reverse()

@@ -130,6 +130,8 @@ class RegistoFragment : Fragment() {
         println(testeSubmete.toString())
         TesteSource.addTest(testeSubmete)
         Toast.makeText(context as MainActivity, getString(R.string.testeSubmetido), Toast.LENGTH_SHORT).show()
+        activity?.let { NavigationManager.goToListTestes(it.supportFragmentManager) }
+
     }
 
     fun hideKeyboard(view: View){
