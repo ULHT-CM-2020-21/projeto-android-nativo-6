@@ -1,15 +1,17 @@
 package pt.ulusofona.deisi.a2020.cm.g6
 
+
+
 import android.os.Bundle
-import android.view.Gravity
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -19,10 +21,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
         setupDrawerMenu()
         NavigationManager.goToDashboardFragment(supportFragmentManager)
+
     }
 
     private fun setupDrawerMenu(){
-        val toggle = ActionBarDrawerToggle(this,drawer,toolbar,R.string.drawer_open,R.string.drawer_close)
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            R.string.drawer_open,
+            R.string.drawer_close
+        )
+        toggle.setDrawerIndicatorEnabled(false);
+        toggle.setHomeAsUpIndicator(R.drawable.ic_menuwhite);
+        toggle.toolbarNavigationClickListener = View.OnClickListener {
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START)
+            } else {
+                drawer.openDrawer(GravityCompat.START)
+            }
+        }
         nav_drawer.setNavigationItemSelectedListener(this)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
@@ -33,10 +51,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onResume()
         val rnds = (0..1).random()
         if(rnds == 0){
-            text_perigo.setText( R.string.NOdanger)
+            text_perigo.setText(R.string.NOdanger)
             imagePerigo.setImageResource(R.drawable.green)
         }else{
-            text_perigo.setText( R.string.danger)
+            text_perigo.setText(R.string.danger)
             imagePerigo.setImageResource(R.drawable.red)
         }
     }

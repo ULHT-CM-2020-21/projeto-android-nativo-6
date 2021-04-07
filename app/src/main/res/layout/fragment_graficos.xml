@@ -43,6 +43,12 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+               android:id="@+id/endDateC"/>
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
@@ -52,7 +58,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="@string/dias"/>
+                android:id="@+id/startDateC"/>
+
+
         </LinearLayout>
 
 
@@ -88,6 +96,12 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/endDateR"/>
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
@@ -97,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="@string/dias"/>
+                android:id="@+id/startDateR"/>
         </LinearLayout>
 
         <TextView
@@ -132,6 +146,12 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/endDateO"/>
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
@@ -141,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="@string/dias"/>
+                android:id="@+id/startDateO"/>
         </LinearLayout>
 
         <TextView
@@ -176,6 +196,12 @@
             android:orientation="horizontal"
             android:gravity="center">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/endDateI"/>
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
@@ -185,7 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:text="@string/dias"/>
+                android:id="@+id/startDateI"/>
         </LinearLayout>
 
 

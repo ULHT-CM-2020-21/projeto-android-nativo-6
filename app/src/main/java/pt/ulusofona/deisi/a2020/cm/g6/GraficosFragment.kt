@@ -34,12 +34,44 @@ class GraficosFragment : Fragment() {
         var covidHoje:CovidData = CovidData()
         val chartData = mutableListOf<Int>(541, 125, 148, 65)
         val intervalData = mutableListOf<Int>(1, 2, 3, 4)
-        val listColors = mutableListOf<String>("#e6194B","#f58231","#ffe119","#bfef45","#3cb44b","#42d4f4","#4363d8","#911eb4","#f032e6","#000075","#800000","#9A6324","#808000","#469990","#dcbeff")
 
         bar_chart_Confirmados.barMaxValue = 800
         bar_chart_Recuperados.barMaxValue = 800
-        bar_chart_Obitos.barMaxValue = 200
-        bar_chart_Internados.barMaxValue = 200
+        bar_chart_Obitos.barMaxValue = 800
+        bar_chart_Internados.barMaxValue = 880
+
+        var maxC = 0;
+        for (i in covidHoje.listDiasConfirmados){
+            if (i > maxC){
+                maxC = i;
+            }
+        }
+
+        var maxR = 0;
+        for (i in covidHoje.listDiasRecuperados){
+            if (i > maxR){
+                maxR = i;
+            }
+        }
+
+        var maxO = 0;
+        for (i in covidHoje.listDiasObitos){
+            if (i > maxO){
+                maxO = i;
+            }
+        }
+
+        var maxI = 0;
+        for (i in covidHoje.listDiasInternados){
+            if (i > maxI){
+                maxI = i;
+            }
+        }
+
+        bar_chart_Confirmados.barMaxValue = maxC
+        bar_chart_Recuperados.barMaxValue = maxR
+        bar_chart_Obitos.barMaxValue = maxO
+        bar_chart_Internados.barMaxValue = maxI
 
         var barchartModel = BarChartModel()
 
@@ -112,7 +144,17 @@ class GraficosFragment : Fragment() {
             Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
         }
 
+        startDateC.setText(getDaysAgo(0))
+        endDateC.setText(getDaysAgo(14))
 
+        startDateR.setText(getDaysAgo(0))
+        endDateR.setText(getDaysAgo(14))
+
+        startDateO.setText(getDaysAgo(0))
+        endDateO.setText(getDaysAgo(14))
+
+        startDateI.setText(getDaysAgo(0))
+        endDateI.setText(getDaysAgo(14))
 
     }
 

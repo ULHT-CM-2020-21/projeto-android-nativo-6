@@ -29,7 +29,7 @@ class RegiaoAdapter(context: MainActivity, private val layout: Int, items: Array
         view.nomeRegiao.text = getItem(position)?.nome.toString()
         view.casosTotais.text = getItem(position)?.casosTotais.toString()
         view.novosCasos.text = getItem(position)?.casosUltima.toString()
-        // Visto ser uma lista fixa podemos definir manualmente cada image
+        // Visto ser uma lista fixa podemos definir manualmente cada imagem
         when (getItem(position)?.nome.toString()) {
             "Norte" ->  view.image_list.setImageResource(R.drawable.mapa_porto_norte)
             "Centro" ->  view.image_list.setImageResource(R.drawable.mapa_centro)

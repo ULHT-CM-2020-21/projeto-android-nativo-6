@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
 import pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource
 import java.util.*
@@ -50,7 +49,13 @@ class ListaTestesFragment : Fragment() {
                 list_test,
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View?, position: Int) {
-                        activity?.let { NavigationManager.goToTest(it.supportFragmentManager,listaOrdenada.elementAt(position)) }
+                        activity?.let {
+                            NavigationManager.goToTest(
+                                it.supportFragmentManager, listaOrdenada.elementAt(
+                                    position
+                                )
+                            )
+                        }
                     }
 
                     override fun onLongItemClick(view: View?, position: Int) {
@@ -58,6 +63,8 @@ class ListaTestesFragment : Fragment() {
                     }
                 })
         )
+
+
 
 
         ordenar_lista.setOnClickListener {

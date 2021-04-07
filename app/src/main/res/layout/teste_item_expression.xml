@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginBottom="10dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    card_view:cardElevation="2dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:contentPadding="5dp"
+
     android:orientation="vertical">
+
+
 
 
     <LinearLayout
@@ -37,10 +46,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
-                <Button
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:drawableBottom="@drawable/ic_opennew"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -64,12 +70,22 @@
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
 
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:drawableBottom="@drawable/ic_baseline_read_more_24"/>
+
             </LinearLayout>
 
 
         </LinearLayout>
 
-
     </LinearLayout>
 
-</LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
