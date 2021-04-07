@@ -32,7 +32,16 @@
     <string name="listaTestesTitulo">Lista de Testes</string>
     <string name="testeSubmetido">Teste Submetido!</string>
     <string name="dias">DIAS</string>
+    <string name="photo">ABRIR FOTO!</string>
     <string name="ordenarLista">Ordenar por Data</string>
+    
+    <string name="norte">Norte</string>
+    <string name="centro">Centro</string>
+    <string name="LVT">Lisboa e Vale Do Tejo</string>
+    <string name="alentejo">Alentejo</string>
+    <string name="algarve">Algarve</string>
+    <string name="acores">Açores</string>
+    <string name="madeira">Madeira</string>
 
     <string name="graficoConfirmados">Gráfico Confirmados</string>
     <string name="graficoRecuperados">Gráfico Recuperados</string>
