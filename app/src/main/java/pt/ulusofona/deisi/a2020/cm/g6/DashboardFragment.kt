@@ -40,11 +40,9 @@ class DashboardFragment : Fragment() {
         numero_novos_obitos.text = "+ " + covidHoje.novos_obitos
         numero_novos_recuperados.text = "+ " + covidHoje.novos_recuperados
 
-        regiaoAdapter = RegiaoAdapter(context as MainActivity, R.layout.regiao_item_expression, list as ArrayList<Regiao>)
-        list_historic.adapter = regiaoAdapter
-        list_historic.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, position, id ->
-            //click
-        })
+
+
+
     }
 
 
