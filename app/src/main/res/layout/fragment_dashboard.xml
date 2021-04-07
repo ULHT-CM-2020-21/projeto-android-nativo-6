@@ -298,11 +298,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/nomeRegiaoPN"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textSize="20sp"
+                        android:text="@string/norte"
                         android:textStyle="bold" />
 
 
@@ -346,6 +347,7 @@
                             android:id="@+id/novosCasosPN"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text=""
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -373,7 +375,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/nomeRegiaoC"
+                        android:text="@string/centro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -449,7 +451,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/nomeRegiaoLVT"
+                       android:text="@string/LVT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -525,7 +527,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/nomeRegiaoAlentejo"
+                      android:text="@string/alentejo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -601,7 +603,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/nomeRegiaoAlgarve"
+                        android:text="@string/algarve"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -677,7 +679,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/nomeRegiaoAcores"
+                        android:text="@string/acores"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
@@ -753,7 +755,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/nomeRegiaoMadeira"
+                        android:text="@string/madeira"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"

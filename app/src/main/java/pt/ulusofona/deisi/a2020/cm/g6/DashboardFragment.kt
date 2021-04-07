@@ -5,9 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import java.util.ArrayList
+
 
 class DashboardFragment : Fragment() {
 
@@ -40,7 +39,26 @@ class DashboardFragment : Fragment() {
         numero_novos_obitos.text = "+ " + covidHoje.novos_obitos
         numero_novos_recuperados.text = "+ " + covidHoje.novos_recuperados
 
+        casosTotaisPN.setText(regiaoNorte.casosTotais)
+        novosCasosPN.setText(regiaoNorte.casosUltima)
 
+        casosTotaisC.setText(regiaoCentro.casosTotais)
+//        novosCasosC.setText(regiaoCentro.casosUltima)
+
+        casosTotaisLVT.setText(regiaoLVT.casosTotais)
+     //   novosCasosLVT.setText(regiaoLVT.casosUltima)
+
+        casosTotaisAlentejo.setText(regiaoAlentejo.casosTotais)
+       // novosCasosAlentejo.setText(regiaoAlentejo.casosUltima)
+
+        casosTotaisAlgarve.setText(regiaoAlgarve.casosTotais)
+       // novosCasosAlgarve.setText(regiaoAlgarve.casosUltima)
+
+        casosTotaisMadeira.setText(regiaomadeira.casosTotais)
+       // novosCasosMadeira.setText(regiaomadeira.casosUltima)
+
+        casosTotaisAcores.setText(regiaoAcores.casosTotais)
+     //   novosCasosAcores.setText(regiaoAcores.casosUltima)
 
 
     }
