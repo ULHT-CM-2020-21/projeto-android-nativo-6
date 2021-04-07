@@ -245,6 +245,7 @@
 
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/titleRegioes"
         android:layout_width="match_parent"
@@ -258,20 +259,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:background="@android:color/darker_gray"
-
-        />
+        android:background="@android:color/darker_gray" />
 
     <ListView
         android:id="@+id/list_historic"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4" />
-
-
-
-
-
 
 
 </LinearLayout>
