@@ -34,11 +34,18 @@
     <string name="ordenarLista">Sort by Date</string>
     <string name="photo">OPEN PHOTO!</string>
 
+    <string name="norte">Norte</string>
+    <string name="centro">Centro</string>
+    <string name="LVT">Lisboa e Vale Do Tejo</string>
+    <string name="alentejo">Alentejo</string>
+    <string name="algarve">Algarve</string>
+    <string name="acores">Açores</string>
+    <string name="madeira">Madeira</string>
+
     <string name="graficoConfirmados">Confirmed Chart</string>
     <string name="graficoRecuperados">Recovered Chart</string>
     <string name="graficoObitos">Deaths chart</string>
     <string name="graficoInternados">Hospitalized Chart</string>
-
 
     <string name="contactoSNS24">+351 808 24 24 24</string>
     <string name="contactoSeguSocial">+351 300 502 502</string>
