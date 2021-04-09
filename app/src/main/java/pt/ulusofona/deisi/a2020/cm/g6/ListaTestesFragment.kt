@@ -34,7 +34,7 @@ class ListaTestesFragment : Fragment() {
         testAdapter = TestAdapter(context as MainActivity, R.layout.teste_item_expression, list as ArrayList<TesteCovid>)
         list_test.adapter = testAdapter
         list_test.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, position, id ->
-            //navegar como nao sei?
+
         })
         */
         list_test.layoutManager = LinearLayoutManager(context as MainActivity)

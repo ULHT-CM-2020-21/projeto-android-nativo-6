@@ -48,15 +48,8 @@ class TestAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestAdapter.TestViewHolder {
-        //return TestViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
+        return TestViewHolder(LayoutInflater.from(context).inflate(layout,parent,false))
 
-        val inflater = LayoutInflater.from(parent!!.getContext())
-        val view = inflater.inflate(R.layout.teste_item_expression, parent, false)
-        return TestViewHolder(view).listen { pos, type ->
-            val item = items.get(pos)
-            Toast.makeText(context as MainActivity, item.local, Toast.LENGTH_SHORT).show()
-
-        }
     }
 
     override fun onBindViewHolder(holder: TestAdapter.TestViewHolder, position: Int) {
@@ -66,13 +59,6 @@ class TestAdapter(
 
     override fun getItemCount(): Int {
         return items.size
-    }
-
-    fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
-        itemView.setOnClickListener {
-            event.invoke(getAdapterPosition(), getItemViewType())
-        }
-        return this
     }
 
 
