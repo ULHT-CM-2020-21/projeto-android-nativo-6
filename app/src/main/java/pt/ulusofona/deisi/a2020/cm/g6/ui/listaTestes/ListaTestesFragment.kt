@@ -34,13 +34,6 @@ class ListaTestesFragment : Fragment() {
         val listaOrdenada = TesteSource.getAllTeste()
         var imagemOrdenar = true
 
-        /*
-        testAdapter = TestAdapter(context as MainActivity, R.layout.teste_item_expression, list as ArrayList<TesteCovid>)
-        list_test.adapter = testAdapter
-        list_test.setOnItemClickListener(AdapterView.OnItemClickListener { adapterView, view, position, id ->
-
-        })
-        */
         list_test.layoutManager = LinearLayoutManager(context as MainActivity)
         list_test.adapter = TestAdapter(
             context as MainActivity,
@@ -90,10 +83,5 @@ class ListaTestesFragment : Fragment() {
 
     }
 
-//    fun ordenarAoContrario(listaParaOrdenar: MutableList<TesteCovid>) {
-//        listaParaOrdenar.reverse()
-//        for (i in listaParaOrdenar)
-//            println(i)
-//    }
 
 }
