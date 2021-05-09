@@ -1,4 +1,4 @@
-package pt.ulusofona.deisi.a2020.cm.g6
+package pt.ulusofona.deisi.a2020.cm.g6.ui.utils
 
 import android.content.Context
 import android.view.GestureDetector

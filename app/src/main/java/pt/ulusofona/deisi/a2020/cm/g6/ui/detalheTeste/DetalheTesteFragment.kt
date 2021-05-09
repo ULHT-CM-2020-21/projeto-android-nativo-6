@@ -1,4 +1,4 @@
-package pt.ulusofona.deisi.a2020.cm.g6
+package pt.ulusofona.deisi.a2020.cm.g6.ui.detalheTeste
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ceylonlabs.imageviewpopup.ImagePopup
 import kotlinx.android.synthetic.main.fragment_detalhe_teste.*
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.TesteCovid
 
 
 class DetalheTesteFragment(var teste: TesteCovid) : Fragment() {

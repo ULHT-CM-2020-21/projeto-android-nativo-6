@@ -1,6 +1,4 @@
-package pt.ulusofona.deisi.a2020.cm.g6.dataSource
-
-import pt.ulusofona.deisi.a2020.cm.g6.CovidData
+package pt.ulusofona.deisi.a2020.cm.g6.data
 
 class DataSource {
 

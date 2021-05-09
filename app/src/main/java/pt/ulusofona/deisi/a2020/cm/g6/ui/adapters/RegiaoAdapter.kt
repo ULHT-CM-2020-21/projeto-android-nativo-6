@@ -1,4 +1,4 @@
-package pt.ulusofona.deisi.a2020.cm.g6
+package pt.ulusofona.deisi.a2020.cm.g6.ui.adapters
 
 
 
@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.regiao_item_expression.view.*
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Regiao
 import java.util.ArrayList
 
 // WARNING PROFESSOR - Região não implementa RecyclerView porque é uma lista com entradas ESTATICAS, são sempre as mesma regiões...

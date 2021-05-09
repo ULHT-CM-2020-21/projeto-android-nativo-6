@@ -1,6 +1,5 @@
-package pt.ulusofona.deisi.a2020.cm.g6
+package pt.ulusofona.deisi.a2020.cm.g6.data
 
-import pt.ulusofona.deisi.a2020.cm.g6.dataSource.DataSource
 import java.text.SimpleDateFormat
 import java.util.*
 

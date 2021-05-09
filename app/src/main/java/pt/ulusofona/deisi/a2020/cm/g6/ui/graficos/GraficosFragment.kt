@@ -1,4 +1,4 @@
-package pt.ulusofona.deisi.a2020.cm.g6
+package pt.ulusofona.deisi.a2020.cm.g6.ui.graficos
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_graficos.*
 import me.ithebk.barchart.BarChartModel
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.data.CovidData
+import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.random.Random
 
 
 class GraficosFragment : Fragment() {
@@ -31,7 +33,7 @@ class GraficosFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        var covidHoje:CovidData = CovidData()
+        var covidHoje: CovidData = CovidData()
         val chartData = mutableListOf<Int>(541, 125, 148, 65)
         val intervalData = mutableListOf<Int>(1, 2, 3, 4)
 

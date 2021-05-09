@@ -1,11 +1,14 @@
-package pt.ulusofona.deisi.a2020.cm.g6.dataSource
+package pt.ulusofona.deisi.a2020.cm.g6.data.local.list
 
-import pt.ulusofona.deisi.a2020.cm.g6.TesteCovid
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.TesteCovid
 import java.text.SimpleDateFormat
 import java.util.*
 
 object TesteSource{
-    var listTestes =mutableListOf(TesteCovid("Farmacia Default 1","12-11-2021",true,""),TesteCovid("Farmacia Default 2","11-1-2021",false,""))
+    var listTestes =mutableListOf(
+        TesteCovid("Farmacia Default 1","12-11-2021",true,""),
+        TesteCovid("Farmacia Default 2","11-1-2021",false,"")
+    )
 
     fun addTest(test: TesteCovid){
         listTestes.add(test)

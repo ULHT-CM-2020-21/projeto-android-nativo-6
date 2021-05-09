@@ -1,4 +1,4 @@
-package pt.ulusofona.deisi.a2020.cm.g6
+package pt.ulusofona.deisi.a2020.cm.g6.ui.registo
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -18,7 +18,11 @@ import butterknife.ButterKnife
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_registo.*
 import kotlinx.android.synthetic.main.fragment_registo.view.*
-import pt.ulusofona.deisi.a2020.cm.g6.dataSource.TesteSource
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.list.TesteSource
+import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.TesteCovid
 
 import java.util.*
 
@@ -52,7 +56,7 @@ class RegistoFragment : Fragment() {
 
     }
 
-    @OnClick(R.id.radio_positivo,R.id.radio_negativo)
+    @OnClick(R.id.radio_positivo, R.id.radio_negativo)
     fun onRadioButtonClicked(view: View) {
         if (view is RadioButton) {
             val checked = view.isChecked

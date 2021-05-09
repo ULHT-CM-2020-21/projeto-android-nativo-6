@@ -1,7 +1,14 @@
-package pt.ulusofona.deisi.a2020.cm.g6
+package pt.ulusofona.deisi.a2020.cm.g6.ui.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.ui.contactos.ContactosFragment
+import pt.ulusofona.deisi.a2020.cm.g6.ui.dashboard.DashboardFragment
+import pt.ulusofona.deisi.a2020.cm.g6.ui.detalheTeste.DetalheTesteFragment
+import pt.ulusofona.deisi.a2020.cm.g6.ui.graficos.GraficosFragment
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listaTestes.ListaTestesFragment
+import pt.ulusofona.deisi.a2020.cm.g6.ui.registo.RegistoFragment
 
 abstract class NavigationManager {
 
