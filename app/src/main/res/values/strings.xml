@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">COVID INFO</string>
+    <string name="app_name">COVID Info</string>
     <string name="detalheTeste">Test Detail</string>
     <string name="registoTeste">Register a new Test</string>
     <string name="localTeste">Test Location</string>
