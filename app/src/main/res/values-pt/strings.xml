@@ -64,6 +64,7 @@
     <string name="INFOemailCovidDuvidas">Canal SNS 24 para esclarecimentos de dúvidas. Não utilizar para diagnóstico médico</string>
     <string name="INFOLegislacao">Área do Diário da República Eletrónico dedicada à legislação relativa à pandemia</string>
 
+    <string name="semDados">SemDados</string>
 
     <!-- Drawer -->
 

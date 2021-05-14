@@ -1,145 +1,161 @@
 package pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.domain.dashboard
 
 
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.CovidData
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.Covid
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.repositories.CovidRepository
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.CovidCallback
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.DashboardCallback
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.Regiao
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class DashboardLogic {
+class DashboardLogic (private val repository: CovidRepository){
 
-    private var covidHoje: CovidData = CovidData()
+    private var covidHoje: Covid? = null
 
-    var regiaoNorte = Regiao(
-        "Norte",
-        String.format("%,d", covidHoje.confirmados_arsnorte),
-        String.format("%,d", covidHoje.novos_confirmados_arsnorte),
-        ""
-    )
-    var regiaoCentro = Regiao(
-        "Centro",
-        String.format("%,d", covidHoje.confirmados_arscentro),
-        String.format("%,d", covidHoje.novos_confirmados_arscentro),
-        ""
-    )
-    var regiaoLVT = Regiao(
-        "Lisboa e Vale Do Tejo",
-        String.format("%,d", covidHoje.confirmados_arslvt),
-        String.format("%,d", covidHoje.novos_confirmados_arslvt),
-        ""
-    )
-    var regiaoAlentejo = Regiao(
-        "Alentejo",
-        String.format("%,d", covidHoje.confirmados_arsalentejo),
-        String.format("%,d", covidHoje.novos_confirmados_arsalentejo),
-        ""
-    )
-    var regiaoAlgarve = Regiao(
-        "Algarve",
-        String.format("%,d", covidHoje.confirmados_arsalgarve),
-        String.format("%,d", covidHoje.novos_confirmados_arsalgarve),
-        ""
-    )
-    var regiaoAcores = Regiao(
-        "Açores",
-        String.format("%,d", covidHoje.confirmados_acores),
-        String.format("%,d", covidHoje.novos_confirmados_acores),
-        ""
-    )
-    var regiaomadeira = Regiao(
-        "Madeira",
-        String.format("%,d", covidHoje.confirmados_madeira),
-        String.format("%,d", covidHoje.novos_confirmados_madeira),
-        ""
-    )
+    fun askDataToday(callback: CovidCallback,callbackDashboard: DashboardCallback){
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.getCovidData(callback,callbackDashboard,"11-10-2021")
+        }
 
-
-    fun getNumeroInternados(): Int {
-        return covidHoje.internados
     }
 
-    fun getNumeroConfirmados(): Int {
-        return covidHoje.confirmados
+    fun getDaysAgo(daysAgo: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
+        return SimpleDateFormat("dd/MM/yyyy").format(calendar.time)
     }
 
-    fun getNumeroObitos(): Int {
-        return covidHoje.obitos
+     fun setDados(covidData: Covid) {
+       covidHoje = covidData
     }
 
-    fun getNumeroRecuperados(): Int {
-        return covidHoje.recuperados
+    fun getNumeroInternados(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.internadosTotais
+        }
     }
 
-    fun getNumeroNovosConfirmados(): Int {
-        return covidHoje.confirmados_novos
+    fun getNumeroConfirmados(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.confirmadosTotais
+        }
     }
 
-    fun getNumeroNovosInternados(): Int {
-        return covidHoje.novos_internados
+    fun getNumeroObitos(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.obitosTotais
+        }
     }
 
-    fun getNumeroNovosObitos(): Int {
-        return covidHoje.novos_obitos
+    fun getNumeroRecuperados(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.recuperadosTotais
+        }
     }
 
-    fun getNumeroNovosRecuperados(): Int {
-        return covidHoje.novos_recuperados
+    fun getNumeroNovosConfirmados(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.confirmados24
+        }
+    }
+
+    fun getNumeroNovosInternados(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.internados24
+        }
+    }
+
+    fun getNumeroNovosObitos(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.obitosTotais
+        }
+    }
+
+    fun getNumeroNovosRecuperados(): String {
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.obitos24
+        }
     }
 
     fun getNumeroCasosTotaisRN(): String {
-        return regiaoNorte.casosTotais
+        return "-"
     }
 
     fun getNumeroCasosUltimaRN(): String {
-        return regiaoNorte.casosUltima
+        return "-"
     }
 
     fun getNumeroCasosTotaisRC(): String {
-        return regiaoCentro.casosTotais
+        return "-"
     }
 
     fun getNumeroCasosUltimasRC(): String {
-        return regiaoCentro.casosUltima
+        return "-"
     }
 
     fun getNumeroCasosTotaisLVT(): String {
-        return regiaoLVT.casosTotais
+        return "-"
     }
 
     fun getNumeroCasosUltimasLV(): String {
-        return regiaoLVT.casosUltima
+        return "-"
     }
 
     fun getNumeroCasosTotaisAlentejo(): String {
-        return regiaoAlentejo.casosTotais
+        return "-"
     }
 
     fun getNumeroCasosUltimasAlentejo(): String {
-        return regiaoAlentejo.casosUltima
+        return "-"
     }
 
     fun getNumeroCasosTotaisAlgarve(): String {
-        return  regiaoAlgarve.casosTotais
+        return "-"
     }
 
     fun getNumeroCasosUltimasAlgarve(): String {
-        return regiaoAlgarve.casosUltima
+        return "-"
     }
 
     fun getNumeroCasosTotaisMadeira(): String {
-        return regiaomadeira.casosTotais
+        return "-"
     }
 
     fun getNumeroCasosUltimasMadeira(): String {
-        return regiaomadeira.casosUltima
+        return "-"
     }
 
     fun getNumeroCasosTotaisAcores(): String {
-        return regiaoAcores.casosTotais
+        return "-"
     }
 
     fun getNumeroCasosUltimasAcores(): String {
-        return regiaoAcores.casosUltima
+        return "-"
     }
+
+
 
 
 }

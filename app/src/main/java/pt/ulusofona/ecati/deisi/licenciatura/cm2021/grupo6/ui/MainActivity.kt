@@ -10,7 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.CovidDatabase
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.Covid
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.NavigationManager
 
 
@@ -21,6 +26,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
+        CoroutineScope(Dispatchers.IO).launch {
+            //TESTES #TODO DELETE
+            CovidDatabase.getInstance(applicationContext).operationDao().insert(
+                Covid(
+                    "10-10-2021",
+                    "123",
+                    "456",
+                    "789",
+                    "741",
+                    "852",
+                    "963",
+                    "159",
+                    "753",)
+            )
+            //DELETE
+        }
         NavigationManager.goToDashboardFragment(supportFragmentManager)
 
     }
