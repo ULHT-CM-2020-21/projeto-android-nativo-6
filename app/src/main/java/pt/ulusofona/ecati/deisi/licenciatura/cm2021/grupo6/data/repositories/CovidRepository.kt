@@ -13,17 +13,17 @@ import retrofit2.Retrofit
 class CovidRepository (private val local: CovidDao, private val remote: Retrofit) {
 
     fun getCovidData(callback: CovidCallback, callbackDashboard: DashboardCallback,data: String){
-        var dados = local.getByDate(data)
-        if(dados != null){
-            callback.getDados(dados)
-            callbackDashboard.onUpdateDados()
-        }
         val service = remote.create(CovidService::class.java)
         CoroutineScope(Dispatchers.IO ).launch {
             println("DADOS")
             val response = service.getDadosDia()
             println("DADOS")
             println(response.body()?.data)
+        }
+        var dados = local.getByDate(data)
+        if(dados != null){
+            callback.getDados(dados)
+            callbackDashboard.onUpdateDados()
         }
 
     }
