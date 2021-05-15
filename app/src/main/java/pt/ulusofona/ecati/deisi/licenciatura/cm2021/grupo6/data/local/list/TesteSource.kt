@@ -1,6 +1,6 @@
 package pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.list
 
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.TesteCovid
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.TesteCovid
 import java.text.SimpleDateFormat
 import java.util.*
 
