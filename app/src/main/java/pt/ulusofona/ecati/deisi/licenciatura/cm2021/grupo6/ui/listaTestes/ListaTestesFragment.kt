@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
 
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
@@ -16,19 +18,18 @@ import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.adapters.TestAdapt
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.NavigationManager
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.RecyclerItemClickListener
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.TesteCovid
-
 import java.util.*
 
 
 class ListaTestesFragment : Fragment() {
+    private lateinit var viewModel: ListaTestesViewModel
     private var testAdapter: TestAdapter? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_lista_testes, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_lista_testes, container, false)
+        viewModel = ViewModelProviders.of(this).get(ListaTestesViewModel::class.java)
+        ButterKnife.bind(this, view)
+        return view
     }
 
     override fun onStart() {

@@ -14,8 +14,10 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
+import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_registo.*
 import kotlinx.android.synthetic.main.fragment_registo.view.*
 
@@ -29,21 +31,20 @@ import java.util.*
 
 
 class RegistoFragment : Fragment() {
+
+    private lateinit var viewModel: RegistoViewModel
     val testeSubmete: TesteCovid = TesteCovid()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-       val view = inflater.inflate(R.layout.fragment_registo,container,false)
-        ButterKnife.bind(this,view)
+        val view = inflater.inflate(R.layout.fragment_registo, container, false)
+        viewModel = ViewModelProviders.of(this).get(RegistoViewModel::class.java)
+        ButterKnife.bind(this, view)
         return view
     }
 
 
     override fun onStart() {
         super.onStart()
-
-        submeterTeste.setOnClickListener {
-            submeterTeste()
-
-        }
 
         dataTeste.setOnClickListener {
            hideKeyboard(dataTeste)
@@ -56,6 +57,52 @@ class RegistoFragment : Fragment() {
         }
 
     }
+
+
+    @OnClick(R.id.submeterTeste)
+    fun onSubmeterTesteNovoClick(){
+        var check = true
+        val editLocal = localTeste
+        val editData = dataTeste
+        val editPositivo = radio_positivo
+        val editNegativo = radio_negativo
+        val editResultados = escolhaResultados
+        val editLocalString: String = editLocal.text.toString()
+        val editDataString: String = editData.text.toString()
+
+        if (editLocalString == "" || editLocalString.isEmpty()) {
+            editLocal.setError(getString(R.string.localTesteErro))
+            check = false
+        }
+
+        if (editDataString == "" || editDataString.isEmpty()) {
+            editData.setError(getString(R.string.dataTesteErro))
+            check = false
+        }
+
+        if (!(editPositivo.isChecked()) && !(editNegativo.isChecked())) {
+            editResultados.resultadoTesteErro.isVisible = true
+            check = false
+        }
+
+        if ((editPositivo.isChecked()) || (editNegativo.isChecked())) {
+            editResultados.resultadoTesteErro.isVisible = false
+        }
+
+        if (check) {
+            testeSubmete.local = editLocalString
+            testeSubmete.data = editDataString
+            TesteSource.addTest(testeSubmete)
+            viewModel.onSubmeterTesteNovo(testeSubmete)
+            Toast.makeText(
+                context as MainActivity,
+                getString(R.string.testeSubmetido),
+                Toast.LENGTH_SHORT
+            ).show()
+            activity?.let { NavigationManager.goToListTestes(it.supportFragmentManager) }
+        }
+    }
+
 
     @OnClick(R.id.radio_positivo, R.id.radio_negativo)
     fun onRadioButtonClicked(view: View) {
@@ -103,7 +150,7 @@ class RegistoFragment : Fragment() {
     }
 
 
-    fun submeterTeste() {
+   /* fun submeterTeste() {
         var check = true
         val editLocal = localTeste
         val editData = dataTeste
@@ -145,7 +192,7 @@ class RegistoFragment : Fragment() {
         }
 
 
-    }
+    }*/
 
     fun hideKeyboard(view: View){
         val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

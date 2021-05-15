@@ -11,13 +11,13 @@ data class TesteCovid (
     var data: String = "DD/MM/YYYY",
     var resultadoTesteCovid: Boolean = false,
     val fotoPath: String = "/drawable/teste_negativo",
-    val foto: File= File(fotoPath),
+    //val foto: File= File(fotoPath), temos que ver...
     val temFoto: Boolean = true){
 
     @PrimaryKey
     var uuid: String = UUID.randomUUID().toString()
 
     override fun toString(): String {
-        return "TesteCovid(local='$local', data='$data', resultadoTesteCovid=$resultadoTesteCovid, fotoPath='$fotoPath', foto=$foto, temFoto='$temFoto')"
+        return "TesteCovid(local='$local', data='$data', resultadoTesteCovid=$resultadoTesteCovid, fotoPath='$fotoPath', temFoto='$temFoto')"
     }
 }

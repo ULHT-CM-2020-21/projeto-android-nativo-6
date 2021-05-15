@@ -26,10 +26,11 @@ class TesteCovidRepositry(private val local: TesteCovidDao) {
     }*/
     //fica para depois...
 
-    private fun getListTestesCovid(): List<TesteCovid> {
+    fun getListTestesCovid(): List<TesteCovid> {
         return local.getAll()
     }
-    private fun saveTesteCovid(testeCovid: TesteCovid) {
+
+    fun saveTesteCovid(testeCovid: TesteCovid) {
         CoroutineScope(Dispatchers.IO).launch {
             local.insert(testeCovid)
         }
