@@ -18,37 +18,37 @@ class CovidResponsePast {
     var data: LinkedTreeMap<String, String> =  LinkedTreeMap()
 
     @SerializedName("confirmados")
-    var confirmados:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("recuperados")
-    var recuperados:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var recuperados:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("obitos")
-    var obitos:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var obitos:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("internados")
-    var internados:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var internados:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("confirmados_arsnorte")
-    var confirmados_arsnorte:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados_arsnorte:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("confirmados_arscentro")
-    var confirmados_arscentro:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados_arscentro:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("confirmados_arslvt")
-    var confirmados_arslvt:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados_arslvt:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("confirmados_arsalentejo")
-    var confirmados_arsalentejo:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados_arsalentejo:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("confirmados_arsalgarve")
-    var confirmados_arsalgarve:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados_arsalgarve:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("confirmados_acores")
-    var confirmados_acores:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados_acores:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
     @SerializedName("confirmados_madeira")
-    var confirmados_madeira:  LinkedTreeMap<String, String> =  LinkedTreeMap()
+    var confirmados_madeira:  LinkedTreeMap<String, Int> =  LinkedTreeMap()
 
 
 

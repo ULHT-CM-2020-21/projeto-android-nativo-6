@@ -10,46 +10,46 @@ data class Covid(val data: String) {
     @PrimaryKey
     var uuid: String = UUID.randomUUID().toString()
 
-    var confirmados24: String = ""
-    var confirmadosTotais: String = ""
-    var recuperadosTotais: String = ""
-    var recuperados24: String = ""
-    var obitosTotais: String = ""
-    var obitos24: String = ""
-    var internadosTotais: String = ""
-    var internados24: String = ""
+    var confirmados24: Int = 0
+    var confirmadosTotais: Int = 0
+    var recuperadosTotais: Int = 0
+    var recuperados24: Int = 0
+    var obitosTotais: Int = 0
+    var obitos24: Int = 0
+    var internadosTotais: Int = 0
+    var internados24:Int = 0
 
-    var norteTotal: String = ""
-    var norte24: String = ""
+    var norteTotal: Int = 0
+    var norte24: Int = 0
 
-    var centroTotal: String = ""
-    var centro24: String = ""
+    var centroTotal: Int = 0
+    var centro24: Int = 0
 
-    var lisboaTotal: String = ""
-    var lisboa24: String = ""
+    var lisboaTotal: Int = 0
+    var lisboa24:Int = 0
 
-    var alentejoTotal: String = ""
-    var alentejo24: String = ""
+    var alentejoTotal: Int = 0
+    var alentejo24: Int = 0
 
-    var algarveTotal: String = ""
-    var algarve24: String = ""
+    var algarveTotal: Int = 0
+    var algarve24: Int = 0
 
-    var acoresTotal: String = ""
-    var acores24: String = ""
+    var acoresTotal: Int = 0
+    var acores24: Int = 0
 
-    var madeiraTotal: String = ""
-    var madeira24: String = ""
+    var madeiraTotal: Int = 0
+    var madeira24: Int = 0
 
     constructor(
         data: String,
-        confirmadosTotais: String,
-        confirmados24: String,
-        recuperadosTotais: String,
-        recuperados24: String,
-        obitosTotais: String,
-        obitos24: String,
-        internadosTotais: String,
-        internados24: String
+        confirmadosTotais: Int,
+        confirmados24: Int,
+        recuperadosTotais: Int,
+        recuperados24: Int,
+        obitosTotais: Int,
+        obitos24: Int,
+        internadosTotais: Int,
+        internados24: Int
     ) : this(data){
         this.confirmados24 =  confirmados24
         this.confirmadosTotais = confirmadosTotais

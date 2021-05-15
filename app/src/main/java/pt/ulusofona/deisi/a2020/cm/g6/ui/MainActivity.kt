@@ -26,22 +26,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupDrawerMenu()
-        CoroutineScope(Dispatchers.IO).launch {
-            //TESTES #TODO DELETE
-            CovidDatabase.getInstance(applicationContext).operationDao().insert(
-                Covid(
-                    "10-10-2021",
-                    "123",
-                    "456",
-                    "789",
-                    "741",
-                    "852",
-                    "963",
-                    "159",
-                    "753",)
-            )
-            //DELETE
-        }
         NavigationManager.goToDashboardFragment(supportFragmentManager)
 
     }

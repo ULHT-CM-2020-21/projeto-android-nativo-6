@@ -37,177 +37,177 @@ class DashboardLogic (private val repository: CovidRepository){
        covidHoje = covidData
     }
 
-    fun getNumeroInternados(): String {
+    fun getNumeroInternados(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.internadosTotais
         }
     }
 
-    fun getNumeroConfirmados(): String {
+    fun getNumeroConfirmados(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.confirmadosTotais
         }
     }
 
-    fun getNumeroObitos(): String {
+    fun getNumeroObitos(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.obitosTotais
         }
     }
 
-    fun getNumeroRecuperados(): String {
+    fun getNumeroRecuperados(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.recuperadosTotais
         }
     }
 
-    fun getNumeroNovosConfirmados(): String {
+    fun getNumeroNovosConfirmados(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.confirmados24
         }
     }
 
-    fun getNumeroNovosInternados(): String {
+    fun getNumeroNovosInternados(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.internados24
         }
     }
 
-    fun getNumeroNovosObitos(): String {
+    fun getNumeroNovosObitos(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.obitos24
         }
     }
 
-    fun getNumeroNovosRecuperados(): String {
+    fun getNumeroNovosRecuperados(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.recuperados24
         }
     }
 
-    fun getNumeroCasosTotaisRN(): String {
+    fun getNumeroCasosTotaisRN(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.norteTotal
         }
     }
 
-    fun getNumeroCasosUltimaRN(): String {
+    fun getNumeroCasosUltimaRN(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.norte24
         }
     }
 
-    fun getNumeroCasosTotaisRC(): String {
+    fun getNumeroCasosTotaisRC(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.centroTotal
         }
     }
 
-    fun getNumeroCasosUltimasRC(): String {
+    fun getNumeroCasosUltimasRC(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.centro24
         }
     }
 
-    fun getNumeroCasosTotaisLVT(): String {
+    fun getNumeroCasosTotaisLVT(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.lisboaTotal
         }
     }
 
-    fun getNumeroCasosUltimasLV(): String {
+    fun getNumeroCasosUltimasLV(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.lisboa24
         }
     }
 
-    fun getNumeroCasosTotaisAlentejo(): String {
+    fun getNumeroCasosTotaisAlentejo(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.alentejoTotal
         }
     }
 
-    fun getNumeroCasosUltimasAlentejo(): String {
+    fun getNumeroCasosUltimasAlentejo(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.alentejo24
         }
     }
 
-    fun getNumeroCasosTotaisAlgarve(): String {
+    fun getNumeroCasosTotaisAlgarve(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.algarveTotal
         }
     }
 
-    fun getNumeroCasosUltimasAlgarve(): String {
+    fun getNumeroCasosUltimasAlgarve(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.algarve24
         }
     }
 
-    fun getNumeroCasosTotaisMadeira(): String {
+    fun getNumeroCasosTotaisMadeira(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.madeiraTotal
         }
     }
 
-    fun getNumeroCasosUltimasMadeira(): String {
+    fun getNumeroCasosUltimasMadeira(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.madeira24
         }
     }
 
-    fun getNumeroCasosTotaisAcores(): String {
+    fun getNumeroCasosTotaisAcores(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.acoresTotal
         }
     }
 
-    fun getNumeroCasosUltimasAcores(): String {
+    fun getNumeroCasosUltimasAcores(): Int {
         if(covidHoje == null){
-            return "-"
+            return 0
         }else{
             return covidHoje!!.acores24
         }

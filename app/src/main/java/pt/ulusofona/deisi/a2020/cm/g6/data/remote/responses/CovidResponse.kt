@@ -8,43 +8,43 @@ class CovidResponse {
     var data: String = ""
 
     @SerializedName("confirmados")
-    var confirmados: String = ""
+    var confirmados: Int = 0
 
     @SerializedName("confirmados_novos")
-    var confirmados_novos: String = ""
+    var confirmados_novos: Int = 0
 
     @SerializedName("recuperados")
-    var recuperados: String = ""
+    var recuperados: Int = 0
 
     @SerializedName("obitos")
-    var obitos: String = ""
+    var obitos: Int = 0
 
     @SerializedName("internados")
-    var internados: String = ""
+    var internados: Int = 0
 
     @SerializedName("internados_uci")
-    var internados_uci: String = ""
+    var internados_uci: Int = 0
 
     @SerializedName("confirmados_arsnorte")
-    var confirmados_arsnorte: String = ""
+    var confirmados_arsnorte: Int = 0
 
     @SerializedName("confirmados_arscentro")
-    var confirmados_arscentro: String = ""
+    var confirmados_arscentro: Int = 0
 
     @SerializedName("confirmados_arslvt")
-    var confirmados_arslvt: String = ""
+    var confirmados_arslvt: Int = 0
 
     @SerializedName("confirmados_arsalentejo")
-    var confirmados_arsalentejo: String = ""
+    var confirmados_arsalentejo: Int = 0
 
     @SerializedName("confirmados_arsalgarve")
-    var confirmados_arsalgarve: String = ""
+    var confirmados_arsalgarve: Int = 0
 
     @SerializedName("confirmados_acores")
-    var confirmados_acores: String = ""
+    var confirmados_acores: Int = 0
 
     @SerializedName("confirmados_madeira")
-    var confirmados_madeira: String = ""
+    var confirmados_madeira: Int = 0
 
 
 

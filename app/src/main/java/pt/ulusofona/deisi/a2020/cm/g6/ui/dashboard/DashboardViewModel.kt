@@ -19,91 +19,91 @@ class DashboardViewModel  (application: Application): AndroidViewModel(applicati
     private val repository =  CovidRepository(storage, RetrofitBuilder.getInstance(ENDPOINT))
     private val dashboardLogic = DashboardLogic(repository)
 
-    fun onSetTextNumeroInternados(): String {
+    fun onSetTextNumeroInternados(): Int {
         return dashboardLogic.getNumeroInternados()
     }
 
-    fun onSetTextConfirmados(): String {
+    fun onSetTextConfirmados(): Int {
         return dashboardLogic.getNumeroConfirmados()
     }
 
-    fun onSetTextObitos(): String {
+    fun onSetTextObitos(): Int {
         return dashboardLogic.getNumeroObitos()
     }
 
-    fun onSetTextRecuperados(): String {
+    fun onSetTextRecuperados(): Int {
         return dashboardLogic.getNumeroRecuperados()
     }
 
-    fun onSetTextNovosConfirmados(): String {
+    fun onSetTextNovosConfirmados(): Int {
         return dashboardLogic.getNumeroNovosConfirmados()
     }
 
-    fun onSetTextNovosInternados(): String {
+    fun onSetTextNovosInternados(): Int {
         return dashboardLogic.getNumeroNovosInternados()
     }
 
-    fun onSetTextNovosObitos(): String {
+    fun onSetTextNovosObitos(): Int {
         return dashboardLogic.getNumeroNovosObitos()
     }
 
-    fun onSetTextNovosRecuperados(): String {
+    fun onSetTextNovosRecuperados(): Int {
         return dashboardLogic.getNumeroNovosRecuperados()
     }
 
-    fun onSetTextRNCasosTotais(): String {
+    fun onSetTextRNCasosTotais(): Int {
         return dashboardLogic.getNumeroCasosTotaisRN()
     }
 
-    fun onSetTextRNCasosUltima(): String {
+    fun onSetTextRNCasosUltima(): Int {
         return dashboardLogic.getNumeroCasosUltimaRN()
     }
 
-    fun onSetTextRCCasosTotais(): String {
+    fun onSetTextRCCasosTotais(): Int {
         return dashboardLogic.getNumeroCasosTotaisRC()
     }
 
-    fun onSetTextRCCasosUltima(): String {
+    fun onSetTextRCCasosUltima(): Int {
         return dashboardLogic.getNumeroCasosUltimasRC()
     }
 
-    fun onSetTextLVTCasosTotais(): String {
+    fun onSetTextLVTCasosTotais(): Int {
         return dashboardLogic.getNumeroCasosTotaisLVT()
     }
 
-    fun onSetTextLVTCasosUltima(): String {
+    fun onSetTextLVTCasosUltima(): Int {
         return dashboardLogic.getNumeroCasosUltimasLV()
     }
 
-    fun onSetTextAlentejoCasosTotais(): String {
+    fun onSetTextAlentejoCasosTotais(): Int {
         return dashboardLogic.getNumeroCasosTotaisAlentejo()
     }
 
-    fun onSetTextAlentejoCasosUltima(): String {
+    fun onSetTextAlentejoCasosUltima(): Int {
         return dashboardLogic.getNumeroCasosUltimasAlentejo()
     }
 
-    fun onSetTextAlgarveCasosTotais(): String {
+    fun onSetTextAlgarveCasosTotais(): Int {
         return dashboardLogic.getNumeroCasosTotaisAlgarve()
     }
 
-    fun onSetTextAlgarveCasosUltima(): String {
+    fun onSetTextAlgarveCasosUltima(): Int {
         return dashboardLogic.getNumeroCasosUltimasAlgarve()
     }
 
-    fun onSetTextMadeiraCasosTotais(): String {
+    fun onSetTextMadeiraCasosTotais(): Int {
         return dashboardLogic.getNumeroCasosTotaisMadeira()
     }
 
-    fun onSetTextMadeiraCasosUltima(): String {
+    fun onSetTextMadeiraCasosUltima(): Int {
         return dashboardLogic.getNumeroCasosUltimasMadeira()
     }
 
-    fun onSetTextAcoresCasosTotais(): String {
+    fun onSetTextAcoresCasosTotais(): Int {
         return dashboardLogic.getNumeroCasosTotaisAcores()
     }
 
-    fun onSetTextAcoresCasosUltima(): String {
+    fun onSetTextAcoresCasosUltima(): Int {
         return dashboardLogic.getNumeroCasosUltimasAcores()
     }
 

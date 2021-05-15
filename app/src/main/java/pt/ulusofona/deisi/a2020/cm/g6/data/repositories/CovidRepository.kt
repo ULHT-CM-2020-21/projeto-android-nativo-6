@@ -45,32 +45,19 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                             ddmmyyArray[2].toInt()
                         ).toString()
 
+                        println(i)
+                        covidHoje.confirmadosTotais = response.body()?.confirmados?.get(numberCovidTotal)!!
+                        covidHoje.internadosTotais = response.body()?.internados?.get(numberCovidTotal)!!
+                        covidHoje.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
+                        covidHoje.recuperadosTotais = response.body()?.recuperados?.get(numberCovidTotal)!!
 
-                        covidHoje.confirmadosTotais =
-                            response.body()?.confirmados?.get(numberCovidTotal).toString()
-                        covidHoje.internadosTotais =
-                            response.body()?.internados?.get(numberCovidTotal).toString()
-                        covidHoje.obitosTotais =
-                            response.body()?.obitos?.get(numberCovidTotal).toString()
-                        covidHoje.recuperadosTotais =
-                            response.body()?.recuperados?.get(numberCovidTotal).toString()
-
-                        covidHoje.norteTotal =
-                            response.body()?.confirmados_arsnorte?.get(numberCovidTotal).toString()
-                        covidHoje.centroTotal =
-                            response.body()?.confirmados_arscentro?.get(numberCovidTotal).toString()
-                        covidHoje.lisboaTotal =
-                            response.body()?.confirmados_arslvt?.get(numberCovidTotal).toString()
-                        covidHoje.alentejoTotal =
-                            response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)
-                                .toString()
-                        covidHoje.algarveTotal =
-                            response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)
-                                .toString()
-                        covidHoje.acoresTotal =
-                            response.body()?.confirmados_acores?.get(numberCovidTotal).toString()
-                        covidHoje.madeiraTotal =
-                            response.body()?.confirmados_madeira?.get(numberCovidTotal).toString()
+                        covidHoje.norteTotal = response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
+                        covidHoje.centroTotal = response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
+                        covidHoje.lisboaTotal = response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
+                        covidHoje.alentejoTotal = response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
+                        covidHoje.algarveTotal = response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
+                        covidHoje.acoresTotal = response.body()?.confirmados_acores?.get(numberCovidTotal)!!
+                        covidHoje.madeiraTotal = response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
 
                         local.insert(covidHoje)
                     }
@@ -94,62 +81,84 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     var covidHoje = Covid(getDaysAgo(0))
                     var covidOntemdBD = local.getByDate(getDaysAgo(1))
 
-                    covidHoje.confirmadosTotais = response.body()?.confirmados.toString()
-                    covidHoje.recuperadosTotais = response.body()?.recuperados.toString()
-                    covidHoje.obitosTotais = response.body()?.obitos.toString()
-                    covidHoje.internadosTotais = response.body()?.internados.toString()
+                    covidHoje.confirmadosTotais = response.body()?.confirmados!!
+                    covidHoje.recuperadosTotais = response.body()?.recuperados!!
+                    covidHoje.obitosTotais = response.body()?.obitos!!
+                    covidHoje.internadosTotais = response.body()?.internados!!
 
-                    covidHoje.norteTotal = response.body()?.confirmados_arsnorte.toString()
-                    covidHoje.centroTotal = response.body()?.confirmados_arscentro.toString()
-                    covidHoje.lisboaTotal = response.body()?.confirmados_arslvt.toString()
-                    covidHoje.alentejoTotal = response.body()?.confirmados_arsalentejo.toString()
-                    covidHoje.algarveTotal = response.body()?.confirmados_arsalgarve.toString()
-                    covidHoje.madeiraTotal = response.body()?.confirmados_madeira.toString()
-                    covidHoje.acoresTotal = response.body()?.confirmados_acores.toString()
+                    covidHoje.norteTotal = response.body()?.confirmados_arsnorte!!
+                    covidHoje.centroTotal = response.body()?.confirmados_arscentro!!
+                    covidHoje.lisboaTotal = response.body()?.confirmados_arslvt!!
+                    covidHoje.alentejoTotal = response.body()?.confirmados_arsalentejo!!
+                    covidHoje.algarveTotal = response.body()?.confirmados_arsalgarve!!
+                    covidHoje.madeiraTotal = response.body()?.confirmados_madeira!!
+                    covidHoje.acoresTotal = response.body()?.confirmados_acores!!
 
                     if (covidOntemdBD != null) {
 
 
-                        var covidTotalHojeC = response.body()?.confirmados?.toDouble()!!
-                        var covidTotalHojeO = response.body()?.obitos?.toDouble()!!
-                        var covidTotalHojeR = response.body()?.recuperados?.toDouble()!!
-                        var covidTotalHojeI = response.body()?.internados?.toDouble()!!
+                        var covidTotalHojeC = response.body()?.confirmados
+                        var covidTotalHojeO = response.body()?.obitos
+                        var covidTotalHojeR = response.body()?.recuperados
+                        var covidTotalHojeI = response.body()?.internados
 
-                        var covidTotalHojeNorte = response.body()?.confirmados_arsnorte?.toDouble()!!
-                        var covidTotalHojeCentro = response.body()?.confirmados_arscentro?.toDouble()!!
-                        var covidTotalHojeLVT = response.body()?.confirmados_arslvt?.toDouble()!!
-                        var covidTotalHojeAlentejo = response.body()?.confirmados_arsalentejo?.toDouble()!!
-                        var covidTotalHojeAlgarve = response.body()?.confirmados_arsalgarve?.toDouble()!!
-                        var covidTotalHojeAcores = response.body()?.confirmados_acores?.toDouble()!!
-                        var covidTotalHojeMadeira = response.body()?.confirmados_madeira?.toDouble()!!
+                        var covidTotalHojeNorte = response.body()?.confirmados_arsnorte
+                        var covidTotalHojeCentro = response.body()?.confirmados_arscentro
+                        var covidTotalHojeLVT = response.body()?.confirmados_arslvt
+                        var covidTotalHojeAlentejo = response.body()?.confirmados_arsalentejo
+                        var covidTotalHojeAlgarve = response.body()?.confirmados_arsalgarve
+                        var covidTotalHojeAcores = response.body()?.confirmados_acores
+                        var covidTotalHojeMadeira = response.body()?.confirmados_madeira
 
-                        var covidOntemC = covidOntemdBD.confirmadosTotais.toDouble()
-                        var covidOntemO = covidOntemdBD.obitosTotais.toDouble()
-                        var covidOntemR = covidOntemdBD.recuperadosTotais.toDouble()
-                        var covidOntemI = covidOntemdBD.internadosTotais.toDouble()
+                        var covidOntemC = covidOntemdBD.confirmadosTotais
+                        var covidOntemO = covidOntemdBD.obitosTotais
+                        var covidOntemR = covidOntemdBD.recuperadosTotais
+                        var covidOntemI = covidOntemdBD.internadosTotais
 
-                        var covidOntemNorte = covidOntemdBD.norteTotal.toDouble()
-                        var covidOntemCentro = covidOntemdBD.centroTotal.toDouble()
-                        var covidOntemLVT = covidOntemdBD.lisboaTotal.toDouble()
-                        var covidOntemAlentejo = covidOntemdBD.alentejoTotal.toDouble()
-                        var covidOntemAlgarve = covidOntemdBD.algarveTotal.toDouble()
-                        var covidOntemAcores = covidOntemdBD.acoresTotal.toDouble()
-                        var covidOntemMadeira = covidOntemdBD.madeiraTotal.toDouble()
+                        var covidOntemNorte = covidOntemdBD.norteTotal
+                        var covidOntemCentro = covidOntemdBD.centroTotal
+                        var covidOntemLVT = covidOntemdBD.lisboaTotal
+                        var covidOntemAlentejo = covidOntemdBD.alentejoTotal
+                        var covidOntemAlgarve = covidOntemdBD.algarveTotal
+                        var covidOntemAcores = covidOntemdBD.acoresTotal
+                        var covidOntemMadeira = covidOntemdBD.madeiraTotal
 
 
 
-                        covidHoje.confirmados24 = (covidTotalHojeC - covidOntemC).toString()
-                        covidHoje.internados24 = (covidTotalHojeI - covidOntemI).toString()
-                        covidHoje.obitos24 = (covidTotalHojeO - covidOntemO).toString()
-                        covidHoje.recuperados24 = (covidTotalHojeR - covidOntemR).toString()
+                        if (covidTotalHojeC != null) {
+                            covidHoje.confirmados24 = (covidTotalHojeC - covidOntemC)
+                        }
+                        if (covidTotalHojeI != null) {
+                            covidHoje.internados24 = (covidTotalHojeI - covidOntemI)
+                        }
+                        if (covidTotalHojeO != null) {
+                            covidHoje.obitos24 = (covidTotalHojeO - covidOntemO)
+                        }
+                        if (covidTotalHojeR != null) {
+                            covidHoje.recuperados24 = (covidTotalHojeR - covidOntemR)
+                        }
 
-                        covidHoje.norte24 = (covidTotalHojeNorte - covidOntemNorte).toString()
-                        covidHoje.centro24 = (covidTotalHojeCentro - covidOntemCentro).toString()
-                        covidHoje.lisboa24 = (covidTotalHojeLVT - covidOntemLVT).toString()
-                        covidHoje.alentejo24 = (covidTotalHojeAlentejo - covidOntemAlentejo).toString()
-                        covidHoje.algarve24 = (covidTotalHojeAlgarve - covidOntemAlgarve).toString()
-                        covidHoje.acores24 = (covidTotalHojeAcores - covidOntemAcores).toString()
-                        covidHoje.madeira24 = (covidTotalHojeMadeira - covidOntemMadeira).toString()
+                        if (covidTotalHojeNorte != null) {
+                            covidHoje.norte24 = (covidTotalHojeNorte - covidOntemNorte)
+                        }
+                        if (covidTotalHojeCentro != null) {
+                            covidHoje.centro24 = (covidTotalHojeCentro - covidOntemCentro)
+                        }
+                        if (covidTotalHojeLVT != null) {
+                            covidHoje.lisboa24 = (covidTotalHojeLVT - covidOntemLVT)
+                        }
+                        if (covidTotalHojeAlentejo != null) {
+                            covidHoje.alentejo24 = (covidTotalHojeAlentejo - covidOntemAlentejo)
+                        }
+                        if (covidTotalHojeAlgarve != null) {
+                            covidHoje.algarve24 = (covidTotalHojeAlgarve - covidOntemAlgarve)
+                        }
+                        if (covidTotalHojeAcores != null) {
+                            covidHoje.acores24 = (covidTotalHojeAcores - covidOntemAcores)
+                        }
+                        if (covidTotalHojeMadeira != null) {
+                            covidHoje.madeira24 = (covidTotalHojeMadeira - covidOntemMadeira)
+                        }
 
 
 
