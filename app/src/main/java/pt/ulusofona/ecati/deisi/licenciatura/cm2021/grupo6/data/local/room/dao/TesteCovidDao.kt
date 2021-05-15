@@ -19,4 +19,8 @@ interface TesteCovidDao {
 
     @Query("SELECT * FROM testeCovid WHERE data= :date")
     fun  getByDate(date: String): TesteCovid?
+
+    //#TODO APAGAR DEBUG
+    @Query("DELETE FROM testeCovid")
+    fun  deleteAllWARNING()
 }

@@ -29,6 +29,5 @@ abstract class TesteCovidDatabase : RoomDatabase() {
             }
         }
 
-
     }
 }
