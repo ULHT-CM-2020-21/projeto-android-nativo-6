@@ -3,9 +3,9 @@ package pt.ulusofona.deisi.a2020.cm.g6.data.repositories
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.dao.TesteCovidDao
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.TesteCovid
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.TesteCovidCallback
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.dao.TesteCovidDao
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
+import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.TesteCovidCallback
 
 
 class TesteCovidRepositry(private val local: TesteCovidDao) {

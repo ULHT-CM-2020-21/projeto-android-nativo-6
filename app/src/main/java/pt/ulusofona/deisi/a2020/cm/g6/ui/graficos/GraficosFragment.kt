@@ -11,8 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.fragment_graficos.*
 import me.ithebk.barchart.BarChartModel
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.MainActivity
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
 
 class GraficosFragment : Fragment() {
 

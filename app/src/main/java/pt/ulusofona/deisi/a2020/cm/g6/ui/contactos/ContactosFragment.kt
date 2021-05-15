@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
+import pt.ulusofona.deisi.a2020.cm.g6.R
 
 
 class ContactosFragment : Fragment() {

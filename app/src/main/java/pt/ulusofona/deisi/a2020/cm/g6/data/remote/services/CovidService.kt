@@ -1,8 +1,8 @@
 package pt.ulusofona.deisi.a2020.cm.g6.data.remote.services
 
 
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.remote.responses.CovidResponse
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.remote.responses.CovidResponsePast
+import pt.ulusofona.deisi.a2020.cm.g6.data.remote.responses.CovidResponse
+import pt.ulusofona.deisi.a2020.cm.g6.data.remote.responses.CovidResponsePast
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

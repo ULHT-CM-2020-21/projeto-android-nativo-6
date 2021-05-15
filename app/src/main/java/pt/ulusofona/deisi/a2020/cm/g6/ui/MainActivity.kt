@@ -13,10 +13,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.CovidDatabase
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.Covid
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.NavigationManager
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.CovidDatabase
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.Covid
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

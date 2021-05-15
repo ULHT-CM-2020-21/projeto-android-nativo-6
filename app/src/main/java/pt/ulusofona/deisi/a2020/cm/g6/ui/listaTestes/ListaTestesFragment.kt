@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
 
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.list.TesteSource
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.MainActivity
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.adapters.TestAdapter
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.NavigationManager
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.RecyclerItemClickListener
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.TesteCovid
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.list.TesteSource
+import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
+import pt.ulusofona.deisi.a2020.cm.g6.ui.adapters.TestAdapter
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.RecyclerItemClickListener
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
 import java.util.*
 
 

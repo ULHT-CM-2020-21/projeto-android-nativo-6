@@ -2,7 +2,7 @@ package pt.ulusofona.deisi.a2020.cm.g6.ui.graficos
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.domain.graficos.GraficosLogic
+import pt.ulusofona.deisi.a2020.cm.g6.domain.graficos.GraficosLogic
 
 
 class GraficosViewModel (application: Application): AndroidViewModel(application){

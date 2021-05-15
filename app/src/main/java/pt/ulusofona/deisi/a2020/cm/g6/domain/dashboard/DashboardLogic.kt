@@ -6,12 +6,12 @@ import androidx.annotation.RequiresApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.CovidData
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.Covid
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.repositories.CovidRepository
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.CovidCallback
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.DashboardCallback
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.Regiao
+import pt.ulusofona.deisi.a2020.cm.g6.data.CovidData
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.Covid
+import pt.ulusofona.deisi.a2020.cm.g6.data.repositories.CovidRepository
+import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.CovidCallback
+import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.DashboardCallback
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Regiao
 import java.text.SimpleDateFormat
 import java.util.*
 

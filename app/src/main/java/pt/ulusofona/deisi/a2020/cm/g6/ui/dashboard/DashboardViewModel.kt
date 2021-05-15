@@ -2,13 +2,13 @@ package pt.ulusofona.deisi.a2020.cm.g6.ui.dashboard
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.CovidDatabase
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.Covid
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.remote.RetrofitBuilder
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.repositories.CovidRepository
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.domain.dashboard.DashboardLogic
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.CovidCallback
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.DashboardCallback
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.CovidDatabase
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.Covid
+import pt.ulusofona.deisi.a2020.cm.g6.data.remote.RetrofitBuilder
+import pt.ulusofona.deisi.a2020.cm.g6.data.repositories.CovidRepository
+import pt.ulusofona.deisi.a2020.cm.g6.domain.dashboard.DashboardLogic
+import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.CovidCallback
+import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.DashboardCallback
 
 const val ENDPOINT = "https://covid19-api.vost.pt/Requests/"
 

@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.regiao_item_expression.view.*
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.MainActivity
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.Regiao
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Regiao
 
 import java.util.ArrayList
 

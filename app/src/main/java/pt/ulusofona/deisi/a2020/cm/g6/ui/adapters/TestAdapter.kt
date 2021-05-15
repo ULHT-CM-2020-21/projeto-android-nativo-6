@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.teste_item_expression.view.*
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.TesteCovid
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
 
 
 class TestAdapter(

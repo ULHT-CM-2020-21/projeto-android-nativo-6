@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ceylonlabs.imageviewpopup.ImagePopup
 import kotlinx.android.synthetic.main.fragment_detalhe_teste.*
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.TesteCovid
+import pt.ulusofona.deisi.a2020.cm.g6.R
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
 
 
 class DetalheTesteFragment(var teste: TesteCovid) : Fragment() {
