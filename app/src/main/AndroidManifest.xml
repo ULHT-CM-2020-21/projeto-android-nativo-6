@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6">
+    package="pt.ulusofona.deisi.a2020.cm.g6">
     <uses-permission android:name="android.permission.ACTION_DIAL" />
     <uses-permission android:name="android.permission.ACTION_VIEW" />
     <uses-permission android:name="android.permission.ACTION_SENDTO" />
