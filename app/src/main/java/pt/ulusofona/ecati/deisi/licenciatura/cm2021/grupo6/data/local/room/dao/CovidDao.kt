@@ -19,4 +19,8 @@ interface CovidDao {
 
     @Query("SELECT * FROM covid WHERE data= :date")
     fun  getByDate(date: String): Covid?
+
+    //#TODO APAGAR DEBUG
+    @Query("DELETE FROM covid")
+    fun  deleteAllWARNING()
 }

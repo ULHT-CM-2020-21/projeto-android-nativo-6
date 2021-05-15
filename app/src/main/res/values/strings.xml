@@ -24,7 +24,7 @@
     <string name="tests">Tests</string>
     <string name="localTesteShow">Location: \u0020</string>
     <string name="dataTesteShow">Date: \u0020</string>
-    <string name="dataUpdate">LAST UPDATE: 10/02/2021</string>
+    <string name="dataUpdate">LAST UPDATE:</string>
     <string name="danger">(DANGER)</string>
     <string name="NOdanger">(NO DANGER)</string>
     <string name="contactosTitulo">CONTACTS</string>

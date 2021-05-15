@@ -229,6 +229,8 @@
                             android:textColor="@color/black"
                             android:textSize="25sp" />
 
+
+
                         <TextView
                             android:id="@+id/numero_novos_internados"
                             android:layout_width="match_parent"
@@ -245,13 +247,16 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dataUpdate"
                     android:layout_marginStart="20dp" />
+                <TextView
+                    android:id="@+id/dateUpdateText"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -323,8 +328,8 @@
 
                         <TextView
                             android:id="@+id/casosTotaisPN"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -345,8 +350,8 @@
 
                         <TextView
                             android:id="@+id/novosCasosPN"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -398,8 +403,8 @@
 
                         <TextView
                             android:id="@+id/casosTotaisC"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -420,8 +425,8 @@
 
                         <TextView
                             android:id="@+id/novosCasosC"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -474,8 +479,8 @@
 
                         <TextView
                             android:id="@+id/casosTotaisLVT"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -496,8 +501,8 @@
 
                         <TextView
                             android:id="@+id/novosCasosLVT"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -550,8 +555,8 @@
 
                         <TextView
                             android:id="@+id/casosTotaisAlentejo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -572,8 +577,8 @@
 
                         <TextView
                             android:id="@+id/novosCasosAlentejo"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -626,8 +631,8 @@
 
                         <TextView
                             android:id="@+id/casosTotaisAlgarve"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -648,8 +653,8 @@
 
                         <TextView
                             android:id="@+id/novosCasosAlgarve"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -702,8 +707,8 @@
 
                         <TextView
                             android:id="@+id/casosTotaisAcores"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -724,8 +729,8 @@
 
                         <TextView
                             android:id="@+id/novosCasosAcores"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -778,8 +783,8 @@
 
                         <TextView
                             android:id="@+id/casosTotaisMadeira"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -800,8 +805,8 @@
 
                         <TextView
                             android:id="@+id/novosCasosMadeira"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="70dp"
+                            android:layout_height="25dp"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>

@@ -19,6 +19,27 @@ data class Covid(val data: String) {
     var internadosTotais: String = ""
     var internados24: String = ""
 
+    var norteTotal: String = ""
+    var norte24: String = ""
+
+    var centroTotal: String = ""
+    var centro24: String = ""
+
+    var lisboaTotal: String = ""
+    var lisboa24: String = ""
+
+    var alentejoTotal: String = ""
+    var alentejo24: String = ""
+
+    var algarveTotal: String = ""
+    var algarve24: String = ""
+
+    var acoresTotal: String = ""
+    var acores24: String = ""
+
+    var madeiraTotal: String = ""
+    var madeira24: String = ""
+
     constructor(
         data: String,
         confirmadosTotais: String,

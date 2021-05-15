@@ -1,6 +1,8 @@
 package pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.domain.dashboard
 
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,9 +20,9 @@ class DashboardLogic (private val repository: CovidRepository){
 
     private var covidHoje: Covid? = null
 
-    fun askDataToday(callback: CovidCallback,callbackDashboard: DashboardCallback){
+    fun askDataToday(callback: CovidCallback, callbackDashboard: DashboardCallback){
         CoroutineScope(Dispatchers.IO).launch {
-            repository.getCovidData(callback,callbackDashboard,"11-10-2021")
+            repository.getCovidData(callback,callbackDashboard)
         }
 
     }
@@ -87,7 +89,7 @@ class DashboardLogic (private val repository: CovidRepository){
         if(covidHoje == null){
             return "-"
         }else{
-            return covidHoje!!.obitosTotais
+            return covidHoje!!.obitos24
         }
     }
 
@@ -95,64 +97,120 @@ class DashboardLogic (private val repository: CovidRepository){
         if(covidHoje == null){
             return "-"
         }else{
-            return covidHoje!!.obitos24
+            return covidHoje!!.recuperados24
         }
     }
 
     fun getNumeroCasosTotaisRN(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.norteTotal
+        }
     }
 
     fun getNumeroCasosUltimaRN(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.norte24
+        }
     }
 
     fun getNumeroCasosTotaisRC(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.centroTotal
+        }
     }
 
     fun getNumeroCasosUltimasRC(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.centro24
+        }
     }
 
     fun getNumeroCasosTotaisLVT(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.lisboaTotal
+        }
     }
 
     fun getNumeroCasosUltimasLV(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.lisboa24
+        }
     }
 
     fun getNumeroCasosTotaisAlentejo(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.alentejoTotal
+        }
     }
 
     fun getNumeroCasosUltimasAlentejo(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.alentejo24
+        }
     }
 
     fun getNumeroCasosTotaisAlgarve(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.algarveTotal
+        }
     }
 
     fun getNumeroCasosUltimasAlgarve(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.algarve24
+        }
     }
 
     fun getNumeroCasosTotaisMadeira(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.madeiraTotal
+        }
     }
 
     fun getNumeroCasosUltimasMadeira(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.madeira24
+        }
     }
 
     fun getNumeroCasosTotaisAcores(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.acoresTotal
+        }
     }
 
     fun getNumeroCasosUltimasAcores(): String {
-        return "-"
+        if(covidHoje == null){
+            return "-"
+        }else{
+            return covidHoje!!.acores24
+        }
     }
 
 
