@@ -23,7 +23,7 @@ import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.R
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.list.TesteSource
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.MainActivity
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.NavigationManager
-import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.utils.TesteCovid
+import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entities.TesteCovid
 
 import java.util.*
 

@@ -19,4 +19,6 @@ interface CovidDao {
 
     @Query("SELECT * FROM covid WHERE data= :date")
     fun  getByDate(date: String): Covid?
+
+
 }
