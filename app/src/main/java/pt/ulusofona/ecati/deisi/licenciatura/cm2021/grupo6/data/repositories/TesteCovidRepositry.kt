@@ -10,12 +10,12 @@ import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.TesteCovi
 
 class TesteCovidRepositry(private val local: TesteCovidDao) {
 
-    fun getTesteCovidData(callback: TesteCovidCallback, /*callbackDashboard: DashboardCallback,*/ data: String){
+    /*fun getTesteCovidData(callback: TesteCovidCallback, *//*callbackDashboard: DashboardCallback,*//* data: String){
         CoroutineScope(Dispatchers.IO ).launch {
             var listaDeTestesCovid = mutableListOf<TesteCovid>()
-            var dados = local.getById(data)
+            val dados = local.getById(data)
             if(dados != null){
-                listaDeTestesCovid.add(dados)
+
                 callback.getTesteCovidData(dados)
                 //preciso de callback para a lista em si? ou no detalhe do teste em si?...
             } else {
@@ -23,17 +23,17 @@ class TesteCovidRepositry(private val local: TesteCovidDao) {
             }
         }
 
-    }
+    }*/
+    //fica para depois...
 
-    private fun getListOperations(): List<TesteCovid> {
+    private fun getListTestesCovid(): List<TesteCovid> {
         return local.getAll()
     }
-
-   /* private fun saveOperationLocal(testeCovid: TesteCovid) {
+    private fun saveTesteCovid(testeCovid: TesteCovid) {
         CoroutineScope(Dispatchers.IO).launch {
-            local.insert(TesteCovid(testeCovid))
+            local.insert(testeCovid)
         }
-    }*/
+    }
 
     //#TODO APAGAR ESTE METODO
     fun deleteAllFromDB() {
