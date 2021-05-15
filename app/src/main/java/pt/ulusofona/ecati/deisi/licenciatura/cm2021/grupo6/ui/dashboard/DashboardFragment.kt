@@ -16,11 +16,15 @@ import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.data.local.room.entit
 import pt.ulusofona.ecati.deisi.licenciatura.cm2021.grupo6.ui.callback.DashboardCallback
 
 
-class DashboardFragment : Fragment() , DashboardCallback{
+class DashboardFragment : Fragment(), DashboardCallback {
 
     private lateinit var viewModel: DashboardViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_dashboard, container, false)
         viewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
         ButterKnife.bind(this, view)
@@ -32,13 +36,13 @@ class DashboardFragment : Fragment() , DashboardCallback{
         viewModel.askDataCovid(this)
 
         numero_internados.text = viewModel.onSetTextNumeroInternados()
-        numero_confirmados.text =  viewModel.onSetTextConfirmados()
+        numero_confirmados.text = viewModel.onSetTextConfirmados()
         numero_obitos.text = viewModel.onSetTextObitos()
-        numero_recuperados.text =  viewModel.onSetTextRecuperados()
+        numero_recuperados.text = viewModel.onSetTextRecuperados()
 
         numero_novos_confirmados.text = viewModel.onSetTextNovosConfirmados()
-        numero_novos_internados.text =  viewModel.onSetTextNovosInternados()
-        numero_novos_obitos.text =  viewModel.onSetTextNovosObitos()
+        numero_novos_internados.text = viewModel.onSetTextNovosInternados()
+        numero_novos_obitos.text = viewModel.onSetTextNovosObitos()
         numero_novos_recuperados.text = viewModel.onSetTextNovosRecuperados()
 
         casosTotaisPN.text = viewModel.onSetTextRNCasosTotais()
@@ -64,38 +68,44 @@ class DashboardFragment : Fragment() , DashboardCallback{
 
     }
 
-    override fun onUpdateDados() {
+    override fun onUpdateDados(dateUpdate: String) {
 
-        numero_internados.text = viewModel.onSetTextNumeroInternados()
-        numero_confirmados.text =  viewModel.onSetTextConfirmados()
-        numero_obitos.text = viewModel.onSetTextObitos()
-        numero_recuperados.text =  viewModel.onSetTextRecuperados()
 
-        numero_novos_confirmados.text = viewModel.onSetTextNovosConfirmados()
-        numero_novos_internados.text =  viewModel.onSetTextNovosInternados()
-        numero_novos_obitos.text =  viewModel.onSetTextNovosObitos()
-        numero_novos_recuperados.text = viewModel.onSetTextNovosRecuperados()
 
-        casosTotaisPN.text = viewModel.onSetTextRNCasosTotais()
-        novosCasosPN.setText(viewModel.onSetTextRNCasosUltima())
+        numero_internados.text = String.format("%,d", viewModel.onSetTextNumeroInternados().toDouble().toInt())
+        numero_confirmados.text = String.format("%,d", viewModel.onSetTextConfirmados().toDouble().toInt())
+        numero_obitos.text = String.format("%,d", viewModel.onSetTextObitos().toDouble().toInt())
+        numero_recuperados.text = String.format("%,d", viewModel.onSetTextRecuperados().toDouble().toInt())
 
-        casosTotaisC.setText(viewModel.onSetTextRCCasosTotais())
-        novosCasosC.setText(viewModel.onSetTextRCCasosUltima())
+        numero_novos_confirmados.text = String.format("%,d", viewModel.onSetTextNovosConfirmados().toDouble().toInt())
+        numero_novos_internados.text = String.format("%,d", viewModel.onSetTextNovosInternados().toDouble().toInt())
+        numero_novos_obitos.text = String.format("%,d", viewModel.onSetTextNovosObitos().toDouble().toInt())
+        numero_novos_recuperados.text = String.format("%,d", viewModel.onSetTextNovosRecuperados().toDouble().toInt())
 
-        casosTotaisLVT.setText(viewModel.onSetTextLVTCasosTotais())
-        novosCasosLVT.setText(viewModel.onSetTextLVTCasosUltima())
+        casosTotaisPN.text = String.format("%,d", viewModel.onSetTextRNCasosTotais().toDouble().toInt())
+        novosCasosPN.text = String.format("%,d", viewModel.onSetTextRNCasosUltima().toDouble().toInt())
 
-        casosTotaisAlentejo.setText(viewModel.onSetTextAlentejoCasosTotais())
-        novosCasosAlentejo.setText(viewModel.onSetTextAlentejoCasosUltima())
+        casosTotaisC.text = String.format("%,d", (viewModel.onSetTextRCCasosTotais().toDouble().toInt()))
+        novosCasosC.text = String.format("%,d", (viewModel.onSetTextRCCasosUltima().toDouble().toInt()))
 
-        casosTotaisAlgarve.setText(viewModel.onSetTextAlgarveCasosTotais())
-        novosCasosAlgarve.setText(viewModel.onSetTextAlgarveCasosUltima())
+        casosTotaisLVT.text = String.format("%,d", (viewModel.onSetTextLVTCasosTotais().toDouble().toInt()))
+        novosCasosLVT.text = String.format("%,d", (viewModel.onSetTextLVTCasosUltima().toDouble().toInt()))
 
-        casosTotaisMadeira.setText(viewModel.onSetTextMadeiraCasosTotais())
-        novosCasosMadeira.setText(viewModel.onSetTextMadeiraCasosUltima())
+        casosTotaisAlentejo.text = String.format("%,d", (viewModel.onSetTextAlentejoCasosTotais().toDouble().toInt()))
+        novosCasosAlentejo.text = String.format("%,d", (viewModel.onSetTextAlentejoCasosUltima().toDouble().toInt()))
 
-        casosTotaisAcores.setText(viewModel.onSetTextAcoresCasosTotais())
-        novosCasosAcores.setText(viewModel.onSetTextAcoresCasosUltima())
+        casosTotaisAlgarve.text = String.format("%,d", (viewModel.onSetTextAlgarveCasosTotais().toDouble().toInt()))
+        novosCasosAlgarve.text = String.format("%,d", (viewModel.onSetTextAlgarveCasosUltima().toDouble().toInt()))
+
+        casosTotaisMadeira.text = String.format("%,d", (viewModel.onSetTextMadeiraCasosTotais().toDouble().toInt()))
+        novosCasosMadeira.text = String.format("%,d", (viewModel.onSetTextMadeiraCasosUltima().toDouble().toInt()))
+
+        casosTotaisAcores.text = String.format("%,d", (viewModel.onSetTextAcoresCasosTotais().toDouble().toInt()))
+        novosCasosAcores.text = String.format("%,d", (viewModel.onSetTextAcoresCasosUltima().toDouble().toInt()))
+
+        dateUpdateText.text = dateUpdate
+
+
     }
 
 
