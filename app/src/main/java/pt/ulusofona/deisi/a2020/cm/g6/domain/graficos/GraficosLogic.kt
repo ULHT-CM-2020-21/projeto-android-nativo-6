@@ -1,10 +1,11 @@
 package pt.ulusofona.deisi.a2020.cm.g6.domain.graficos
 
 import pt.ulusofona.deisi.a2020.cm.g6.data.CovidData
+import pt.ulusofona.deisi.a2020.cm.g6.data.repositories.CovidRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
-class GraficosLogic {
+class GraficosLogic(private val repository: CovidRepository) {
 
     var covidHoje: CovidData = CovidData()
 

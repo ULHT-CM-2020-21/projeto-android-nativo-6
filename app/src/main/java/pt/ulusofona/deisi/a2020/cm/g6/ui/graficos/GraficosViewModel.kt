@@ -2,11 +2,18 @@ package pt.ulusofona.deisi.a2020.cm.g6.ui.graficos
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.CovidDatabase
+import pt.ulusofona.deisi.a2020.cm.g6.data.remote.RetrofitBuilder
+import pt.ulusofona.deisi.a2020.cm.g6.data.repositories.CovidRepository
 import pt.ulusofona.deisi.a2020.cm.g6.domain.graficos.GraficosLogic
+import pt.ulusofona.deisi.a2020.cm.g6.ui.dashboard.ENDPOINT
 
 
 class GraficosViewModel (application: Application): AndroidViewModel(application){
-    private val graficosLogic = GraficosLogic()
+
+    private val storage = CovidDatabase.getInstance(application).operationDao()
+    private val repository =  CovidRepository(storage, RetrofitBuilder.getInstance(ENDPOINT))
+    private val graficosLogic = GraficosLogic(repository)
 
     fun setMaxConfirmados(): Int {
         return graficosLogic.getMaxConfirmados()
