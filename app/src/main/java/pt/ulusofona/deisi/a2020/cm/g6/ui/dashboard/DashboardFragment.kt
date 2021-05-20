@@ -8,15 +8,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.a2020.cm.g6.R
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.Covid
-import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.DashboardCallback
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.DashboardUIListener
 
 
-class DashboardFragment : Fragment(), DashboardCallback {
+class DashboardFragment : Fragment(), DashboardUIListener {
 
     private lateinit var viewModel: DashboardViewModel
 
@@ -33,47 +30,48 @@ class DashboardFragment : Fragment(), DashboardCallback {
 
     override fun onStart() {
         super.onStart()
-        viewModel.askDataCovid(this)
+        viewModel.registerViewListener(this)
+        viewModel.askDataCovid()
     }
 
-    override fun onUpdateDados(dateUpdate: String) {
+
+
+    override fun onUpdateUI(covid: Covid) {
 
 
 
-        numero_internados.text = String.format("%,d", viewModel.onSetTextNumeroInternados())
-        numero_confirmados.text = String.format("%,d", viewModel.onSetTextConfirmados())
-        numero_obitos.text = String.format("%,d", viewModel.onSetTextObitos())
-        numero_recuperados.text = String.format("%,d", viewModel.onSetTextRecuperados())
+        numero_internados.text = String.format("%,d", covid.internadosTotais)
+        numero_confirmados.text = String.format("%,d", covid.confirmadosTotais)
+        numero_obitos.text = String.format("%,d",covid.obitosTotais)
+        numero_recuperados.text = String.format("%,d", covid.recuperadosTotais)
 
-        numero_novos_confirmados.text = String.format("%,d", viewModel.onSetTextNovosConfirmados())
-        numero_novos_internados.text = String.format("%,d", viewModel.onSetTextNovosInternados())
-        numero_novos_obitos.text = String.format("%,d", viewModel.onSetTextNovosObitos())
-        numero_novos_recuperados.text = String.format("%,d", viewModel.onSetTextNovosRecuperados())
+        numero_novos_confirmados.text = String.format("%,d", covid.confirmados24)
+        numero_novos_internados.text = String.format("%,d", covid.internados24)
+        numero_novos_obitos.text = String.format("%,d", covid.obitos24)
+        numero_novos_recuperados.text = String.format("%,d", covid.recuperados24)
 
-        casosTotaisPN.text = String.format("%,d", viewModel.onSetTextRNCasosTotais())
-        novosCasosPN.text = String.format("%,d", viewModel.onSetTextRNCasosUltima())
+        casosTotaisPN.text = String.format("%,d", covid.norteTotal)
+        novosCasosPN.text = String.format("%,d", covid.norte24)
 
-        casosTotaisC.text = String.format("%,d", (viewModel.onSetTextRCCasosTotais()))
-        novosCasosC.text = String.format("%,d", (viewModel.onSetTextRCCasosUltima()))
+        casosTotaisC.text = String.format("%,d", covid.centroTotal)
+        novosCasosC.text = String.format("%,d", covid.centro24)
 
-        casosTotaisLVT.text = String.format("%,d", (viewModel.onSetTextLVTCasosTotais()))
-        novosCasosLVT.text = String.format("%,d", (viewModel.onSetTextLVTCasosUltima()))
+        casosTotaisLVT.text = String.format("%,d", covid.lisboaTotal)
+        novosCasosLVT.text = String.format("%,d", covid.lisboa24)
 
-        casosTotaisAlentejo.text = String.format("%,d", (viewModel.onSetTextAlentejoCasosTotais()))
-        novosCasosAlentejo.text = String.format("%,d", (viewModel.onSetTextAlentejoCasosUltima()))
+        casosTotaisAlentejo.text = String.format("%,d", covid.alentejoTotal)
+        novosCasosAlentejo.text = String.format("%,d", covid.alentejo24)
 
-        casosTotaisAlgarve.text = String.format("%,d", (viewModel.onSetTextAlgarveCasosTotais()))
-        novosCasosAlgarve.text = String.format("%,d", (viewModel.onSetTextAlgarveCasosUltima()))
+        casosTotaisAlgarve.text = String.format("%,d", covid.algarveTotal)
+        novosCasosAlgarve.text = String.format("%,d", covid.alentejo24)
 
-        casosTotaisMadeira.text = String.format("%,d", (viewModel.onSetTextMadeiraCasosTotais()))
-        novosCasosMadeira.text = String.format("%,d", (viewModel.onSetTextMadeiraCasosUltima()))
+        casosTotaisMadeira.text = String.format("%,d", covid.madeiraTotal)
+        novosCasosMadeira.text = String.format("%,d", covid.madeira24)
 
-        casosTotaisAcores.text = String.format("%,d", (viewModel.onSetTextAcoresCasosTotais()))
-        novosCasosAcores.text = String.format("%,d", (viewModel.onSetTextAcoresCasosUltima()))
+        casosTotaisAcores.text = String.format("%,d", covid.acoresTotal)
+        novosCasosAcores.text = String.format("%,d", covid.acores24)
 
-        dateUpdateText.text = dateUpdate
-
-
+        dateUpdateText.text = covid.data
     }
 
 

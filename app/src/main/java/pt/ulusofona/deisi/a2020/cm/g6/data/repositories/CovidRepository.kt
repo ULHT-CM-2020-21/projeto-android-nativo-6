@@ -7,9 +7,7 @@ import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.dao.CovidDao
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.Covid
 import pt.ulusofona.deisi.a2020.cm.g6.data.remote.services.CovidService
-import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.CovidDataChecked
-import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.CovidCallback
-import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.DashboardCallback
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.FetchRepositoryListener
 import retrofit2.Retrofit
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -17,7 +15,10 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
 
-class CovidRepository(private val local: CovidDao, private val remote: Retrofit): CovidDataChecked {
+class CovidRepository(private val local: CovidDao, private val remote: Retrofit) {
+
+    private lateinit var listener: FetchRepositoryListener
+
 
     fun check15DaysData() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -78,7 +79,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     }
 
     // Confirma que temos pelo menos 2 dias de dados para desenhar dashboard
-    fun checkBDLastUpdates(callback: CovidDataChecked, callbackCovid: CovidCallback, callbackDashboard: DashboardCallback) {
+    fun checkBDLastUpdates() {
         CoroutineScope(Dispatchers.IO).launch {
             val service = remote.create(CovidService::class.java)
 
@@ -152,14 +153,12 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     local.insert(covidTwoDayAgo)
                 }
            }
-            callback.checkLastRemoteUpdate(callbackCovid,callbackDashboard)
+            checkLastRemoteUpdate()
         }
-
-
     }
 
     // confirma qual os dados mais recente das API
-    override fun checkLastRemoteUpdate(callback: CovidCallback, callbackDashboard: DashboardCallback) {
+    fun checkLastRemoteUpdate() {
         val service = remote.create(CovidService::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             var responseHoje = service.getDadosDia()
@@ -182,8 +181,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                 if (covidOntem != null) {
                     covidHoje = calcularDadosCovidEntreDatas(covidHoje, covidOntem)
-                    callback.getDados(covidHoje)
-                    callbackDashboard.onUpdateDados(getDaysAgo(0))
+                    listener.onFetchedRepository(covidHoje)
                 }
 
 
@@ -192,8 +190,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 var covidDoisDias = local.getByDate(getDaysAgo(2))
                 if (covidOntem != null && covidDoisDias != null) {
                     covidOntem = calcularDadosCovidEntreDatas(covidOntem, covidDoisDias)
-                    callback.getDados(covidOntem)
-                    callbackDashboard.onUpdateDados(getDaysAgo(1))
+                    listener.onFetchedRepository(covidOntem)
                 }
 
             }
@@ -223,8 +220,9 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     }
 
     // Main function to Dashboard
-    fun getCovidData(callback: CovidCallback, callbackDashboard: DashboardCallback) {
-        checkBDLastUpdates(this,callback,callbackDashboard)
+    fun getCovidData(callback: FetchRepositoryListener) {
+        listener = callback
+        checkBDLastUpdates()
     }
 
     fun getDaysAgo(daysAgo: Int): String {
