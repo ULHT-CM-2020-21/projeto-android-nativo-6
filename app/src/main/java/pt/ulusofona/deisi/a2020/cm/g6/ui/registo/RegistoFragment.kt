@@ -2,10 +2,13 @@ package pt.ulusofona.deisi.a2020.cm.g6.ui.registo
 
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,20 +16,22 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import butterknife.OnClick
-import butterknife.Optional
 import kotlinx.android.synthetic.main.fragment_registo.*
 import kotlinx.android.synthetic.main.fragment_registo.view.*
-
 import pt.ulusofona.deisi.a2020.cm.g6.R
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.list.TesteSource
+import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
 import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
-import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
-
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -35,7 +40,14 @@ class RegistoFragment : Fragment() {
     private lateinit var viewModel: RegistoViewModel
     val testeSubmete: TesteCovid = TesteCovid()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    lateinit var currentPhotoPath: String
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_registo, container, false)
         viewModel = ViewModelProviders.of(this).get(RegistoViewModel::class.java)
         ButterKnife.bind(this, view)
@@ -137,9 +149,11 @@ class RegistoFragment : Fragment() {
         val ano: Int = calendar.get(Calendar.YEAR)
 
 
-        picker = DatePickerDialog(context as MainActivity, DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            editDate!!.setText("" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year)
-        },
+        picker = DatePickerDialog(
+            context as MainActivity,
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                editDate!!.setText("" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year)
+            },
             ano,
             mes,
             dia

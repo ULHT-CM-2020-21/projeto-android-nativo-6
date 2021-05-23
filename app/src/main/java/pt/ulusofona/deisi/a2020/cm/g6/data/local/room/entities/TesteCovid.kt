@@ -12,7 +12,8 @@ data class TesteCovid (
     var resultadoTesteCovid: Boolean = false,
     val fotoPath: String = "/drawable/teste_negativo",
     //val foto: File= File(fotoPath), temos que ver...
-    val temFoto: Boolean = true){
+    val temFoto: Boolean = true
+) {
 
     @PrimaryKey
     var uuid: String = UUID.randomUUID().toString()

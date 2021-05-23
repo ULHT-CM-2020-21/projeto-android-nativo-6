@@ -28,7 +28,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
             val service = remote.create(CovidService::class.java)
             // confirmar se tenho na bd pelo menos 15 dias de dados
             for (i in 16 downTo 1) {
-
                 var dadosBD = local.getByDate(getDaysAgo(i))
                 if (dadosBD == null) {
                     val response = service.getDadosDiaEspecifico(getDaysAgo(i))
@@ -36,43 +35,20 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                         var covidManyDays = Covid(getDaysAgo(i))
 
-                        val numberCovidTotal = daysBetween(
-                            getDaysAgo(i)
-                        ).toString()
+                        val numberCovidTotal = daysBetween(getDaysAgo(i)).toString()
 
-                        covidManyDays.confirmadosTotais = response.body()?.confirmados?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.internadosTotais = response.body()?.internados?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.obitosTotais =
-                            response.body()?.obitos?.get(numberCovidTotal)!!
-                        covidManyDays.recuperadosTotais = response.body()?.recuperados?.get(
-                            numberCovidTotal
-                        )!!
+                        covidManyDays.confirmadosTotais = response.body()?.confirmados?.get(numberCovidTotal)!!
+                        covidManyDays.internadosTotais = response.body()?.internados?.get(numberCovidTotal)!!
+                        covidManyDays.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
+                        covidManyDays.recuperadosTotais = response.body()?.recuperados?.get(numberCovidTotal)!!
 
-                        covidManyDays.norteTotal = response.body()?.confirmados_arsnorte?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.centroTotal = response.body()?.confirmados_arscentro?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.lisboaTotal = response.body()?.confirmados_arslvt?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.alentejoTotal = response.body()?.confirmados_arsalentejo?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.algarveTotal = response.body()?.confirmados_arsalgarve?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.acoresTotal = response.body()?.confirmados_acores?.get(
-                            numberCovidTotal
-                        )!!
-                        covidManyDays.madeiraTotal = response.body()?.confirmados_madeira?.get(
-                            numberCovidTotal
-                        )!!
+                        covidManyDays.norteTotal = response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
+                        covidManyDays.centroTotal = response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
+                        covidManyDays.lisboaTotal = response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
+                        covidManyDays.alentejoTotal = response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
+                        covidManyDays.algarveTotal = response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
+                        covidManyDays.acoresTotal = response.body()?.confirmados_acores?.get(numberCovidTotal)!!
+                        covidManyDays.madeiraTotal = response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
 
                         local.insert(covidManyDays)
                     }
@@ -91,42 +67,57 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                     var covidManyDays = Covid(getDaysAgo(0))
 
-                    val numberCovidTotal = daysBetween(
-                        getDaysAgo(0)
-                    ).toString()
+                    val numberCovidTotal = daysBetween(getDaysAgo(0)).toString()
 
-                    covidManyDays.confirmadosTotais = response.body()?.confirmados?.get(
-                        numberCovidTotal
-                    )!!
-                    covidManyDays.internadosTotais = response.body()?.internados?.get(
-                        numberCovidTotal
-                    )!!
+                    covidManyDays.confirmadosTotais = response.body()?.confirmados?.get(numberCovidTotal)!!
+                    covidManyDays.internadosTotais = response.body()?.internados?.get(numberCovidTotal)!!
                     covidManyDays.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
-                    covidManyDays.recuperadosTotais = response.body()?.recuperados?.get(
-                        numberCovidTotal
-                    )!!
+                    covidManyDays.recuperadosTotais = response.body()?.recuperados?.get(numberCovidTotal)!!
 
-                    covidManyDays.norteTotal = response.body()?.confirmados_arsnorte?.get(
-                        numberCovidTotal
-                    )!!
-                    covidManyDays.centroTotal = response.body()?.confirmados_arscentro?.get(
-                        numberCovidTotal
-                    )!!
-                    covidManyDays.lisboaTotal = response.body()?.confirmados_arslvt?.get(
-                        numberCovidTotal
-                    )!!
-                    covidManyDays.alentejoTotal = response.body()?.confirmados_arsalentejo?.get(
-                        numberCovidTotal
-                    )!!
-                    covidManyDays.algarveTotal = response.body()?.confirmados_arsalgarve?.get(
-                        numberCovidTotal
-                    )!!
-                    covidManyDays.acoresTotal = response.body()?.confirmados_acores?.get(
-                        numberCovidTotal
-                    )!!
-                    covidManyDays.madeiraTotal = response.body()?.confirmados_madeira?.get(
-                        numberCovidTotal
-                    )!!
+                    covidManyDays.norteTotal = response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
+                    covidManyDays.centroTotal = response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
+                    covidManyDays.lisboaTotal = response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
+                    covidManyDays.alentejoTotal = response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
+                    covidManyDays.algarveTotal = response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
+                    covidManyDays.acoresTotal = response.body()?.confirmados_acores?.get(numberCovidTotal)!!
+                    covidManyDays.madeiraTotal = response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
+
+                    var antigoCovid = local.getByDate(getDaysAgo(1))
+                    covidManyDays = calcularDadosCovidEntreDatas(covidManyDays, antigoCovid!!)
+                    local.updateByDate24h(covidManyDays.confirmados24,covidManyDays.recuperados24,covidManyDays.internados24,covidManyDays.obitos24, covidManyDays.data)
+
+
+                    var grafico = Grafico()
+                    var listaConfirmados = mutableListOf<Int>()
+                    var listaRecuperados = mutableListOf<Int>()
+                    var listaInternados = mutableListOf<Int>()
+                    var listaObitos = mutableListOf<Int>()
+
+                    for(i in 0..14){
+                        var covid = local.getByDate(getDaysAgo(i))
+                        listaConfirmados.add(covid!!.confirmados24)
+                        listaRecuperados.add(covid!!.recuperados24)
+                        if(covid!!.internados24 < 0){
+                            listaInternados.add(0)
+                        }else{
+                            listaInternados.add(covid!!.internados24)
+                        }
+                        listaObitos.add(covid!!.obitos24)
+                    }
+
+                    grafico.fromToday = true
+
+                    grafico.valuesConfirmados = listaConfirmados
+                    grafico.valuesRecuperados = listaRecuperados
+                    grafico.valuesInternados = listaInternados
+                    grafico.valuesObitos = listaObitos
+
+                    grafico.maxConfirmados = getMaxList(listaConfirmados)
+                    grafico.maxRecuperados = getMaxList(listaRecuperados)
+                    grafico.maxInternados = getMaxList(listaInternados)
+                    grafico.maxObitos = getMaxList(listaObitos)
+
+                    listenerGraficos.onFetchedRepository(grafico)
                 } else {
                     var grafico = Grafico()
                     var listaConfirmados = mutableListOf<Int>()
@@ -138,7 +129,11 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                         var covid = local.getByDate(getDaysAgo(i))
                         listaConfirmados.add(covid!!.confirmados24)
                         listaRecuperados.add(covid!!.recuperados24)
-                        listaInternados.add(covid!!.internados24)
+                        if(covid!!.internados24 < 0){
+                            listaInternados.add(0)
+                        }else{
+                            listaInternados.add(covid!!.internados24)
+                        }
                         listaObitos.add(covid!!.obitos24)
                     }
 
@@ -158,7 +153,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 }
             }
         }
-
     }
 
     fun getMaxList(lista : List<Int>): Int {
