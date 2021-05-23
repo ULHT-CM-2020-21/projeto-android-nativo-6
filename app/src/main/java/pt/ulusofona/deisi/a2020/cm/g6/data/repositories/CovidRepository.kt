@@ -136,13 +136,13 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                     for(i in 1..15){
                         var covid = local.getByDate(getDaysAgo(i))
-                        println(covid!!.data)
-                        println(covid!!.confirmados24)
                         listaConfirmados.add(covid!!.confirmados24)
                         listaRecuperados.add(covid!!.recuperados24)
                         listaInternados.add(covid!!.internados24)
                         listaObitos.add(covid!!.obitos24)
                     }
+
+                    grafico.fromToday = false
 
                     grafico.valuesConfirmados = listaConfirmados
                     grafico.valuesRecuperados = listaRecuperados
@@ -293,10 +293,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     // Calcular dados entre duas datas (Covid 24 horas)
     fun calcularDadosCovidEntreDatas(covidAtual: Covid, covidAntigo: Covid): Covid {
 
-       /* println(covidAtual.data)
-        println(covidAntigo.data)
-        println(covidAtual.confirmadosTotais)
-        println(covidAntigo.confirmadosTotais)*/
         covidAtual.confirmados24 =
             (covidAtual.confirmadosTotais?.minus(covidAntigo.confirmadosTotais)!!)
         covidAtual.internados24 =
@@ -313,8 +309,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         covidAtual.acores24 = (covidAtual.acoresTotal?.minus(covidAntigo.acoresTotal))!!
         covidAtual.madeira24 = (covidAtual.madeiraTotal?.minus(covidAntigo.madeiraTotal))!!
 
-        /*println(covidAtual.confirmados24)
-        println("--")*/
         return covidAtual
     }
 

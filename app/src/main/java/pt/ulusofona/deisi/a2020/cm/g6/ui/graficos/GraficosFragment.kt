@@ -108,29 +108,56 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
         }
 
-        bar_chart_Confirmados.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-        }
-        bar_chart_Recuperados.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-        }
-        bar_chart_Obitos.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-        }
-        bar_chart_Internados.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-        }
+        if(grafico.fromToday == true){
+            bar_chart_Confirmados.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            }
+            bar_chart_Recuperados.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            }
+            bar_chart_Obitos.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            }
+            bar_chart_Internados.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            }
 
 
 
-        startDateC.setText(getDaysAgo(0))
-        endDateC.setText(getDaysAgo(14))
-        startDateR.setText(getDaysAgo(0))
-        endDateR.setText(getDaysAgo(14))
-        startDateO.setText(getDaysAgo(0))
-        endDateO.setText(getDaysAgo(14))
-        startDateI.setText(getDaysAgo(0))
-        endDateI.setText(getDaysAgo(14))
+            startDateC.setText(getDaysAgo(0))
+            endDateC.setText(getDaysAgo(14))
+            startDateR.setText(getDaysAgo(0))
+            endDateR.setText(getDaysAgo(14))
+            startDateO.setText(getDaysAgo(0))
+            endDateO.setText(getDaysAgo(14))
+            startDateI.setText(getDaysAgo(0))
+            endDateI.setText(getDaysAgo(14))
+
+        } else {
+            bar_chart_Confirmados.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
+            }
+            bar_chart_Recuperados.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
+            }
+            bar_chart_Obitos.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
+            }
+            bar_chart_Internados.setOnBarClickListener {
+                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
+            }
+
+
+
+            startDateC.setText(getDaysAgo(1))
+            endDateC.setText(getDaysAgo(15))
+            startDateR.setText(getDaysAgo(1))
+            endDateR.setText(getDaysAgo(15))
+            startDateO.setText(getDaysAgo(1))
+            endDateO.setText(getDaysAgo(15))
+            startDateI.setText(getDaysAgo(1))
+            endDateI.setText(getDaysAgo(15))
+        }
     }
 
     fun getDaysAgo(daysAgo: Int): String {
