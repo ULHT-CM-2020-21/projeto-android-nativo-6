@@ -27,7 +27,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         CoroutineScope(Dispatchers.IO).launch {
             val service = remote.create(CovidService::class.java)
             // confirmar se tenho na bd pelo menos 15 dias de dados
-            for (i in 17 downTo 1) {
+            for (i in 16 downTo 1) {
 
                 var dadosBD = local.getByDate(getDaysAgo(i))
                 if (dadosBD == null) {
@@ -74,7 +74,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                             numberCovidTotal
                         )!!
 
-                        if (i != 17) {
+                        if (i != 16) {
                             covidManyDays = calcularDadosCovidEntreDatas(
                                 covidManyDays, local.getByDate(getDaysAgo(i + 1))!!
                             )
@@ -135,8 +135,10 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     var listaInternados = mutableListOf<Int>()
                     var listaObitos = mutableListOf<Int>()
 
-                    for(i in 16 downTo 1){
+                    for(i in 1..15){
                         var covid = local.getByDate(getDaysAgo(i))
+                        println(covid!!.data)
+                        println(covid!!.confirmados24)
                         listaConfirmados.add(covid!!.confirmados24)
                         listaRecuperados.add(covid!!.recuperados24)
                         listaInternados.add(covid!!.internados24)
@@ -292,6 +294,10 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     // Calcular dados entre duas datas (Covid 24 horas)
     fun calcularDadosCovidEntreDatas(covidAtual: Covid, covidAntigo: Covid): Covid {
 
+       /* println(covidAtual.data)
+        println(covidAntigo.data)
+        println(covidAtual.confirmadosTotais)
+        println(covidAntigo.confirmadosTotais)*/
         covidAtual.confirmados24 =
             (covidAtual.confirmadosTotais?.minus(covidAntigo.confirmadosTotais)!!)
         covidAtual.internados24 =
@@ -308,6 +314,8 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         covidAtual.acores24 = (covidAtual.acoresTotal?.minus(covidAntigo.acoresTotal))!!
         covidAtual.madeira24 = (covidAtual.madeiraTotal?.minus(covidAntigo.madeiraTotal))!!
 
+        /*println(covidAtual.confirmados24)
+        println("--")*/
         return covidAtual
     }
 
