@@ -75,15 +75,11 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                         )!!
 
                         if (i != 17) {
-                            println(i)
-                            println(i-1)
                             covidManyDays = calcularDadosCovidEntreDatas(
-                                local.getByDate(getDaysAgo(i + 1))!!,
-                                covidManyDays
+                                covidManyDays, local.getByDate(getDaysAgo(i + 1))!!
                             )
 
                         }
-                        println("sai do if")
 
                         local.insert(covidManyDays)
                     }
@@ -139,7 +135,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     var listaInternados = mutableListOf<Int>()
                     var listaObitos = mutableListOf<Int>()
 
-                    for(i in 15 downTo 1){
+                    for(i in 16 downTo 1){
                         var covid = local.getByDate(getDaysAgo(i))
                         listaConfirmados.add(covid!!.confirmados24)
                         listaRecuperados.add(covid!!.recuperados24)
