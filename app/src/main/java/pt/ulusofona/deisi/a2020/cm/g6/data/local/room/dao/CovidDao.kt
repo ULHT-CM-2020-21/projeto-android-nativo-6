@@ -23,4 +23,7 @@ interface CovidDao {
     //#TODO APAGAR DEBUG
     @Query("DELETE FROM covid")
     fun  deleteAllWARNING()
+
+    @Query("UPDATE covid SET confirmados24= :confirmadosUltimas, recuperados24= :recuperadosUltimas, internados24= :internadosUltimas, obitos24= :obitosUltimas WHERE data= :date")
+    fun updateByDate24h(confirmadosUltimas: Int, recuperadosUltimas: Int, internadosUltimas: Int, obitosUltimas: Int, date: String)
 }
