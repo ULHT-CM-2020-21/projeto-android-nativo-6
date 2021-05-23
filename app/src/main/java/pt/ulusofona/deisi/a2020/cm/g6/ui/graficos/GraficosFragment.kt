@@ -13,8 +13,12 @@ import kotlinx.android.synthetic.main.fragment_graficos.*
 import me.ithebk.barchart.BarChartModel
 import pt.ulusofona.deisi.a2020.cm.g6.R
 import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.GraficoUIListener
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Grafico
+import java.text.SimpleDateFormat
+import java.util.*
 
-class GraficosFragment : Fragment() {
+class GraficosFragment : Fragment(), GraficoUIListener {
 
     private lateinit var viewModel: GraficosViewModel
 
@@ -29,18 +33,25 @@ class GraficosFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        viewModel.registerViewListener(this)
+        viewModel.drawGraphs()
 
-        bar_chart_Confirmados.barMaxValue = viewModel.setMaxConfirmados()
-        bar_chart_Recuperados.barMaxValue = viewModel.setMaxRecuperados()
-        bar_chart_Obitos.barMaxValue = viewModel.setMaxObitos()
-        bar_chart_Internados.barMaxValue = viewModel.setMaxInternados()
+    }
+
+    override fun onUpdateUI(grafico: Grafico) {
+        bar_chart_Confirmados.barMaxValue = grafico.maxConfirmados
+        bar_chart_Recuperados.barMaxValue = grafico.maxRecuperados
+        bar_chart_Obitos.barMaxValue = grafico.maxObitos
+        bar_chart_Internados.barMaxValue = grafico.maxInternados
 
         var barchartModel: BarChartModel
 
-        var valuesGraficoConfirmados = viewModel.onDrawGraficosConfirmados()
-        var valuesGraficoInternados = viewModel.onDrawGraficosInternados()
-        var valuesGraficoObitos = viewModel.onDrawGraficosObitos()
-        var valuesGraficoRecuperados = viewModel.onDrawGraficosRecuperados()
+        var valuesGraficoConfirmados = grafico.valuesConfirmados
+        var valuesGraficoRecuperados = grafico.valuesRecuperados
+        var valuesGraficoObitos = grafico.valuesObitos
+        var valuesGraficoInternados = grafico.valuesInternados
+
+
 
         for(i in 14 downTo 0){
             barchartModel = BarChartModel()
@@ -98,28 +109,34 @@ class GraficosFragment : Fragment() {
         }
 
         bar_chart_Confirmados.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,viewModel.getMessageToastDate(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
         }
         bar_chart_Recuperados.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,viewModel.getMessageToastDate(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
         }
         bar_chart_Obitos.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,viewModel.getMessageToastDate(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
         }
         bar_chart_Internados.setOnBarClickListener {
-            Toast.makeText(context as MainActivity,viewModel.getMessageToastDate(it.barTag as Int), Toast.LENGTH_SHORT).show()
+            Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
         }
 
-        startDateC.setText(viewModel.getGraficoDatesInfo(0))
-        endDateC.setText(viewModel.getGraficoDatesInfo(14))
-        startDateR.setText(viewModel.getGraficoDatesInfo(0))
-        endDateR.setText(viewModel.getGraficoDatesInfo(14))
-        startDateO.setText(viewModel.getGraficoDatesInfo(0))
-        endDateO.setText(viewModel.getGraficoDatesInfo(14))
-        startDateI.setText(viewModel.getGraficoDatesInfo(0))
-        endDateI.setText(viewModel.getGraficoDatesInfo(14))
 
+
+        startDateC.setText(getDaysAgo(0))
+        endDateC.setText(getDaysAgo(14))
+        startDateR.setText(getDaysAgo(0))
+        endDateR.setText(getDaysAgo(14))
+        startDateO.setText(getDaysAgo(0))
+        endDateO.setText(getDaysAgo(14))
+        startDateI.setText(getDaysAgo(0))
+        endDateI.setText(getDaysAgo(14))
     }
 
+    fun getDaysAgo(daysAgo: Int): String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
+        return SimpleDateFormat("dd/MM/yyyy").format(calendar.time)
+    }
 
 }

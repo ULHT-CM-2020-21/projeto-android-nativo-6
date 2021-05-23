@@ -2,51 +2,52 @@ package pt.ulusofona.deisi.a2020.cm.g6.ui.graficos
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.CovidDatabase
 import pt.ulusofona.deisi.a2020.cm.g6.data.remote.RetrofitBuilder
 import pt.ulusofona.deisi.a2020.cm.g6.data.repositories.CovidRepository
 import pt.ulusofona.deisi.a2020.cm.g6.domain.graficos.GraficosLogic
 import pt.ulusofona.deisi.a2020.cm.g6.ui.dashboard.ENDPOINT
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.FetchGraficoListener
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.GraficoUIListener
+import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Grafico
 
 
-class GraficosViewModel (application: Application): AndroidViewModel(application){
+class GraficosViewModel (application: Application): AndroidViewModel(application), FetchGraficoListener{
 
     private val storage = CovidDatabase.getInstance(application).operationDao()
     private val repository =  CovidRepository(storage, RetrofitBuilder.getInstance(ENDPOINT))
     private val graficosLogic = GraficosLogic(repository)
+    private var listeners = mutableListOf<GraficoUIListener>()
 
-    fun setMaxConfirmados(): Int {
-        return graficosLogic.getMaxConfirmados()
-    }
-    fun setMaxRecuperados(): Int {
-        return graficosLogic.getMaxRecuperados()
-    }
-    fun setMaxInternados(): Int {
-        return graficosLogic.getMaxInternados()
-    }
-    fun setMaxObitos(): Int {
-        return graficosLogic.getMaxObitos()
+
+    fun registerViewListener(listener: GraficoUIListener){
+        listeners.add(listener)
     }
 
-    fun onDrawGraficosConfirmados(): MutableList<Int> {
-        return graficosLogic.getListDiasConfirmados()
-    }
-    fun onDrawGraficosRecuperados(): MutableList<Int> {
-        return graficosLogic.getListDiasRecuperados()
-    }
-    fun onDrawGraficosObitos(): MutableList<Int> {
-        return graficosLogic.getListDiasObitos()
-    }
-    fun onDrawGraficosInternados(): MutableList<Int> {
-        return graficosLogic.getListDiasInternados()
+    fun unregisterViewListener(listener: GraficoUIListener){
+        listeners.remove(listener)
     }
 
-    fun getMessageToastDate(value: Int): String{
-        return graficosLogic.getDaysAgo(value)
+    fun notifyListener(grafico: Grafico){
+        for(i in listeners){
+            i.onUpdateUI(grafico)
+        }
     }
 
-    fun getGraficoDatesInfo(value: Int): String{
-        return graficosLogic.getDaysAgo(value)
+    fun drawGraphs(){
+        graficosLogic.registerListener(this)
+        CoroutineScope(Dispatchers.IO).launch{
+            graficosLogic.askGraphsData()
+        }
+    }
+
+    override fun onDataFetched(grafico: Grafico) {
+        CoroutineScope(Dispatchers.Main).launch {
+            notifyListener(grafico)
+        }
     }
 
 }
