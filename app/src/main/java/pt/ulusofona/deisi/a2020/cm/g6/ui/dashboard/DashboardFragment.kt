@@ -38,7 +38,7 @@ class DashboardFragment : Fragment(), DashboardUIListener {
 
     override fun onUpdateUI(covid: Covid) {
 
-
+        println("eestou aquiii")
 
         numero_internados.text = String.format("%,d", covid.internadosTotais)
         numero_confirmados.text = String.format("%,d", covid.confirmadosTotais)

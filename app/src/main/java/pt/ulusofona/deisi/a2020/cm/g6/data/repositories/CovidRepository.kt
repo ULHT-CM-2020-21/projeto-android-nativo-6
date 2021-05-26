@@ -1,6 +1,5 @@
 package pt.ulusofona.deisi.a2020.cm.g6.data.repositories
 
-import android.os.Build
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,9 +11,6 @@ import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.FetchRepositoryGraficoListener
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Grafico
 import retrofit2.Retrofit
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
 import java.util.*
 
 class CovidRepository(private val local: CovidDao, private val remote: Retrofit) {
@@ -37,29 +33,46 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                         val numberCovidTotal = daysBetween(getDaysAgo(i)).toString()
 
-                        covidManyDays.confirmadosTotais = response.body()?.confirmados?.get(numberCovidTotal)!!
-                        covidManyDays.internadosTotais = response.body()?.internados?.get(numberCovidTotal)!!
-                        covidManyDays.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
-                        covidManyDays.recuperadosTotais = response.body()?.recuperados?.get(numberCovidTotal)!!
+                        covidManyDays.confirmadosTotais =
+                            response.body()?.confirmados?.get(numberCovidTotal)!!
+                        covidManyDays.internadosTotais =
+                            response.body()?.internados?.get(numberCovidTotal)!!
+                        covidManyDays.obitosTotais =
+                            response.body()?.obitos?.get(numberCovidTotal)!!
+                        covidManyDays.recuperadosTotais =
+                            response.body()?.recuperados?.get(numberCovidTotal)!!
 
-                        covidManyDays.norteTotal = response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
-                        covidManyDays.centroTotal = response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
-                        covidManyDays.lisboaTotal = response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
-                        covidManyDays.alentejoTotal = response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
-                        covidManyDays.algarveTotal = response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
-                        covidManyDays.acoresTotal = response.body()?.confirmados_acores?.get(numberCovidTotal)!!
-                        covidManyDays.madeiraTotal = response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
+                        covidManyDays.norteTotal =
+                            response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
+                        covidManyDays.centroTotal =
+                            response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
+                        covidManyDays.lisboaTotal =
+                            response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
+                        covidManyDays.alentejoTotal =
+                            response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
+                        covidManyDays.algarveTotal =
+                            response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
+                        covidManyDays.acoresTotal =
+                            response.body()?.confirmados_acores?.get(numberCovidTotal)!!
+                        covidManyDays.madeiraTotal =
+                            response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
 
                         local.insert(covidManyDays)
                     }
                 }
             }
-            for(i in 15 downTo 0){
+            for (i in 15 downTo 0) {
                 var atualCovid = local.getByDate(getDaysAgo(i))
                 var antigoCovid = local.getByDate(getDaysAgo(i + 1))
-                if(atualCovid != null && antigoCovid != null){
+                if (atualCovid != null && antigoCovid != null) {
                     atualCovid = calcularDadosCovidEntreDatas(atualCovid!!, antigoCovid!!)
-                    local.updateByDate24h(atualCovid.confirmados24,atualCovid.recuperados24,atualCovid.internados24,atualCovid.obitos24, atualCovid.data)
+                    local.updateByDate24h(
+                        atualCovid.confirmados24,
+                        atualCovid.recuperados24,
+                        atualCovid.internados24,
+                        atualCovid.obitos24,
+                        atualCovid.data
+                    )
                 }
             }
             var covidHoje = local.getByDate(getDaysAgo(0))
@@ -71,22 +84,38 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                     val numberCovidTotal = daysBetween(getDaysAgo(0)).toString()
 
-                    covidManyDays.confirmadosTotais = response.body()?.confirmados?.get(numberCovidTotal)!!
-                    covidManyDays.internadosTotais = response.body()?.internados?.get(numberCovidTotal)!!
+                    covidManyDays.confirmadosTotais =
+                        response.body()?.confirmados?.get(numberCovidTotal)!!
+                    covidManyDays.internadosTotais =
+                        response.body()?.internados?.get(numberCovidTotal)!!
                     covidManyDays.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
-                    covidManyDays.recuperadosTotais = response.body()?.recuperados?.get(numberCovidTotal)!!
+                    covidManyDays.recuperadosTotais =
+                        response.body()?.recuperados?.get(numberCovidTotal)!!
 
-                    covidManyDays.norteTotal = response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
-                    covidManyDays.centroTotal = response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
-                    covidManyDays.lisboaTotal = response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
-                    covidManyDays.alentejoTotal = response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
-                    covidManyDays.algarveTotal = response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
-                    covidManyDays.acoresTotal = response.body()?.confirmados_acores?.get(numberCovidTotal)!!
-                    covidManyDays.madeiraTotal = response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
+                    covidManyDays.norteTotal =
+                        response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
+                    covidManyDays.centroTotal =
+                        response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
+                    covidManyDays.lisboaTotal =
+                        response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
+                    covidManyDays.alentejoTotal =
+                        response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
+                    covidManyDays.algarveTotal =
+                        response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
+                    covidManyDays.acoresTotal =
+                        response.body()?.confirmados_acores?.get(numberCovidTotal)!!
+                    covidManyDays.madeiraTotal =
+                        response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
 
                     var antigoCovid = local.getByDate(getDaysAgo(1))
                     covidManyDays = calcularDadosCovidEntreDatas(covidManyDays, antigoCovid!!)
-                    local.updateByDate24h(covidManyDays.confirmados24,covidManyDays.recuperados24,covidManyDays.internados24,covidManyDays.obitos24, covidManyDays.data)
+                    local.updateByDate24h(
+                        covidManyDays.confirmados24,
+                        covidManyDays.recuperados24,
+                        covidManyDays.internados24,
+                        covidManyDays.obitos24,
+                        covidManyDays.data
+                    )
 
 
                     var grafico = Grafico()
@@ -95,13 +124,13 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     var listaInternados = mutableListOf<Int>()
                     var listaObitos = mutableListOf<Int>()
 
-                    for(i in 0..14){
+                    for (i in 0..14) {
                         var covid = local.getByDate(getDaysAgo(i))
                         listaConfirmados.add(covid!!.confirmados24)
                         listaRecuperados.add(covid!!.recuperados24)
-                        if(covid!!.internados24 < 0){
+                        if (covid!!.internados24 < 0) {
                             listaInternados.add(0)
-                        }else{
+                        } else {
                             listaInternados.add(covid!!.internados24)
                         }
                         listaObitos.add(covid!!.obitos24)
@@ -127,13 +156,13 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     var listaInternados = mutableListOf<Int>()
                     var listaObitos = mutableListOf<Int>()
 
-                    for(i in 1..15){
+                    for (i in 1..15) {
                         var covid = local.getByDate(getDaysAgo(i))
                         listaConfirmados.add(covid!!.confirmados24)
                         listaRecuperados.add(covid!!.recuperados24)
-                        if(covid!!.internados24 < 0){
+                        if (covid!!.internados24 < 0) {
                             listaInternados.add(0)
-                        }else{
+                        } else {
                             listaInternados.add(covid!!.internados24)
                         }
                         listaObitos.add(covid!!.obitos24)
@@ -157,10 +186,10 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         }
     }
 
-    fun getMaxList(lista : List<Int>): Int {
+    fun getMaxList(lista: List<Int>): Int {
         var max = 0;
-        for (i in lista){
-            if (i > max){
+        for (i in lista) {
+            if (i > max) {
                 max = i
             }
         }
@@ -181,6 +210,11 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                     var covidOneDayAgo = Covid(getDaysAgo(1))
                     val numberCovidTotal = daysBetween(getDaysAgo(1)).toString()
+                    println(numberCovidTotal)
+                    println(response)
+                    println(response.body()?.confirmados)
+                    println(numberCovidTotal)
+                    println(response.body()?.confirmados?.get(numberCovidTotal)!!)
 
                     covidOneDayAgo.confirmadosTotais =
                         response.body()?.confirmados?.get(numberCovidTotal)!!
@@ -216,6 +250,11 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     var covidTwoDayAgo = Covid(getDaysAgo(2))
                     val numberCovidTotal = daysBetween(getDaysAgo(2)).toString()
 
+                    println(numberCovidTotal)
+                    println(response)
+                    println(response.body()?.confirmados)
+                    println(numberCovidTotal)
+                    println(response.body()?.confirmados?.get(numberCovidTotal)!!)
                     covidTwoDayAgo.confirmadosTotais =
                         response.body()?.confirmados?.get(numberCovidTotal)!!
                     covidTwoDayAgo.recuperadosTotais =
@@ -321,13 +360,21 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     }
 
     fun daysBetween(date: String): Long {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-            val start: LocalDate = LocalDate.parse(date, formatter)
-            val end: LocalDate = LocalDate.parse("26-02-2020", formatter)
-            return ChronoUnit.DAYS.between(end, start)
-        }
-        return 0
+        val cal1 = Calendar.getInstance()
+        val cal2 = Calendar.getInstance()
+
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        cal2.setTime(sdf.parse(date))
+
+
+        cal1[2020, Calendar.FEBRUARY] = 26
+
+        val millis1 = cal1.timeInMillis
+        val millis2 = cal2.timeInMillis
+        val diff = millis2 - millis1
+
+        val diffDays = diff / (24 * 60 * 60 * 1000)
+        return diffDays + 1
     }
 
     fun get15DaysDataGraph(listener: FetchRepositoryGraficoListener) {
