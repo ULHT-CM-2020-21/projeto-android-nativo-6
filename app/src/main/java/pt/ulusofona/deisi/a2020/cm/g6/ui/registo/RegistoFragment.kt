@@ -33,14 +33,13 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.jvm.Throws
 
 
 class RegistoFragment : Fragment() {
 
     private lateinit var viewModel: RegistoViewModel
     val testeSubmete: TesteCovid = TesteCovid()
-
-    lateinit var currentPhotoPath: String
 
 
     override fun onCreateView(
@@ -64,10 +63,56 @@ class RegistoFragment : Fragment() {
         }
 
         button_camera.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivity(intent)
+            println("button camera")
+            dispatchTakePictureIntent()
         }
 
+    }
+
+    var currentPhotoPath: String? = null
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        // Create an image file name
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = activity?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        ).apply {
+            // Save a file: path for use with ACTION_VIEW intents
+            currentPhotoPath = absolutePath
+        }
+    }
+
+    val REQUEST_IMAGE_CAPTURE = 1
+     var photoURIFinal: Uri? = null
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            // Ensure that there's a camera activity to handle the intent
+            takePictureIntent.resolveActivity(activity?.packageManager!!)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    // Error occurred while creating the File
+                    null
+                }
+                // Continue only if the File was successfully created
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        requireContext(),
+                        "pt.ulusofona.deisi.a2020.cm.g6",
+                        it
+                    )
+                    photoURIFinal = photoURI
+                    println(photoURIFinal)
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                }
+            }
+        }
     }
 
 
@@ -104,6 +149,9 @@ class RegistoFragment : Fragment() {
         if (check) {
             testeSubmete.local = editLocalString
             testeSubmete.data = editDataString
+            if(photoURIFinal != null){
+                testeSubmete.fotoPath = photoURIFinal.toString()
+            }
             TesteSource.addTest(testeSubmete)
             viewModel.onSubmeterTesteNovo(testeSubmete)
             Toast.makeText(

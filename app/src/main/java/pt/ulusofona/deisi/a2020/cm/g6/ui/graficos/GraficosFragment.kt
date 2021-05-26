@@ -1,12 +1,17 @@
 package pt.ulusofona.deisi.a2020.cm.g6.ui.graficos
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProviders
 import butterknife.ButterKnife
 import kotlinx.android.synthetic.main.fragment_graficos.*
@@ -15,6 +20,8 @@ import pt.ulusofona.deisi.a2020.cm.g6.R
 import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
 import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.GraficoUIListener
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Grafico
+import java.io.File
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,7 +35,6 @@ class GraficosFragment : Fragment(), GraficoUIListener {
         ButterKnife.bind(this, view)
         return view
     }
-
 
 
     override fun onStart() {

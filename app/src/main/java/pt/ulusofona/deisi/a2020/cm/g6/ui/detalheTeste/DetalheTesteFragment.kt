@@ -1,5 +1,6 @@
 package pt.ulusofona.deisi.a2020.cm.g6.ui.detalheTeste
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,10 @@ class DetalheTesteFragment(var teste: TesteCovid) : Fragment() {
             detalheTesteResultado.text = getString(R.string.resultadoTestePositivo)
         }else{
             detalheTesteResultado.text = getString(R.string.resultadoTesteNegativo)
+        }
+        if(teste.fotoPath != null){
+            var uriImage = Uri.parse(teste.fotoPath)
+            photo.setImageURI(uriImage)
         }
         val imagePopup = ImagePopup(context)
         imagePopup.setFullScreen(true)

@@ -182,6 +182,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     var covidOneDayAgo = Covid(getDaysAgo(1))
                     val numberCovidTotal = daysBetween(getDaysAgo(1)).toString()
 
+
                     covidOneDayAgo.confirmadosTotais =
                         response.body()?.confirmados?.get(numberCovidTotal)!!
                     covidOneDayAgo.recuperadosTotais =
