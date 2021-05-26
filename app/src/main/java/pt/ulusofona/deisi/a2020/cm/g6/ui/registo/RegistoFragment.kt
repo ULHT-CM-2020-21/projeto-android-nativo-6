@@ -63,7 +63,6 @@ class RegistoFragment : Fragment() {
         }
 
         button_camera.setOnClickListener {
-            println("button camera")
             dispatchTakePictureIntent()
         }
 
@@ -107,7 +106,6 @@ class RegistoFragment : Fragment() {
                         it
                     )
                     photoURIFinal = photoURI
-                    println(photoURIFinal)
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
                 }
@@ -211,50 +209,6 @@ class RegistoFragment : Fragment() {
 
     }
 
-
-   /* fun submeterTeste() {
-        var check = true
-        val editLocal = localTeste
-        val editData = dataTeste
-        val editPositivo = radio_positivo
-        val editNegativo = radio_negativo
-        val editResultados = escolhaResultados
-        val editLocalString: String = editLocal.text.toString()
-        val editDataString: String = editData.text.toString()
-
-        if (editLocalString == "" || editLocalString.isEmpty()) {
-            editLocal.setError(getString(R.string.localTesteErro))
-            check = false
-        }
-
-        if (editDataString == "" || editDataString.isEmpty()) {
-            editData.setError(getString(R.string.dataTesteErro))
-            check = false
-        }
-
-        if (!(editPositivo.isChecked()) && !(editNegativo.isChecked())) {
-            editResultados.resultadoTesteErro.isVisible = true
-            check = false
-        }
-
-        if ((editPositivo.isChecked()) || (editNegativo.isChecked())) {
-            editResultados.resultadoTesteErro.isVisible = false
-        }
-
-        if (check) {
-            testeSubmete.local = editLocalString
-            testeSubmete.data = editDataString
-            TesteSource.addTest(testeSubmete)
-            Toast.makeText(
-                context as MainActivity,
-                getString(R.string.testeSubmetido),
-                Toast.LENGTH_SHORT
-            ).show()
-            activity?.let { NavigationManager.goToListTestes(it.supportFragmentManager) }
-        }
-
-
-    }*/
 
     fun hideKeyboard(view: View){
         val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager

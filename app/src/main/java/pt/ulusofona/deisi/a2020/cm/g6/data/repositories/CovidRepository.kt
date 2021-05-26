@@ -5,11 +5,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.dao.CovidDao
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.Covid
+import pt.ulusofona.deisi.a2020.cm.g6.data.remote.responses.CovidResponsePast
 import pt.ulusofona.deisi.a2020.cm.g6.data.remote.services.CovidService
 import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.FetchRepositoryCovidListener
 import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.FetchRepositoryGraficoListener
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Grafico
+import retrofit2.Response
 import retrofit2.Retrofit
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,172 +21,200 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     private lateinit var listenerCovid: FetchRepositoryCovidListener
     private lateinit var listenerGraficos: FetchRepositoryGraficoListener
 
+    fun writeCovidObjectDataFromRemote(
+        covidManyDays: Covid,
+        numberCovidTotal: String,
+        response: Response<CovidResponsePast>
+    ): Covid {
+        val confirmadosTotais: Int? = response.body()?.confirmados?.get(numberCovidTotal)
+        if (confirmadosTotais != null) {
+            covidManyDays.confirmadosTotais = confirmadosTotais
+        } else {
+            covidManyDays.confirmadosTotais = 0
+        }
+
+        val internadosTotais: Int? = response.body()?.internados?.get(numberCovidTotal)
+        if (internadosTotais != null) {
+            covidManyDays.internadosTotais = internadosTotais
+        } else {
+            covidManyDays.internadosTotais = 0
+        }
+
+        val obitosTotais: Int? = response.body()?.obitos?.get(numberCovidTotal)
+        if (obitosTotais != null) {
+            covidManyDays.obitosTotais = obitosTotais
+        } else {
+            covidManyDays.obitosTotais = 0
+        }
+
+        val recuperadosTotais: Int? = response.body()?.recuperados?.get(numberCovidTotal)
+        if (recuperadosTotais != null) {
+            covidManyDays.recuperadosTotais = recuperadosTotais
+        } else {
+            covidManyDays.recuperadosTotais = 0
+        }
+
+        val norteTotal: Int? = response.body()?.confirmados_arsnorte?.get(numberCovidTotal)
+        if (norteTotal != null) {
+            covidManyDays.norteTotal = norteTotal
+        } else {
+            covidManyDays.norteTotal = 0
+        }
+
+        val centroTotal: Int? = response.body()?.confirmados_arscentro?.get(numberCovidTotal)
+        if (centroTotal != null) {
+            covidManyDays.centroTotal = centroTotal
+        } else {
+            covidManyDays.centroTotal = 0
+        }
+
+        val lisboaTotal: Int? = response.body()?.confirmados_arslvt?.get(numberCovidTotal)
+        if (lisboaTotal != null) {
+            covidManyDays.lisboaTotal = lisboaTotal
+        } else {
+            covidManyDays.lisboaTotal = 0
+        }
+
+        val alentejoTotal: Int? = response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)
+        if (alentejoTotal != null) {
+            covidManyDays.alentejoTotal = alentejoTotal
+        } else {
+            covidManyDays.alentejoTotal = 0
+        }
+
+        val algarveTotal: Int? = response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)
+        if (algarveTotal != null) {
+            covidManyDays.algarveTotal = algarveTotal
+        } else {
+            covidManyDays.algarveTotal = 0
+        }
+
+        val acoresTotal: Int? = response.body()?.confirmados_acores?.get(numberCovidTotal)
+        if (acoresTotal != null) {
+            covidManyDays.acoresTotal = acoresTotal
+        } else {
+            covidManyDays.acoresTotal = 0
+        }
+
+
+        val madeiraTotal: Int? = response.body()?.confirmados_madeira?.get(numberCovidTotal)
+        if (madeiraTotal != null) {
+            covidManyDays.madeiraTotal = madeiraTotal
+        } else {
+            covidManyDays.madeiraTotal = 0
+        }
+        return covidManyDays
+    }
+
+    fun calculate24HoursNumbers15Days() {
+        for (i in 15 downTo 0) {
+            var atualCovid = local.getByDate(getDaysAgo(i))
+            var antigoCovid = local.getByDate(getDaysAgo(i + 1))
+            if (atualCovid != null && antigoCovid != null) {
+                atualCovid = calcularDadosCovidEntreDatas(atualCovid, antigoCovid)
+                local.updateByDate24h(
+                    atualCovid.confirmados24,
+                    atualCovid.recuperados24,
+                    atualCovid.internados24,
+                    atualCovid.obitos24,
+                    atualCovid.data
+                )
+            }
+        }
+    }
+
+    fun createGraficoData(fromToday: Boolean): Grafico {
+        var grafico = Grafico()
+        var listaConfirmados = mutableListOf<Int>()
+        var listaRecuperados = mutableListOf<Int>()
+        var listaInternados = mutableListOf<Int>()
+        var listaObitos = mutableListOf<Int>()
+        if (fromToday) {
+            for (i in 0..14) {
+                var covid = local.getByDate(getDaysAgo(i))
+                if (covid != null) {
+                    listaConfirmados.add(covid.confirmados24)
+                    listaRecuperados.add(covid.recuperados24)
+                    if (covid.internados24 < 0) {
+                        listaInternados.add(0)
+                    } else {
+                        listaInternados.add(covid.internados24)
+                    }
+                    listaObitos.add(covid.obitos24)
+                } else {
+                    listaConfirmados.add(0)
+                    listaRecuperados.add(0)
+                    listaInternados.add(0)
+                    listaObitos.add(0)
+                }
+            }
+            grafico.fromToday = true
+        } else {
+            for (i in 1..15) {
+                var covid = local.getByDate(getDaysAgo(i))
+                if (covid != null) {
+                    listaConfirmados.add(covid.confirmados24)
+                    listaRecuperados.add(covid.recuperados24)
+                    if (covid.internados24 < 0) {
+                        listaInternados.add(0)
+                    } else {
+                        listaInternados.add(covid.internados24)
+                    }
+                    listaObitos.add(covid.obitos24)
+                } else {
+                    listaConfirmados.add(0)
+                    listaRecuperados.add(0)
+                    listaInternados.add(0)
+                    listaObitos.add(0)
+                }
+            }
+            grafico.fromToday = false
+        }
+        grafico.valuesConfirmados = listaConfirmados
+        grafico.valuesRecuperados = listaRecuperados
+        grafico.valuesInternados = listaInternados
+        grafico.valuesObitos = listaObitos
+
+        grafico.maxConfirmados = getMaxList(listaConfirmados)
+        grafico.maxRecuperados = getMaxList(listaRecuperados)
+        grafico.maxInternados = getMaxList(listaInternados)
+        grafico.maxObitos = getMaxList(listaObitos)
+        return grafico
+    }
 
     fun check15DaysData() {
         CoroutineScope(Dispatchers.IO).launch {
-            val service = remote.create(CovidService::class.java)
-            // confirmar se tenho na bd pelo menos 15 dias de dados
-            for (i in 16 downTo 1) {
-                var dadosBD = local.getByDate(getDaysAgo(i))
-                if (dadosBD == null) {
-                    val response = service.getDadosDiaEspecifico(getDaysAgo(i))
-                    if (response.isSuccessful) {
-
-                        var covidManyDays = Covid(getDaysAgo(i))
-
-                        val numberCovidTotal = daysBetween(getDaysAgo(i)).toString()
-
-                        covidManyDays.confirmadosTotais =
-                            response.body()?.confirmados?.get(numberCovidTotal)!!
-                        covidManyDays.internadosTotais =
-                            response.body()?.internados?.get(numberCovidTotal)!!
-                        covidManyDays.obitosTotais =
-                            response.body()?.obitos?.get(numberCovidTotal)!!
-                        covidManyDays.recuperadosTotais =
-                            response.body()?.recuperados?.get(numberCovidTotal)!!
-
-                        covidManyDays.norteTotal =
-                            response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
-                        covidManyDays.centroTotal =
-                            response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
-                        covidManyDays.lisboaTotal =
-                            response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
-                        covidManyDays.alentejoTotal =
-                            response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
-                        covidManyDays.algarveTotal =
-                            response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
-                        covidManyDays.acoresTotal =
-                            response.body()?.confirmados_acores?.get(numberCovidTotal)!!
-                        covidManyDays.madeiraTotal =
-                            response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
-
-                        local.insert(covidManyDays)
-                    }
-                }
-            }
-            for (i in 15 downTo 0) {
-                var atualCovid = local.getByDate(getDaysAgo(i))
-                var antigoCovid = local.getByDate(getDaysAgo(i + 1))
-                if (atualCovid != null && antigoCovid != null) {
-                    atualCovid = calcularDadosCovidEntreDatas(atualCovid!!, antigoCovid!!)
-                    local.updateByDate24h(
-                        atualCovid.confirmados24,
-                        atualCovid.recuperados24,
-                        atualCovid.internados24,
-                        atualCovid.obitos24,
-                        atualCovid.data
-                    )
-                }
-            }
-            var covidHoje = local.getByDate(getDaysAgo(0))
-            if (covidHoje == null) {
-                val response = service.getDadosDiaEspecifico(getDaysAgo(0))
-                if (response.isSuccessful) {
-
-                    var covidManyDays = Covid(getDaysAgo(0))
-
-                    val numberCovidTotal = daysBetween(getDaysAgo(0)).toString()
-
-                    covidManyDays.confirmadosTotais =
-                        response.body()?.confirmados?.get(numberCovidTotal)!!
-                    covidManyDays.internadosTotais =
-                        response.body()?.internados?.get(numberCovidTotal)!!
-                    covidManyDays.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
-                    covidManyDays.recuperadosTotais =
-                        response.body()?.recuperados?.get(numberCovidTotal)!!
-
-                    covidManyDays.norteTotal =
-                        response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
-                    covidManyDays.centroTotal =
-                        response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
-                    covidManyDays.lisboaTotal =
-                        response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
-                    covidManyDays.alentejoTotal =
-                        response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
-                    covidManyDays.algarveTotal =
-                        response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
-                    covidManyDays.acoresTotal =
-                        response.body()?.confirmados_acores?.get(numberCovidTotal)!!
-                    covidManyDays.madeiraTotal =
-                        response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
-
-                    var antigoCovid = local.getByDate(getDaysAgo(1))
-                    covidManyDays = calcularDadosCovidEntreDatas(covidManyDays, antigoCovid!!)
-                    local.updateByDate24h(
-                        covidManyDays.confirmados24,
-                        covidManyDays.recuperados24,
-                        covidManyDays.internados24,
-                        covidManyDays.obitos24,
-                        covidManyDays.data
-                    )
-
-
-                    var grafico = Grafico()
-                    var listaConfirmados = mutableListOf<Int>()
-                    var listaRecuperados = mutableListOf<Int>()
-                    var listaInternados = mutableListOf<Int>()
-                    var listaObitos = mutableListOf<Int>()
-
-                    for (i in 0..14) {
-                        var covid = local.getByDate(getDaysAgo(i))
-                        listaConfirmados.add(covid!!.confirmados24)
-                        listaRecuperados.add(covid!!.recuperados24)
-                        if (covid!!.internados24 < 0) {
-                            listaInternados.add(0)
-                        } else {
-                            listaInternados.add(covid!!.internados24)
+            try {
+                val service = remote.create(CovidService::class.java)
+                // confirmar se tenho na bd pelo menos 15 dias de dados
+                for (i in 16 downTo 1) {
+                    var dadosBD = local.getByDate(getDaysAgo(i))
+                    if (dadosBD == null) {
+                        val response = service.getDadosDiaEspecifico(getDaysAgo(i))
+                        if (response.isSuccessful) {
+                            var covidManyDays = Covid(getDaysAgo(i))
+                            val numberCovidTotal = daysBetween(getDaysAgo(i)).toString()
+                            covidManyDays = writeCovidObjectDataFromRemote(
+                                covidManyDays,
+                                numberCovidTotal,
+                                response
+                            )
+                            local.insert(covidManyDays)
                         }
-                        listaObitos.add(covid!!.obitos24)
                     }
-
-                    grafico.fromToday = true
-
-                    grafico.valuesConfirmados = listaConfirmados
-                    grafico.valuesRecuperados = listaRecuperados
-                    grafico.valuesInternados = listaInternados
-                    grafico.valuesObitos = listaObitos
-
-                    grafico.maxConfirmados = getMaxList(listaConfirmados)
-                    grafico.maxRecuperados = getMaxList(listaRecuperados)
-                    grafico.maxInternados = getMaxList(listaInternados)
-                    grafico.maxObitos = getMaxList(listaObitos)
-
-                    listenerGraficos.onFetchedRepository(grafico)
+                }
+                calculate24HoursNumbers15Days()
+                var covidHoje = local.getByDate(getDaysAgo(0))
+                if (covidHoje == null) {
+                    listenerGraficos.onFetchedRepository(createGraficoData(false))
                 } else {
-                    var grafico = Grafico()
-                    var listaConfirmados = mutableListOf<Int>()
-                    var listaRecuperados = mutableListOf<Int>()
-                    var listaInternados = mutableListOf<Int>()
-                    var listaObitos = mutableListOf<Int>()
-
-                    for (i in 1..15) {
-                        var covid = local.getByDate(getDaysAgo(i))
-                        listaConfirmados.add(covid!!.confirmados24)
-                        listaRecuperados.add(covid!!.recuperados24)
-                        if (covid!!.internados24 < 0) {
-                            listaInternados.add(0)
-                        } else {
-                            listaInternados.add(covid!!.internados24)
-                        }
-                        listaObitos.add(covid!!.obitos24)
-                    }
-
-                    grafico.fromToday = false
-
-                    grafico.valuesConfirmados = listaConfirmados
-                    grafico.valuesRecuperados = listaRecuperados
-                    grafico.valuesInternados = listaInternados
-                    grafico.valuesObitos = listaObitos
-
-                    grafico.maxConfirmados = getMaxList(listaConfirmados)
-                    grafico.maxRecuperados = getMaxList(listaRecuperados)
-                    grafico.maxInternados = getMaxList(listaInternados)
-                    grafico.maxObitos = getMaxList(listaObitos)
-
-                    listenerGraficos.onFetchedRepository(grafico)
+                    listenerGraficos.onFetchedRepository(createGraficoData(true))
                 }
+            } catch (e: IOException) {
+                println("sem net");
             }
         }
+
     }
 
     fun getMaxList(lista: List<Int>): Int {
@@ -199,128 +230,118 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     // Confirma que temos pelo menos 2 dias de dados para desenhar dashboard
     fun checkBDLastUpdates() {
         CoroutineScope(Dispatchers.IO).launch {
-            val service = remote.create(CovidService::class.java)
-
-            var bdOneDayAgo = local.getByDate(getDaysAgo(1))
-            var bdTwoDayAgo = local.getByDate(getDaysAgo(2))
-
-            if (bdOneDayAgo == null) {
-                val response = service.getDadosDiaEspecifico(getDaysAgo(1))
-                if (response.isSuccessful) {
-
-                    var covidOneDayAgo = Covid(getDaysAgo(1))
-                    val numberCovidTotal = daysBetween(getDaysAgo(1)).toString()
-                    println(numberCovidTotal)
-                    println(response)
-                    println(response.body()?.confirmados)
-                    println(numberCovidTotal)
-                    println(response.body()?.confirmados?.get(numberCovidTotal)!!)
-
-                    covidOneDayAgo.confirmadosTotais =
-                        response.body()?.confirmados?.get(numberCovidTotal)!!
-                    covidOneDayAgo.recuperadosTotais =
-                        response.body()?.recuperados?.get(numberCovidTotal)!!
-                    covidOneDayAgo.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
-                    covidOneDayAgo.internadosTotais =
-                        response.body()?.internados?.get(numberCovidTotal)!!
-
-                    covidOneDayAgo.norteTotal =
-                        response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
-                    covidOneDayAgo.centroTotal =
-                        response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
-                    covidOneDayAgo.lisboaTotal =
-                        response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
-                    covidOneDayAgo.alentejoTotal =
-                        response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
-                    covidOneDayAgo.algarveTotal =
-                        response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
-                    covidOneDayAgo.madeiraTotal =
-                        response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
-                    covidOneDayAgo.acoresTotal =
-                        response.body()?.confirmados_acores?.get(numberCovidTotal)!!
-
-                    local.insert(covidOneDayAgo)
+            try {
+                val service = remote.create(CovidService::class.java)
+                var bdOneDayAgo = local.getByDate(getDaysAgo(1))
+                var bdTwoDayAgo = local.getByDate(getDaysAgo(2))
+                if (bdOneDayAgo == null) {
+                    val response = service.getDadosDiaEspecifico(getDaysAgo(1))
+                    if (response.isSuccessful) {
+                        var covidOneDayAgo = Covid(getDaysAgo(1))
+                        val numberCovidTotal = daysBetween(getDaysAgo(1)).toString()
+                        covidOneDayAgo = writeCovidObjectDataFromRemote(
+                            covidOneDayAgo,
+                            numberCovidTotal,
+                            response
+                        )
+                        local.insert(covidOneDayAgo)
+                    }
                 }
-            }
+                if (bdTwoDayAgo == null) {
+                    val response = service.getDadosDiaEspecifico(getDaysAgo(2))
+                    if (response.isSuccessful) {
 
-            if (bdTwoDayAgo == null) {
-                val response = service.getDadosDiaEspecifico(getDaysAgo(2))
-                if (response.isSuccessful) {
-
-                    var covidTwoDayAgo = Covid(getDaysAgo(2))
-                    val numberCovidTotal = daysBetween(getDaysAgo(2)).toString()
-
-                    println(numberCovidTotal)
-                    println(response)
-                    println(response.body()?.confirmados)
-                    println(numberCovidTotal)
-                    println(response.body()?.confirmados?.get(numberCovidTotal)!!)
-                    covidTwoDayAgo.confirmadosTotais =
-                        response.body()?.confirmados?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.recuperadosTotais =
-                        response.body()?.recuperados?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.obitosTotais = response.body()?.obitos?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.internadosTotais =
-                        response.body()?.internados?.get(numberCovidTotal)!!
-
-                    covidTwoDayAgo.norteTotal =
-                        response.body()?.confirmados_arsnorte?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.centroTotal =
-                        response.body()?.confirmados_arscentro?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.lisboaTotal =
-                        response.body()?.confirmados_arslvt?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.alentejoTotal =
-                        response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.algarveTotal =
-                        response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.madeiraTotal =
-                        response.body()?.confirmados_madeira?.get(numberCovidTotal)!!
-                    covidTwoDayAgo.acoresTotal =
-                        response.body()?.confirmados_acores?.get(numberCovidTotal)!!
-
-                    local.insert(covidTwoDayAgo)
+                        var covidTwoDayAgo = Covid(getDaysAgo(2))
+                        val numberCovidTotal = daysBetween(getDaysAgo(2)).toString()
+                        covidTwoDayAgo = writeCovidObjectDataFromRemote(
+                            covidTwoDayAgo,
+                            numberCovidTotal,
+                            response
+                        )
+                        local.insert(covidTwoDayAgo)
+                    }
                 }
+                checkLastRemoteUpdate()
+            } catch (e: IOException) {
+                println("sem net");
             }
-            checkLastRemoteUpdate()
         }
+
     }
 
     // confirma qual os dados mais recente das API
     fun checkLastRemoteUpdate() {
-        val service = remote.create(CovidService::class.java)
+
         CoroutineScope(Dispatchers.IO).launch {
-            var responseHoje = service.getDadosDia()
-            if (responseHoje.isSuccessful && responseHoje.body()?.data == getDaysAgo(0)) {
-                var covidHoje = Covid(getDaysAgo(0))
-                covidHoje.confirmadosTotais = responseHoje.body()?.confirmados!!
-                covidHoje.recuperadosTotais = responseHoje.body()?.recuperados!!
-                covidHoje.obitosTotais = responseHoje.body()?.obitos!!
-                covidHoje.internadosTotais = responseHoje.body()?.internados!!
+            try {
+                val service = remote.create(CovidService::class.java)
+                var responseHoje = service.getDadosDia()
+                if (responseHoje.isSuccessful && responseHoje.body()?.data == getDaysAgo(0)) {
+                    var covidHoje = Covid(getDaysAgo(0))
 
-                covidHoje.norteTotal = responseHoje.body()?.confirmados_arsnorte!!
-                covidHoje.centroTotal = responseHoje.body()?.confirmados_arscentro!!
-                covidHoje.lisboaTotal = responseHoje.body()?.confirmados_arslvt!!
-                covidHoje.alentejoTotal = responseHoje.body()?.confirmados_arsalentejo!!
-                covidHoje.algarveTotal = responseHoje.body()?.confirmados_arsalgarve!!
-                covidHoje.madeiraTotal = responseHoje.body()?.confirmados_madeira!!
-                covidHoje.acoresTotal = responseHoje.body()?.confirmados_acores!!
+                    val confirmadosTotais = responseHoje.body()?.confirmados
+                    if (confirmadosTotais != null) {
+                        covidHoje.confirmadosTotais = confirmadosTotais
+                    }
+                    val recuperadosTotais = responseHoje.body()?.recuperados
+                    if (recuperadosTotais != null) {
+                        covidHoje.recuperadosTotais = recuperadosTotais
+                    }
+                    val obitosTotais = responseHoje.body()?.obitos
+                    if (obitosTotais != null) {
+                        covidHoje.obitosTotais = obitosTotais
+                    }
+                    var internadosTotais = responseHoje.body()?.internados
+                    if (internadosTotais != null) {
+                        covidHoje.internadosTotais = internadosTotais
+                    }
 
-                var covidOntem = local.getByDate(getDaysAgo(1))
+                    var norteTotal = responseHoje.body()?.confirmados_arsnorte
+                    if (norteTotal != null) {
+                        covidHoje.norteTotal = norteTotal
+                    }
+                    var centroTotal = responseHoje.body()?.confirmados_arscentro
+                    if (centroTotal != null) {
+                        covidHoje.centroTotal = centroTotal
+                    }
+                    var lisboaTotal = responseHoje.body()?.confirmados_arslvt
+                    if (lisboaTotal != null) {
+                        covidHoje.lisboaTotal = lisboaTotal
+                    }
+                    var alentejoTotal = responseHoje.body()?.confirmados_arsalentejo
+                    if (alentejoTotal != null) {
+                        covidHoje.alentejoTotal = alentejoTotal
+                    }
+                    var algarveTotal = responseHoje.body()?.confirmados_arsalgarve
+                    if (algarveTotal != null) {
+                        covidHoje.algarveTotal = algarveTotal
+                    }
+                    var madeiraTotal = responseHoje.body()?.confirmados_madeira
+                    if (madeiraTotal != null) {
+                        covidHoje.madeiraTotal = madeiraTotal
+                    }
+                    var acoresTotal = responseHoje.body()?.confirmados_acores
+                    if (acoresTotal != null) {
+                        covidHoje.acoresTotal = acoresTotal
+                    }
 
-                if (covidOntem != null) {
-                    covidHoje = calcularDadosCovidEntreDatas(covidHoje, covidOntem)
-                    listenerCovid.onFetchedRepository(covidHoje)
+                    var covidOntem = local.getByDate(getDaysAgo(1))
+                    if (covidOntem != null) {
+                        covidHoje = calcularDadosCovidEntreDatas(covidHoje, covidOntem)
+                        listenerCovid.onFetchedRepository(covidHoje)
+                    }
+
+                } else {
+                    var covidOntem = local.getByDate(getDaysAgo(1))
+                    var covidDoisDias = local.getByDate(getDaysAgo(2))
+                    if (covidOntem != null && covidDoisDias != null) {
+                        covidOntem = calcularDadosCovidEntreDatas(covidOntem, covidDoisDias)
+                        listenerCovid.onFetchedRepository(covidOntem)
+                    }
+
                 }
-
-
-            } else {
-                var covidOntem = local.getByDate(getDaysAgo(1))
-                var covidDoisDias = local.getByDate(getDaysAgo(2))
-                if (covidOntem != null && covidDoisDias != null) {
-                    covidOntem = calcularDadosCovidEntreDatas(covidOntem, covidDoisDias)
-                    listenerCovid.onFetchedRepository(covidOntem)
-                }
-
+            } catch (e: IOException) {
+                println("sem net");
             }
         }
     }
@@ -329,20 +350,20 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     fun calcularDadosCovidEntreDatas(covidAtual: Covid, covidAntigo: Covid): Covid {
 
         covidAtual.confirmados24 =
-            (covidAtual.confirmadosTotais?.minus(covidAntigo.confirmadosTotais)!!)
+            (covidAtual.confirmadosTotais.minus(covidAntigo.confirmadosTotais))
         covidAtual.internados24 =
-            (covidAtual.internadosTotais?.minus(covidAntigo.internadosTotais)!!)
-        covidAtual.obitos24 = (covidAtual.obitosTotais?.minus(covidAntigo.obitosTotais))!!
+            (covidAtual.internadosTotais.minus(covidAntigo.internadosTotais))
+        covidAtual.obitos24 = (covidAtual.obitosTotais.minus(covidAntigo.obitosTotais))
         covidAtual.recuperados24 =
-            (covidAtual.recuperadosTotais?.minus(covidAntigo.recuperadosTotais))!!
+            (covidAtual.recuperadosTotais.minus(covidAntigo.recuperadosTotais))
 
-        covidAtual.norte24 = (covidAtual.norteTotal?.minus(covidAntigo.norteTotal))!!
-        covidAtual.centro24 = (covidAtual.centroTotal?.minus(covidAntigo.centroTotal))!!
-        covidAtual.lisboa24 = (covidAtual.lisboaTotal?.minus(covidAntigo.lisboaTotal))!!
-        covidAtual.alentejo24 = (covidAtual.alentejoTotal?.minus(covidAntigo.alentejoTotal))!!
-        covidAtual.algarve24 = (covidAtual.algarveTotal?.minus(covidAntigo.algarveTotal))!!
-        covidAtual.acores24 = (covidAtual.acoresTotal?.minus(covidAntigo.acoresTotal))!!
-        covidAtual.madeira24 = (covidAtual.madeiraTotal?.minus(covidAntigo.madeiraTotal))!!
+        covidAtual.norte24 = (covidAtual.norteTotal.minus(covidAntigo.norteTotal))
+        covidAtual.centro24 = (covidAtual.centroTotal.minus(covidAntigo.centroTotal))
+        covidAtual.lisboa24 = (covidAtual.lisboaTotal.minus(covidAntigo.lisboaTotal))
+        covidAtual.alentejo24 = (covidAtual.alentejoTotal.minus(covidAntigo.alentejoTotal))
+        covidAtual.algarve24 = (covidAtual.algarveTotal.minus(covidAntigo.algarveTotal))
+        covidAtual.acores24 = (covidAtual.acoresTotal.minus(covidAntigo.acoresTotal))
+        covidAtual.madeira24 = (covidAtual.madeiraTotal.minus(covidAntigo.madeiraTotal))
 
         return covidAtual
     }
