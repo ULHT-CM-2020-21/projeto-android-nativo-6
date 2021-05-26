@@ -54,11 +54,13 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     }
                 }
             }
-            for(i in 15 downTo 1){
+            for(i in 15 downTo 0){
                 var atualCovid = local.getByDate(getDaysAgo(i))
                 var antigoCovid = local.getByDate(getDaysAgo(i + 1))
-                atualCovid = calcularDadosCovidEntreDatas(atualCovid!!, antigoCovid!!)
-                local.updateByDate24h(atualCovid.confirmados24,atualCovid.recuperados24,atualCovid.internados24,atualCovid.obitos24, atualCovid.data)
+                if(atualCovid != null && antigoCovid != null){
+                    atualCovid = calcularDadosCovidEntreDatas(atualCovid!!, antigoCovid!!)
+                    local.updateByDate24h(atualCovid.confirmados24,atualCovid.recuperados24,atualCovid.internados24,atualCovid.obitos24, atualCovid.data)
+                }
             }
             var covidHoje = local.getByDate(getDaysAgo(0))
             if (covidHoje == null) {
