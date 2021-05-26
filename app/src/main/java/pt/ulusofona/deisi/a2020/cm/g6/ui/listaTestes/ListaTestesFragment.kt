@@ -9,23 +9,29 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
+import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_lista_testes.*
 
 import pt.ulusofona.deisi.a2020.cm.g6.R
-import pt.ulusofona.deisi.a2020.cm.g6.data.local.list.TesteSource
 import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
 import pt.ulusofona.deisi.a2020.cm.g6.ui.adapters.TestAdapter
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.RecyclerItemClickListener
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.ListaUIListener
 import java.util.*
 
 
-class ListaTestesFragment : Fragment() {
+class ListaTestesFragment : Fragment(), ListaUIListener {
     private lateinit var viewModel: ListaTestesViewModel
-    private var testAdapter: TestAdapter? = null
+    var imagemOrdenar = true
+    private var listaDeTestes: List<TesteCovid> = mutableListOf()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_lista_testes, container, false)
         viewModel = ViewModelProviders.of(this).get(ListaTestesViewModel::class.java)
         ButterKnife.bind(this, view)
@@ -34,15 +40,34 @@ class ListaTestesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val listaOrdenada = TesteSource.getAllTeste()
-        var imagemOrdenar = true
+        viewModel.registerListener(this)
+        viewModel.drawLista()
+
+
+    }
+
+    @OnClick(R.id.ordenar_lista)
+    fun ordenarLista() {
+        (listaDeTestes as ArrayList<TesteCovid>).reverse()
+        onUpdateUI(listaDeTestes)
+    }
+
+    override fun onUpdateUI(listaTestes: List<TesteCovid>) {
+        listaDeTestes = listaTestes
 
         list_test.layoutManager = LinearLayoutManager(context as MainActivity)
         list_test.adapter = TestAdapter(
             context as MainActivity,
             R.layout.teste_item_expression,
-            listaOrdenada as ArrayList<TesteCovid>
+            listaDeTestes as ArrayList<TesteCovid>
         )
+        if (imagemOrdenar != true) {
+            ordenar_lista.setImageResource(R.drawable.ordenar_crescente)
+            imagemOrdenar = true
+        }else{
+            ordenar_lista.setImageResource(R.drawable.ordenar_decrescente)
+            imagemOrdenar = false
+        }
         list_test.addOnItemTouchListener(
             RecyclerItemClickListener(
                 context,
@@ -51,7 +76,7 @@ class ListaTestesFragment : Fragment() {
                     override fun onItemClick(view: View?, position: Int) {
                         activity?.let {
                             NavigationManager.goToTest(
-                                it.supportFragmentManager, listaOrdenada.elementAt(
+                                it.supportFragmentManager, listaDeTestes.elementAt(
                                     position
                                 )
                             )
@@ -63,27 +88,6 @@ class ListaTestesFragment : Fragment() {
                     }
                 })
         )
-
-
-
-
-        ordenar_lista.setOnClickListener {
-            listaOrdenada.reverse()
-            list_test.layoutManager = LinearLayoutManager(context as MainActivity)
-            list_test.adapter = TestAdapter(
-                context as MainActivity,
-                R.layout.teste_item_expression,
-                listaOrdenada
-            )
-            if (imagemOrdenar) {
-                ordenar_lista.setImageResource(R.drawable.ordenar_crescente)
-                imagemOrdenar = false
-            }else{
-                ordenar_lista.setImageResource(R.drawable.ordenar_decrescente)
-                imagemOrdenar = true
-            }
-        }
-
     }
 
 

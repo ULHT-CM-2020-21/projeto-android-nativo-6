@@ -2,9 +2,7 @@ package pt.ulusofona.deisi.a2020.cm.g6.ui.registo
 
 import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -25,7 +23,6 @@ import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_registo.*
 import kotlinx.android.synthetic.main.fragment_registo.view.*
 import pt.ulusofona.deisi.a2020.cm.g6.R
-import pt.ulusofona.deisi.a2020.cm.g6.data.local.list.TesteSource
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
 import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
@@ -150,7 +147,6 @@ class RegistoFragment : Fragment() {
             if(photoURIFinal != null){
                 testeSubmete.fotoPath = photoURIFinal.toString()
             }
-            TesteSource.addTest(testeSubmete)
             viewModel.onSubmeterTesteNovo(testeSubmete)
             Toast.makeText(
                 context as MainActivity,

@@ -9,7 +9,4 @@ class RegistoLogic (private val repository: TesteCovidRepositry) {
     fun addTeste(testeCovid: TesteCovid){
         repository.saveTesteCovid(testeCovid)
     }
-
-
-
 }
