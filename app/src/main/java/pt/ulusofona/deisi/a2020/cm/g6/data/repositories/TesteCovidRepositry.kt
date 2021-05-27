@@ -5,7 +5,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.dao.TesteCovidDao
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
-import pt.ulusofona.deisi.a2020.cm.g6.ui.callback.TesteCovidCallback
 import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.FetchRepositoryListaListener
 import java.text.SimpleDateFormat
 import java.util.*
