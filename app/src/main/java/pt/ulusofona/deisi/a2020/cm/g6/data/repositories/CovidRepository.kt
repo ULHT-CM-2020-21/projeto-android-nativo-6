@@ -21,109 +21,99 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     private lateinit var listenerCovid: FetchRepositoryCovidListener
     private lateinit var listenerGraficos: FetchRepositoryGraficoListener
 
-    fun writeCovidObjectDataFromRemote(
-        covidManyDays: Covid,
-        numberCovidTotal: String,
-        response: Response<CovidResponsePast>
-    ): Covid {
+    private fun writeCovidObjectDataFromRemote(covid: Covid, numberCovidTotal: String, response: Response<CovidResponsePast>): Covid {
         val confirmadosTotais: Int? = response.body()?.confirmados?.get(numberCovidTotal)
         if (confirmadosTotais != null) {
-            covidManyDays.confirmadosTotais = confirmadosTotais
+            covid.confirmadosTotais = confirmadosTotais
         } else {
-            covidManyDays.confirmadosTotais = 0
+            covid.confirmadosTotais = 0
         }
 
         val internadosTotais: Int? = response.body()?.internados?.get(numberCovidTotal)
         if (internadosTotais != null) {
-            covidManyDays.internadosTotais = internadosTotais
+            covid.internadosTotais = internadosTotais
         } else {
-            covidManyDays.internadosTotais = 0
+            covid.internadosTotais = 0
         }
 
         val obitosTotais: Int? = response.body()?.obitos?.get(numberCovidTotal)
         if (obitosTotais != null) {
-            covidManyDays.obitosTotais = obitosTotais
+            covid.obitosTotais = obitosTotais
         } else {
-            covidManyDays.obitosTotais = 0
+            covid.obitosTotais = 0
         }
 
         val recuperadosTotais: Int? = response.body()?.recuperados?.get(numberCovidTotal)
         if (recuperadosTotais != null) {
-            covidManyDays.recuperadosTotais = recuperadosTotais
+            covid.recuperadosTotais = recuperadosTotais
         } else {
-            covidManyDays.recuperadosTotais = 0
+            covid.recuperadosTotais = 0
         }
 
         val norteTotal: Int? = response.body()?.confirmados_arsnorte?.get(numberCovidTotal)
         if (norteTotal != null) {
-            covidManyDays.norteTotal = norteTotal
+            covid.norteTotal = norteTotal
         } else {
-            covidManyDays.norteTotal = 0
+            covid.norteTotal = 0
         }
 
         val centroTotal: Int? = response.body()?.confirmados_arscentro?.get(numberCovidTotal)
         if (centroTotal != null) {
-            covidManyDays.centroTotal = centroTotal
+            covid.centroTotal = centroTotal
         } else {
-            covidManyDays.centroTotal = 0
+            covid.centroTotal = 0
         }
 
         val lisboaTotal: Int? = response.body()?.confirmados_arslvt?.get(numberCovidTotal)
         if (lisboaTotal != null) {
-            covidManyDays.lisboaTotal = lisboaTotal
+            covid.lisboaTotal = lisboaTotal
         } else {
-            covidManyDays.lisboaTotal = 0
+            covid.lisboaTotal = 0
         }
 
         val alentejoTotal: Int? = response.body()?.confirmados_arsalentejo?.get(numberCovidTotal)
         if (alentejoTotal != null) {
-            covidManyDays.alentejoTotal = alentejoTotal
+            covid.alentejoTotal = alentejoTotal
         } else {
-            covidManyDays.alentejoTotal = 0
+            covid.alentejoTotal = 0
         }
 
         val algarveTotal: Int? = response.body()?.confirmados_arsalgarve?.get(numberCovidTotal)
         if (algarveTotal != null) {
-            covidManyDays.algarveTotal = algarveTotal
+            covid.algarveTotal = algarveTotal
         } else {
-            covidManyDays.algarveTotal = 0
+            covid.algarveTotal = 0
         }
 
         val acoresTotal: Int? = response.body()?.confirmados_acores?.get(numberCovidTotal)
         if (acoresTotal != null) {
-            covidManyDays.acoresTotal = acoresTotal
+            covid.acoresTotal = acoresTotal
         } else {
-            covidManyDays.acoresTotal = 0
+            covid.acoresTotal = 0
         }
 
 
         val madeiraTotal: Int? = response.body()?.confirmados_madeira?.get(numberCovidTotal)
         if (madeiraTotal != null) {
-            covidManyDays.madeiraTotal = madeiraTotal
+            covid.madeiraTotal = madeiraTotal
         } else {
-            covidManyDays.madeiraTotal = 0
+            covid.madeiraTotal = 0
         }
-        return covidManyDays
+        return covid
     }
 
-    fun calculate24HoursNumbers15Days() {
+    private fun calculateRemote24HoursNumbers15Days() {
         for (i in 15 downTo 0) {
             var atualCovid = local.getByDate(getDaysAgo(i))
             var antigoCovid = local.getByDate(getDaysAgo(i + 1))
             if (atualCovid != null && antigoCovid != null) {
                 atualCovid = calcularDadosCovidEntreDatas(atualCovid, antigoCovid)
-                local.updateByDate24h(
-                    atualCovid.confirmados24,
-                    atualCovid.recuperados24,
-                    atualCovid.internados24,
-                    atualCovid.obitos24,
-                    atualCovid.data
-                )
+                local.updateByDate24h(atualCovid.confirmados24, atualCovid.recuperados24, atualCovid.internados24, atualCovid.obitos24, atualCovid.data)
             }
         }
     }
 
-    fun createGraficoData(fromToday: Boolean): Grafico {
+    private fun createGraficoData(fromToday: Boolean): Grafico {
         var grafico = Grafico()
         var listaConfirmados = mutableListOf<Int>()
         var listaRecuperados = mutableListOf<Int>()
@@ -182,7 +172,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         return grafico
     }
 
-    fun check15DaysData() {
+    private fun check15DaysData() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val service = remote.create(CovidService::class.java)
@@ -203,7 +193,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                         }
                     }
                 }
-                calculate24HoursNumbers15Days()
+                calculateRemote24HoursNumbers15Days()
                 var covidHoje = local.getByDate(getDaysAgo(0))
                 if (covidHoje == null) {
                     listenerGraficos.onFetchedRepository(createGraficoData(false))
@@ -211,13 +201,13 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     listenerGraficos.onFetchedRepository(createGraficoData(true))
                 }
             } catch (e: IOException) {
-                println("sem net");
+                //SEM NET....
             }
         }
 
     }
 
-    fun getMaxList(lista: List<Int>): Int {
+    private fun getMaxList(lista: List<Int>): Int {
         var max = 0;
         for (i in lista) {
             if (i > max) {
@@ -228,7 +218,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     }
 
     // Confirma que temos pelo menos 2 dias de dados para desenhar dashboard
-    fun checkBDLastUpdates() {
+    private fun getLastCovidData() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val service = remote.create(CovidService::class.java)
@@ -263,14 +253,14 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 }
                 checkLastRemoteUpdate()
             } catch (e: IOException) {
-                println("sem net");
+                //Sem net...
             }
         }
 
     }
 
     // confirma qual os dados mais recente das API
-    fun checkLastRemoteUpdate() {
+    private fun checkLastRemoteUpdate() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -341,21 +331,18 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                 }
             } catch (e: IOException) {
-                println("sem net");
+                //Sem net
             }
         }
     }
 
     // Calcular dados entre duas datas (Covid 24 horas)
-    fun calcularDadosCovidEntreDatas(covidAtual: Covid, covidAntigo: Covid): Covid {
+    private fun calcularDadosCovidEntreDatas(covidAtual: Covid, covidAntigo: Covid): Covid {
 
-        covidAtual.confirmados24 =
-            (covidAtual.confirmadosTotais.minus(covidAntigo.confirmadosTotais))
-        covidAtual.internados24 =
-            (covidAtual.internadosTotais.minus(covidAntigo.internadosTotais))
+        covidAtual.confirmados24 = (covidAtual.confirmadosTotais.minus(covidAntigo.confirmadosTotais))
+        covidAtual.internados24 = (covidAtual.internadosTotais.minus(covidAntigo.internadosTotais))
         covidAtual.obitos24 = (covidAtual.obitosTotais.minus(covidAntigo.obitosTotais))
-        covidAtual.recuperados24 =
-            (covidAtual.recuperadosTotais.minus(covidAntigo.recuperadosTotais))
+        covidAtual.recuperados24 = (covidAtual.recuperadosTotais.minus(covidAntigo.recuperadosTotais))
 
         covidAtual.norte24 = (covidAtual.norteTotal.minus(covidAntigo.norteTotal))
         covidAtual.centro24 = (covidAtual.centroTotal.minus(covidAntigo.centroTotal))
@@ -368,19 +355,19 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         return covidAtual
     }
 
-    // Main function to Dashboard
+
     fun getCovidData(callback: FetchRepositoryCovidListener) {
         listenerCovid = callback
-        checkBDLastUpdates()
+        getLastCovidData()
     }
 
-    fun getDaysAgo(daysAgo: Int): String {
+    private fun getDaysAgo(daysAgo: Int): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
         return SimpleDateFormat("dd-MM-yyyy").format(calendar.time)
     }
 
-    fun daysBetween(date: String): Long {
+    private fun daysBetween(date: String): Long {
         val cal1 = Calendar.getInstance()
         val cal2 = Calendar.getInstance()
 
@@ -401,14 +388,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     fun get15DaysDataGraph(listener: FetchRepositoryGraficoListener) {
         listenerGraficos = listener
         check15DaysData()
-    }
-
-
-    //#TODO APAGAR ESTE METODO
-    fun deleteAllFromDB() {
-        CoroutineScope(Dispatchers.IO).launch {
-            local.deleteAllWARNING()
-        }
     }
 
 

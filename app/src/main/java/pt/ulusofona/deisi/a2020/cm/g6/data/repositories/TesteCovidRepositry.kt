@@ -12,32 +12,17 @@ import java.util.*
 
 
 class TesteCovidRepositry(private val local: TesteCovidDao) {
-    /*fun getTesteCovidData(callback: TesteCovidCallback, *//*callbackDashboard: DashboardCallback,*//* data: String){
-        CoroutineScope(Dispatchers.IO ).launch {
-            var listaDeTestesCovid = mutableListOf<TesteCovid>()
-            val dados = local.getById(data)
-            if(dados != null){
-
-                callback.getTesteCovidData(dados)
-                //preciso de callback para a lista em si? ou no detalhe do teste em si?...
-            } else {
-
-            }
-        }
-
-    }*/
-    //fica para depois...
 
     fun getListTestesCovid(listener: FetchRepositoryListaListener) {
         listener.onFetchedRepository(ordenar(local.getAll()))
     }
 
-    fun ordenar(listaParaOrdenar: List<TesteCovid>): List<TesteCovid> {
+    private fun ordenar(listaParaOrdenar: List<TesteCovid>): List<TesteCovid> {
         val resultado = listaParaOrdenar.sortedBy { it.data.toDate() }
         return ArrayList<TesteCovid>(resultado)
     }
 
-    fun String.toDate(): Date {
+    private fun String.toDate(): Date {
         return SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).parse(this)
     }
 
@@ -47,11 +32,5 @@ class TesteCovidRepositry(private val local: TesteCovidDao) {
         }
     }
 
-    //#TODO APAGAR ESTE METODO
-    fun deleteAllFromDB() {
-        CoroutineScope(Dispatchers.IO).launch {
-            local.deleteAllWARNING()
-        }
-    }
 
 }
