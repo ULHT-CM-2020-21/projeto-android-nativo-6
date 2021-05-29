@@ -9,6 +9,8 @@
     <string name="dataTesteEx">DD/MM/YYYY</string>
     <string name="dataTesteErro">Test date cannot be empty!</string>
     <string name="resultadoTeste">Test Result</string>
+    <string name="resultadoListaTeste">Result:\u0020</string>
+    <string name="temFotoListaTeste">Photo:\u0020</string>
     <string name="resultadoTestePositivo">Positive</string>
     <string name="resultadoTesteNegativo">Negative</string>
     <string name="resultadoTesteErro">Test result cannot be empty!</string>
@@ -64,6 +66,8 @@
     <string name="INFOLegislacao">Area dedicated to pandemic legislation</string>
 
     <string name="semDados">No Data</string>
+    <string name="semFoto">No Photo!</string>
+    <string name="temFoto">It has a Photo!</string>
 
 
     <!-- Drawer -->

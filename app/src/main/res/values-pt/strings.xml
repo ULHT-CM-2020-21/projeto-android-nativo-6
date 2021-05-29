@@ -10,6 +10,8 @@
     <string name="dataTesteEx">DD/MM/AAAA</string>
     <string name="dataTesteErro">A data não pode ficar vazia!</string>
     <string name="resultadoTeste">Resultado do Teste</string>
+    <string name="resultadoListaTeste">Resultado:\u0020</string>
+    <string name="temFotoListaTeste">Foto:\u0020</string>
     <string name="resultadoTestePositivo">Positivo</string>
     <string name="resultadoTesteNegativo">Negativo</string>
     <string name="resultadoTesteErro">O resultado não pode ser vazio!</string>
@@ -64,6 +66,8 @@
     <string name="INFOemailCovidDuvidas">Canal SNS 24 para esclarecimentos de dúvidas. Não utilizar para diagnóstico médico</string>
     <string name="INFOLegislacao">Área do Diário da República Eletrónico dedicada à legislação relativa à pandemia</string>
 
+    <string name="semFoto">Sem Fotografia!</string>
+    <string name="temFoto">Tem Fotografia!</string>
     <string name="semDados">Sem Dados</string>
 
     <!-- Drawer -->

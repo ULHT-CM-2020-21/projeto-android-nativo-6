@@ -14,7 +14,7 @@ data class TesteCovid (
     var resultadoTesteCovid: Boolean = false,
     var fotoPath: String? = null,
     //val foto: File= File(fotoPath), temos que ver...
-    val temFoto: Boolean = true
+    var temFoto: Boolean = false
 ) {
 
     @PrimaryKey
