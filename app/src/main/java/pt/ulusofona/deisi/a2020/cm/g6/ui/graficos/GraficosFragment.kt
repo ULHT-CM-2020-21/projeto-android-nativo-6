@@ -144,6 +144,8 @@ class GraficosFragment : Fragment(), GraficoUIListener {
         startDateI.setText(getDaysAgo(0))
         endDateI.setText(getDaysAgo(14))
 
+        progressBar.visibility = View.GONE
+
 
     }
 

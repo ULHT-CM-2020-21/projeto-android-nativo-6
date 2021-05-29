@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.graficos.GraficosFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="match_parent"
@@ -23,42 +32,43 @@
 
         <me.ithebk.barchart.BarChart
             android:id="@+id/bar_chart_Confirmados"
-            app:bar_type="vertical"
-            app:bar_width="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             app:bar_color="@color/teal_700"
+            app:bar_max_value="100"
+            app:bar_show_animation="true"
+            app:bar_show_auto_color="true"
+            app:bar_show_value="true"
+            app:bar_spaces="0dp"
             app:bar_text_color="#000000"
             app:bar_text_size="10sp"
-            app:bar_show_auto_color="true"
-            app:bar_max_value="100"
-            app:bar_spaces = "0dp"
-            app:bar_show_value="true"
-            app:bar_show_animation="true"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"/>
+            app:bar_type="vertical"
+            app:bar_width="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/endDateC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-               android:id="@+id/endDateC"/>
+                android:textColor="@color/black" />
 
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
-                android:src="@drawable/seta"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:src="@drawable/seta" />
+
             <TextView
+                android:id="@+id/startDateC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:id="@+id/startDateC"/>
+                android:textColor="@color/black" />
 
 
         </LinearLayout>
@@ -76,42 +86,43 @@
 
         <me.ithebk.barchart.BarChart
             android:id="@+id/bar_chart_Recuperados"
-            app:bar_type="vertical"
-            app:bar_width="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             app:bar_color="@color/teal_700"
+            app:bar_max_value="100"
+            app:bar_show_animation="true"
+            app:bar_show_auto_color="true"
+            app:bar_show_value="true"
+            app:bar_spaces="0dp"
             app:bar_text_color="#000000"
             app:bar_text_size="10sp"
-            app:bar_show_auto_color="true"
-            app:bar_max_value="100"
-            app:bar_spaces = "0dp"
-            app:bar_show_value="true"
-            app:bar_show_animation="true"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"/>
+            app:bar_type="vertical"
+            app:bar_width="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/endDateR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:id="@+id/endDateR"/>
+                android:textColor="@color/black" />
 
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
-                android:src="@drawable/seta"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:src="@drawable/seta" />
+
             <TextView
+                android:id="@+id/startDateR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:id="@+id/startDateR"/>
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <TextView
@@ -126,42 +137,43 @@
 
         <me.ithebk.barchart.BarChart
             android:id="@+id/bar_chart_Obitos"
-            app:bar_type="vertical"
-            app:bar_width="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             app:bar_color="@color/teal_700"
+            app:bar_max_value="100"
+            app:bar_show_animation="true"
+            app:bar_show_auto_color="true"
+            app:bar_show_value="true"
+            app:bar_spaces="0dp"
             app:bar_text_color="#000000"
             app:bar_text_size="10sp"
-            app:bar_show_auto_color="true"
-            app:bar_max_value="100"
-            app:bar_spaces = "0dp"
-            app:bar_show_value="true"
-            app:bar_show_animation="true"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"/>
+            app:bar_type="vertical"
+            app:bar_width="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/endDateO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:id="@+id/endDateO"/>
+                android:textColor="@color/black" />
 
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
-                android:src="@drawable/seta"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:src="@drawable/seta" />
+
             <TextView
+                android:id="@+id/startDateO"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:id="@+id/startDateO"/>
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <TextView
@@ -176,51 +188,47 @@
 
         <me.ithebk.barchart.BarChart
             android:id="@+id/bar_chart_Internados"
-            app:bar_type="vertical"
-            app:bar_width="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
             android:layout_gravity="center"
             app:bar_color="@color/teal_700"
+            app:bar_max_value="100"
+            app:bar_show_animation="true"
+            app:bar_show_auto_color="true"
+            app:bar_show_value="true"
+            app:bar_spaces="0dp"
             app:bar_text_color="#000000"
             app:bar_text_size="10sp"
-            app:bar_show_auto_color="true"
-            app:bar_max_value="100"
-            app:bar_spaces = "0dp"
-            app:bar_show_value="true"
-            app:bar_show_animation="true"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"/>
+            app:bar_type="vertical"
+            app:bar_width="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/endDateI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:id="@+id/endDateI"/>
+                android:textColor="@color/black" />
 
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="30sp"
-                android:src="@drawable/seta"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:src="@drawable/seta" />
+
             <TextView
+                android:id="@+id/startDateI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:id="@+id/startDateI"/>
+                android:textColor="@color/black" />
         </LinearLayout>
 
 
-
     </LinearLayout>
-
-
-
-
 
 
 </ScrollView>

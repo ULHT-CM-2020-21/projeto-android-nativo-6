@@ -57,6 +57,10 @@ class ListaTestesFragment : Fragment(), ListaUIListener {
 
     override fun onUpdateUI(listaTestes: List<TesteCovid>) {
         listaDeTestes = listaTestes
+        if(!listaTestes.isEmpty()){
+            semDadosMessage.visibility = View.GONE
+            list_test.visibility = View.VISIBLE
+        }
 
         list_test.layoutManager = LinearLayoutManager(context as MainActivity)
         list_test.adapter = TestAdapter(

@@ -27,7 +27,9 @@ class TesteCovidRepositry(private val local: TesteCovidDao) {
 
     fun saveTesteCovid(testeCovid: TesteCovid) {
         CoroutineScope(Dispatchers.IO).launch {
-            local.insert(testeCovid)
+            if(local.getById(testeCovid.uuid) == null){
+                local.insert(testeCovid)
+            }
         }
     }
 
