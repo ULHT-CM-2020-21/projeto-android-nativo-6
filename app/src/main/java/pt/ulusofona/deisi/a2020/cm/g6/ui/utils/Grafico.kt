@@ -9,5 +9,4 @@ class Grafico() {
     var valuesRecuperados: List<Int> = mutableListOf()
     var valuesObitos: List<Int> = mutableListOf()
     var valuesInternados: List<Int> = mutableListOf()
-    var fromToday: Boolean = false
 }

@@ -34,6 +34,10 @@ class DashboardFragment : Fragment(), DashboardUIListener {
         viewModel.askDataCovid()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.unregisterViewListener(this)
+    }
 
 
     override fun onUpdateUI(covid: Covid) {

@@ -13,6 +13,7 @@ import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Grafico
 import retrofit2.Response
 import retrofit2.Retrofit
 import java.io.IOException
+import java.net.InetAddress
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,6 +21,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
     private lateinit var listenerCovid: FetchRepositoryCovidListener
     private lateinit var listenerGraficos: FetchRepositoryGraficoListener
+    private var daysAgoNumberFromLocal = 0
 
     private fun writeCovidObjectDataFromRemote(covid: Covid, numberCovidTotal: String, response: Response<CovidResponsePast>): Covid {
         val confirmadosTotais: Int? = response.body()?.confirmados?.get(numberCovidTotal)
@@ -103,7 +105,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     }
 
     private fun calculateRemote24HoursNumbers15Days() {
-        for (i in 15 downTo 0) {
+        for (i in daysAgoNumberFromLocal + 15 downTo daysAgoNumberFromLocal) {
             var atualCovid = local.getByDate(getDaysAgo(i))
             var antigoCovid = local.getByDate(getDaysAgo(i + 1))
             if (atualCovid != null && antigoCovid != null) {
@@ -113,71 +115,55 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         }
     }
 
-    private fun createGraficoData(fromToday: Boolean): Grafico {
+    private fun createGraficoData(): Grafico {
         var grafico = Grafico()
         var listaConfirmados = mutableListOf<Int>()
         var listaRecuperados = mutableListOf<Int>()
         var listaInternados = mutableListOf<Int>()
         var listaObitos = mutableListOf<Int>()
-        if (fromToday) {
-            for (i in 0..14) {
-                var covid = local.getByDate(getDaysAgo(i))
-                if (covid != null) {
-                    listaConfirmados.add(covid.confirmados24)
-                    listaRecuperados.add(covid.recuperados24)
-                    if (covid.internados24 < 0) {
-                        listaInternados.add(0)
-                    } else {
-                        listaInternados.add(covid.internados24)
-                    }
-                    listaObitos.add(covid.obitos24)
-                } else {
-                    listaConfirmados.add(0)
-                    listaRecuperados.add(0)
+        println("daysAgoNumberFromLocal" + daysAgoNumberFromLocal)
+        for (i in daysAgoNumberFromLocal..daysAgoNumberFromLocal + 14) {
+            var covid = local.getByDate(getDaysAgo(i))
+            if (covid != null) {
+                listaConfirmados.add(covid.confirmados24)
+                listaRecuperados.add(covid.recuperados24)
+                if (covid.internados24 < 0) {
                     listaInternados.add(0)
-                    listaObitos.add(0)
-                }
-            }
-            grafico.fromToday = true
-        } else {
-            for (i in 1..15) {
-                var covid = local.getByDate(getDaysAgo(i))
-                if (covid != null) {
-                    listaConfirmados.add(covid.confirmados24)
-                    listaRecuperados.add(covid.recuperados24)
-                    if (covid.internados24 < 0) {
-                        listaInternados.add(0)
-                    } else {
-                        listaInternados.add(covid.internados24)
-                    }
-                    listaObitos.add(covid.obitos24)
                 } else {
-                    listaConfirmados.add(0)
-                    listaRecuperados.add(0)
-                    listaInternados.add(0)
-                    listaObitos.add(0)
+                    listaInternados.add(covid.internados24)
                 }
+                listaObitos.add(covid.obitos24)
+            } else {
+                println("null")
+                listaConfirmados.add(0)
+                listaRecuperados.add(0)
+                listaInternados.add(0)
+                listaObitos.add(0)
             }
-            grafico.fromToday = false
         }
+
         grafico.valuesConfirmados = listaConfirmados
         grafico.valuesRecuperados = listaRecuperados
         grafico.valuesInternados = listaInternados
         grafico.valuesObitos = listaObitos
 
-        grafico.maxConfirmados = getMaxList(listaConfirmados)
-        grafico.maxRecuperados = getMaxList(listaRecuperados)
-        grafico.maxInternados = getMaxList(listaInternados)
-        grafico.maxObitos = getMaxList(listaObitos)
+        // aumento destes numeros permite uma melhor UI
+        // em casos em que o maximo é por exemplo 650, mas os seus vizinhso sao 649
+        // iria criar uma UI com pouca qualidade
+        grafico.maxConfirmados = getMaxList(listaConfirmados) + 70
+        grafico.maxRecuperados = getMaxList(listaRecuperados) + 50
+        grafico.maxInternados = getMaxList(listaInternados) + 3
+        grafico.maxObitos = getMaxList(listaObitos) + 5
         return grafico
     }
+
 
     private fun check15DaysData() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val service = remote.create(CovidService::class.java)
                 // confirmar se tenho na bd pelo menos 15 dias de dados
-                for (i in 16 downTo 1) {
+                for (i in daysAgoNumberFromLocal + 16 downTo daysAgoNumberFromLocal + 1) {
                     var dadosBD = local.getByDate(getDaysAgo(i))
                     if (dadosBD == null) {
                         val response = service.getDadosDiaEspecifico(getDaysAgo(i))
@@ -194,14 +180,10 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     }
                 }
                 calculateRemote24HoursNumbers15Days()
-                var covidHoje = local.getByDate(getDaysAgo(0))
-                if (covidHoje == null) {
-                    listenerGraficos.onFetchedRepository(createGraficoData(false))
-                } else {
-                    listenerGraficos.onFetchedRepository(createGraficoData(true))
-                }
+                listenerGraficos.onFetchedRepository(createGraficoData())
             } catch (e: IOException) {
-                //SEM NET....
+                calculateRemote24HoursNumbers15Days()
+                listenerGraficos.onFetchedRepository(createGraficoData())
             }
         }
 
@@ -214,6 +196,7 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 max = i
             }
         }
+        println("max" + max)
         return max
     }
 
@@ -253,7 +236,8 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 }
                 checkLastRemoteUpdate()
             } catch (e: IOException) {
-                //Sem net...
+                println("sem net no getLastCovidData")
+                checkLastRemoteUpdate()
             }
         }
 
@@ -315,6 +299,8 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                         covidHoje.acoresTotal = acoresTotal
                     }
 
+                    local.insert(covidHoje)
+
                     var covidOntem = local.getByDate(getDaysAgo(1))
                     if (covidOntem != null) {
                         covidHoje = calcularDadosCovidEntreDatas(covidHoje, covidOntem)
@@ -331,7 +317,18 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                 }
             } catch (e: IOException) {
-                //Sem net
+                println("sem net checkLastRemoteUpdate")
+                var covidOntem = local.getByDate(getDaysAgo(daysAgoNumberFromLocal ))
+                var covidDoisDias = local.getByDate(getDaysAgo(daysAgoNumberFromLocal + 1))
+                if (covidOntem != null && covidDoisDias != null) {
+                    covidOntem = calcularDadosCovidEntreDatas(covidOntem, covidDoisDias)
+                    listenerCovid.onFetchedRepository(covidOntem)
+                }else{
+                    var covidOlder = local.getByDate(getDaysAgo(daysAgoNumberFromLocal))
+                    if (covidOlder != null) {
+                        listenerCovid.onFetchedRepository(covidOlder)
+                    }
+                }
             }
         }
     }
@@ -355,9 +352,9 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         return covidAtual
     }
 
-
     fun getCovidData(callback: FetchRepositoryCovidListener) {
         listenerCovid = callback
+        checkInternetAndLastLocalData()
         getLastCovidData()
     }
 
@@ -388,6 +385,28 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     fun get15DaysDataGraph(listener: FetchRepositoryGraficoListener) {
         listenerGraficos = listener
         check15DaysData()
+    }
+
+    fun checkInternetAndLastLocalData() {
+        if (!isInternetAvailable()) {
+            for (i in 0..30) {
+                var covid = local.getByDate(getDaysAgo(i))
+                if (covid != null) {
+                    println("days é" + i)
+                    daysAgoNumberFromLocal = i
+                    return
+                }
+            }
+        }
+    }
+
+    fun isInternetAvailable(): Boolean {
+        try {
+            val ipAddr: InetAddress = InetAddress.getByName("google.com")
+            return !ipAddr.equals("")
+        } catch (e: Exception) {
+            return false
+        }
     }
 
 
