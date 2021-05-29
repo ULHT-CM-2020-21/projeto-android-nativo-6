@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.ceylonlabs.imageviewpopup.ImagePopup
 import kotlinx.android.synthetic.main.fragment_detalhe_teste.*
@@ -24,12 +25,19 @@ class DetalheTesteFragment(var teste: TesteCovid) : Fragment() {
         detalheTesteData.text = teste.data
         if (teste.resultadoTesteCovid) {
             detalheTesteResultado.text = getString(R.string.resultadoTestePositivo)
-        }else{
+        } else {
             detalheTesteResultado.text = getString(R.string.resultadoTesteNegativo)
         }
-        if(teste.fotoPath != null){
+        if (teste.fotoPath != null) {
             var uriImage = Uri.parse(teste.fotoPath)
             photo.setImageURI(uriImage)
+            photo_open.isVisible = true
+            semFoto.isVisible = false
+        }
+        if (teste.fotoPath == null) {
+            photo.visibility = View.INVISIBLE
+            photo_open.isVisible = false
+            semFoto.isVisible = true
         }
         val imagePopup = ImagePopup(context)
         imagePopup.setFullScreen(true)

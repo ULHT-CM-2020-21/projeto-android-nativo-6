@@ -146,6 +146,7 @@ class RegistoFragment : Fragment() {
             testeSubmete.data = editDataString
             if(photoURIFinal != null){
                 testeSubmete.fotoPath = photoURIFinal.toString()
+                testeSubmete.temFoto = true
             }
             viewModel.onSubmeterTesteNovo(testeSubmete)
             Toast.makeText(
