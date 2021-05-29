@@ -29,7 +29,7 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
     private lateinit var viewModel: GraficosViewModel
 
-    override fun onCreateView (inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_graficos, container, false)
         viewModel = ViewModelProviders.of(this).get(GraficosViewModel::class.java)
         ButterKnife.bind(this, view)
@@ -42,6 +42,11 @@ class GraficosFragment : Fragment(), GraficoUIListener {
         viewModel.registerViewListener(this)
         viewModel.drawGraphs()
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.unregisterViewListener(this)
     }
 
     override fun onUpdateUI(grafico: Grafico) {
@@ -59,12 +64,12 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
 
 
-        for(i in 14 downTo 0){
+        for (i in 14 downTo 0) {
             barchartModel = BarChartModel()
             barchartModel.barValue = valuesGraficoConfirmados.elementAt(i)
-            if(i % 2 ==0){
+            if (i % 2 == 0) {
                 barchartModel.barColor = Color.parseColor("#989898")
-            }else{
+            } else {
                 barchartModel.barColor = Color.parseColor("#767676")
             }
             barchartModel.barTag = i
@@ -72,12 +77,12 @@ class GraficosFragment : Fragment(), GraficoUIListener {
             bar_chart_Confirmados.addBar(barchartModel)
         }
 
-        for(i in 14 downTo 0){
+        for (i in 14 downTo 0) {
             barchartModel = BarChartModel()
             barchartModel.barValue = valuesGraficoRecuperados.elementAt(i)
-            if(i % 2 ==0){
+            if (i % 2 == 0) {
                 barchartModel.barColor = Color.parseColor("#5ca08e")
-            }else{
+            } else {
                 barchartModel.barColor = Color.parseColor("#2e856e")
             }
             barchartModel.barText = valuesGraficoRecuperados.elementAt(i).toString()
@@ -86,12 +91,12 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
         }
 
-        for(i in 14 downTo 0){
+        for (i in 14 downTo 0) {
             barchartModel = BarChartModel()
             barchartModel.barValue = valuesGraficoObitos.elementAt(i)
-            if(i % 2 ==0){
+            if (i % 2 == 0) {
                 barchartModel.barColor = Color.parseColor("#ff7b7b")
-            }else{
+            } else {
                 barchartModel.barColor = Color.parseColor("#ffbaba")
             }
             barchartModel.barText = valuesGraficoObitos.elementAt(i).toString()
@@ -100,12 +105,12 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
         }
 
-        for(i in 14 downTo 0){
+        for (i in 14 downTo 0) {
             barchartModel = BarChartModel()
             barchartModel.barValue = valuesGraficoInternados.elementAt(i)
-            if(i % 2 ==0){
+            if (i % 2 == 0) {
                 barchartModel.barColor = Color.parseColor("#70ADCC")
-            }else{
+            } else {
                 barchartModel.barColor = Color.parseColor("#568EBC")
             }
             barchartModel.barText = valuesGraficoInternados.elementAt(i).toString()
@@ -114,56 +119,32 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
         }
 
-        if(grafico.fromToday == true){
-            bar_chart_Confirmados.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-            }
-            bar_chart_Recuperados.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-            }
-            bar_chart_Obitos.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-            }
-            bar_chart_Internados.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
-            }
 
-
-
-            startDateC.setText(getDaysAgo(0))
-            endDateC.setText(getDaysAgo(14))
-            startDateR.setText(getDaysAgo(0))
-            endDateR.setText(getDaysAgo(14))
-            startDateO.setText(getDaysAgo(0))
-            endDateO.setText(getDaysAgo(14))
-            startDateI.setText(getDaysAgo(0))
-            endDateI.setText(getDaysAgo(14))
-
-        } else {
-            bar_chart_Confirmados.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
-            }
-            bar_chart_Recuperados.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
-            }
-            bar_chart_Obitos.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
-            }
-            bar_chart_Internados.setOnBarClickListener {
-                Toast.makeText(context as MainActivity,getDaysAgo(it.barTag as Int + 1), Toast.LENGTH_SHORT).show()
-            }
-
-
-
-            startDateC.setText(getDaysAgo(1))
-            endDateC.setText(getDaysAgo(15))
-            startDateR.setText(getDaysAgo(1))
-            endDateR.setText(getDaysAgo(15))
-            startDateO.setText(getDaysAgo(1))
-            endDateO.setText(getDaysAgo(15))
-            startDateI.setText(getDaysAgo(1))
-            endDateI.setText(getDaysAgo(15))
+        bar_chart_Confirmados.setOnBarClickListener {
+            Toast.makeText(context as MainActivity, getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
         }
+        bar_chart_Recuperados.setOnBarClickListener {
+            Toast.makeText(context as MainActivity, getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
+        }
+        bar_chart_Obitos.setOnBarClickListener {
+            Toast.makeText(context as MainActivity, getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
+        }
+        bar_chart_Internados.setOnBarClickListener {
+            Toast.makeText(context as MainActivity, getDaysAgo(it.barTag as Int), Toast.LENGTH_SHORT).show()
+        }
+
+
+
+        startDateC.setText(getDaysAgo(0))
+        endDateC.setText(getDaysAgo(14))
+        startDateR.setText(getDaysAgo(0))
+        endDateR.setText(getDaysAgo(14))
+        startDateO.setText(getDaysAgo(0))
+        endDateO.setText(getDaysAgo(14))
+        startDateI.setText(getDaysAgo(0))
+        endDateI.setText(getDaysAgo(14))
+
+
     }
 
     fun getDaysAgo(daysAgo: Int): String {

@@ -42,8 +42,11 @@ class ListaTestesFragment : Fragment(), ListaUIListener {
         super.onStart()
         viewModel.registerListener(this)
         viewModel.drawLista()
+    }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.unregisterListener(this)
     }
 
     @OnClick(R.id.ordenar_lista)
