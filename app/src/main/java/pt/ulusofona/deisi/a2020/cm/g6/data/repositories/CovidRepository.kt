@@ -121,7 +121,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
         var listaRecuperados = mutableListOf<Int>()
         var listaInternados = mutableListOf<Int>()
         var listaObitos = mutableListOf<Int>()
-        println("daysAgoNumberFromLocal" + daysAgoNumberFromLocal)
         for (i in daysAgoNumberFromLocal..daysAgoNumberFromLocal + 14) {
             var covid = local.getByDate(getDaysAgo(i))
             if (covid != null) {
@@ -134,7 +133,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 }
                 listaObitos.add(covid.obitos24)
             } else {
-                println("null")
                 listaConfirmados.add(0)
                 listaRecuperados.add(0)
                 listaInternados.add(0)
@@ -196,7 +194,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 max = i
             }
         }
-        println("max" + max)
         return max
     }
 
@@ -236,7 +233,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                 }
                 checkLastRemoteUpdate()
             } catch (e: IOException) {
-                println("sem net no getLastCovidData")
                 checkLastRemoteUpdate()
             }
         }
@@ -317,7 +313,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
 
                 }
             } catch (e: IOException) {
-                println("sem net checkLastRemoteUpdate")
                 var covidOntem = local.getByDate(getDaysAgo(daysAgoNumberFromLocal ))
                 var covidDoisDias = local.getByDate(getDaysAgo(daysAgoNumberFromLocal + 1))
                 if (covidOntem != null && covidDoisDias != null) {
@@ -392,7 +387,6 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
             for (i in 0..30) {
                 var covid = local.getByDate(getDaysAgo(i))
                 if (covid != null) {
-                    println("days é" + i)
                     daysAgoNumberFromLocal = i
                     return
                 }
