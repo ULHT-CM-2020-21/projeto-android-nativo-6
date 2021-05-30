@@ -16,7 +16,7 @@ class Battery private constructor(private val context: Context): Runnable{
     private val TAG = Battery::class.java.simpleName
 
     // Intervalo de tempo em que a thread será lançada
-    private val TIME_BETWEEN_UPDATES = 1*1000L
+    private val TIME_BETWEEN_UPDATES = 20*1000L
 
     companion object {
         private var listener: OnBatteryPercentageListener? = null
