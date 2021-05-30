@@ -31,8 +31,7 @@ import java.util.jar.Manifest
 const val REQUEST_CODE = 100
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener {
-class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnLocationChangedListener {
+class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener, OnLocationChangedListener{
     override fun onRequestPermissionsSuccess() {
         FusedLocation.start(this)
         FusedLocation.registerListener(this)
