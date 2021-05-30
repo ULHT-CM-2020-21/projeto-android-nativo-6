@@ -41,7 +41,7 @@ class DashboardFragment : Fragment(), DashboardUIListener {
         //viewModel.unregisterViewListener(this)
     }
 
-    fun deafultValuesforUI(){
+    fun deafultValuesforUI() {
         numero_internados.text = "0"
         numero_confirmados.text = "0"
         numero_obitos.text = "0"
@@ -52,8 +52,8 @@ class DashboardFragment : Fragment(), DashboardUIListener {
         numero_novos_obitos.text = "+0"
         numero_novos_recuperados.text = "+0"
 
-        casosTotaisPN.text ="0"
-        novosCasosPN.text ="+0"
+        casosTotaisPN.text = "0"
+        novosCasosPN.text = "+0"
 
         casosTotaisC.text = "0"
         novosCasosC.text = "+0"
@@ -65,9 +65,9 @@ class DashboardFragment : Fragment(), DashboardUIListener {
         novosCasosAlentejo.text = "+0"
 
         casosTotaisAlgarve.text = "0"
-        novosCasosAlgarve.text ="+0"
+        novosCasosAlgarve.text = "+0"
 
-        casosTotaisMadeira.text ="0"
+        casosTotaisMadeira.text = "0"
         novosCasosMadeira.text = "+0"
 
         casosTotaisAcores.text = "0"
@@ -78,42 +78,74 @@ class DashboardFragment : Fragment(), DashboardUIListener {
 
 
     override fun onUpdateUI(covid: Covid) {
-        numero_internados.text = String.format("%,d", covid.internadosTotais)
-        numero_confirmados.text = String.format("%,d", covid.confirmadosTotais)
-        numero_obitos.text = String.format("%,d",covid.obitosTotais)
-        numero_recuperados.text = String.format("%,d", covid.recuperadosTotais)
-
-        numero_novos_confirmados.text = String.format("+%,d", covid.confirmados24)
-        if(covid.internados24 < 0){
-            numero_novos_internados.text = String.format("%,d", covid.internados24)
-        }else{
-            numero_novos_internados.text = String.format("+%,d", covid.internados24)
+        if (numero_internados != null && covid.internadosTotais != null) {
+            numero_internados?.text = String.format("%,d", covid.internadosTotais)
         }
-        numero_novos_obitos.text = String.format("+%,d", covid.obitos24)
-        numero_novos_recuperados.text = String.format("+%,d", covid.recuperados24)
+        if (numero_confirmados != null && covid.confirmadosTotais != null) {
+            numero_confirmados.text = String.format("%,d", covid.confirmadosTotais)
+        }
+        if (numero_obitos != null && covid.obitosTotais != null) {
+            numero_obitos.text = String.format("%,d", covid.obitosTotais)
+        }
 
-        casosTotaisPN.text = String.format("%,d", covid.norteTotal)
-        novosCasosPN.text = String.format("+%,d", covid.norte24)
+        if (numero_recuperados != null && covid.recuperadosTotais != null) {
+            numero_recuperados.text = String.format("%,d", covid.recuperadosTotais)
+        }
 
-        casosTotaisC.text = String.format("%,d", covid.centroTotal)
-        novosCasosC.text = String.format("+%,d", covid.centro24)
+        if (numero_novos_confirmados != null && covid.confirmados24 != null) {
+            numero_novos_confirmados.text = String.format("+%,d", covid.confirmados24)
+        }
 
-        casosTotaisLVT.text = String.format("%,d", covid.lisboaTotal)
-        novosCasosLVT.text = String.format("+%,d", covid.lisboa24)
+        if (numero_novos_internados != null && covid.internados24 != null) {
+            if (covid.internados24 < 0) {
+                numero_novos_internados.text = String.format("%,d", covid.internados24)
+            } else {
+                numero_novos_internados.text = String.format("+%,d", covid.internados24)
+            }
+        }
 
-        casosTotaisAlentejo.text = String.format("%,d", covid.alentejoTotal)
-        novosCasosAlentejo.text = String.format("+%,d", covid.alentejo24)
+        if (numero_novos_obitos != null && covid.obitos24 != null) {
+            numero_novos_obitos.text = String.format("+%,d", covid.obitos24)
+        }
+        if (numero_novos_recuperados != null && covid.recuperados24 != null) {
+            numero_novos_recuperados.text = String.format("+%,d", covid.recuperados24)
+        }
 
-        casosTotaisAlgarve.text = String.format("%,d", covid.algarveTotal)
-        novosCasosAlgarve.text = String.format("+%,d", covid.alentejo24)
+        if (casosTotaisPN != null && novosCasosPN != null) {
+            casosTotaisPN.text = String.format("%,d", covid.norteTotal)
+            novosCasosPN.text = String.format("+%,d", covid.norte24)
+        }
 
-        casosTotaisMadeira.text = String.format("%,d", covid.madeiraTotal)
-        novosCasosMadeira.text = String.format("+%,d", covid.madeira24)
+        if (casosTotaisC != null && novosCasosC != null) {
+            casosTotaisC.text = String.format("%,d", covid.centroTotal)
+            novosCasosC.text = String.format("+%,d", covid.centro24)
 
-        casosTotaisAcores.text = String.format("%,d", covid.acoresTotal)
-        novosCasosAcores.text = String.format("+%,d", covid.acores24)
+        }
 
-        dateUpdateText.text = covid.data
+        if (casosTotaisLVT != null && novosCasosLVT != null) {
+            casosTotaisLVT.text = String.format("%,d", covid.lisboaTotal)
+            novosCasosLVT.text = String.format("+%,d", covid.lisboa24)
+        }
+        if (casosTotaisAlentejo != null && novosCasosAlentejo != null) {
+            casosTotaisAlentejo.text = String.format("%,d", covid.alentejoTotal)
+            novosCasosAlentejo.text = String.format("+%,d", covid.alentejo24)
+        }
+        if (casosTotaisAlgarve != null && novosCasosAlgarve != null) {
+            casosTotaisAlgarve.text = String.format("%,d", covid.algarveTotal)
+            novosCasosAlgarve.text = String.format("+%,d", covid.alentejo24)
+        }
+        if (casosTotaisMadeira != null && novosCasosMadeira != null) {
+            casosTotaisMadeira.text = String.format("%,d", covid.madeiraTotal)
+            novosCasosMadeira.text = String.format("+%,d", covid.madeira24)
+        }
+        if (casosTotaisAcores != null && novosCasosAcores != null) {
+            casosTotaisAcores.text = String.format("%,d", covid.acoresTotal)
+            novosCasosAcores.text = String.format("+%,d", covid.acores24)
+        }
+        if(dateUpdateText != null){
+            dateUpdateText.text = covid.data
+        }
+
     }
 
 

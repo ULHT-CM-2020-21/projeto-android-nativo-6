@@ -46,7 +46,7 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.unregisterViewListener(this)
+        //viewModel.unregisterViewListener(this)
     }
 
     override fun onUpdateUI(grafico: Grafico) {
