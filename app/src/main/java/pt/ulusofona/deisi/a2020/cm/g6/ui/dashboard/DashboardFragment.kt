@@ -38,7 +38,7 @@ class DashboardFragment : Fragment(), DashboardUIListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.unregisterViewListener(this)
+        //viewModel.unregisterViewListener(this)
     }
 
     fun deafultValuesforUI(){
