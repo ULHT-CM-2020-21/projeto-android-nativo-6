@@ -90,18 +90,30 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/semFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:layout_marginStart="12dp"
+            android:text="@string/semFoto"
+            android:visibility="invisible"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+
         <ImageView
+            android:id="@+id/photo"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:id="@+id/photo"
-            android:layout_gravity="center"
-            android:src="@drawable/covidresult"/>
+            android:layout_gravity="center"/>
+
         <Button
+            android:id="@+id/photo_open"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/photo"
             android:layout_gravity="center"
-            android:id="@+id/photo_open"/>
+            android:visibility="invisible" />
 
     </LinearLayout>
 </ScrollView>

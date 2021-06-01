@@ -5,12 +5,8 @@ import pt.ulusofona.deisi.a2020.cm.g6.data.repositories.TesteCovidRepositry
 
 class RegistoLogic (private val repository: TesteCovidRepositry) {
 
-    private var testeCovid: TesteCovid? = null
 
     fun addTeste(testeCovid: TesteCovid){
         repository.saveTesteCovid(testeCovid)
     }
-
-
-
 }
