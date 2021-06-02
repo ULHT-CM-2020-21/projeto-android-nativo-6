@@ -252,47 +252,69 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
                     val confirmadosTotais = responseHoje.body()?.confirmados
                     if (confirmadosTotais != null) {
                         covidHoje.confirmadosTotais = confirmadosTotais
+                    }else{
+                        covidHoje.confirmadosTotais = 0
                     }
                     val recuperadosTotais = responseHoje.body()?.recuperados
                     if (recuperadosTotais != null) {
                         covidHoje.recuperadosTotais = recuperadosTotais
+                    }else{
+                        covidHoje.recuperadosTotais = 0
                     }
                     val obitosTotais = responseHoje.body()?.obitos
                     if (obitosTotais != null) {
                         covidHoje.obitosTotais = obitosTotais
+                    }else{
+                        covidHoje.obitosTotais = 0
                     }
                     var internadosTotais = responseHoje.body()?.internados
                     if (internadosTotais != null) {
                         covidHoje.internadosTotais = internadosTotais
+                    }else{
+                        covidHoje.internadosTotais = 0
                     }
 
                     var norteTotal = responseHoje.body()?.confirmados_arsnorte
                     if (norteTotal != null) {
                         covidHoje.norteTotal = norteTotal
+                    }else{
+                        covidHoje.norteTotal = 0
                     }
                     var centroTotal = responseHoje.body()?.confirmados_arscentro
                     if (centroTotal != null) {
                         covidHoje.centroTotal = centroTotal
+                    }else{
+                        covidHoje.centroTotal
                     }
                     var lisboaTotal = responseHoje.body()?.confirmados_arslvt
                     if (lisboaTotal != null) {
                         covidHoje.lisboaTotal = lisboaTotal
+                    }else{
+                        covidHoje.lisboaTotal = 0
                     }
                     var alentejoTotal = responseHoje.body()?.confirmados_arsalentejo
                     if (alentejoTotal != null) {
                         covidHoje.alentejoTotal = alentejoTotal
+                    }else{
+                        covidHoje.alentejoTotal = 0
                     }
                     var algarveTotal = responseHoje.body()?.confirmados_arsalgarve
                     if (algarveTotal != null) {
                         covidHoje.algarveTotal = algarveTotal
+                    }else{
+                        covidHoje.algarveTotal = 0
                     }
                     var madeiraTotal = responseHoje.body()?.confirmados_madeira
                     if (madeiraTotal != null) {
                         covidHoje.madeiraTotal = madeiraTotal
+                    }else{
+                        covidHoje.madeiraTotal = 0
                     }
                     var acoresTotal = responseHoje.body()?.confirmados_acores
                     if (acoresTotal != null) {
                         covidHoje.acoresTotal = acoresTotal
+                    }else{
+                        covidHoje.acoresTotal = 0
                     }
 
                     local.insert(covidHoje)
