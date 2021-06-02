@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.listaTestes.ListaTestesFragment">
+    tools:context=".ui.listaTestes.ListaTestesFragment"
+    android:theme="@style/AppTheme">
 
 
     <LinearLayout
@@ -18,7 +19,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"
             android:text="@string/listaTestesTitulo"
-            android:textColor="@color/black"
             android:layout_gravity="center"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -63,7 +63,6 @@
         android:id="@+id/semDadosMessage"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/black"
         android:textSize="30sp"
         android:text="@string/semDados"/>
 

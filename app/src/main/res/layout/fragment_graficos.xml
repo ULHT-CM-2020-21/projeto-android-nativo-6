@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.graficos.GraficosFragment">
+    tools:context=".ui.graficos.GraficosFragment"
+    android:theme="@style/AppTheme">
 
 
     <LinearLayout
@@ -26,7 +27,6 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/graficoConfirmados"
-            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,6 @@
             app:bar_show_auto_color="true"
             app:bar_show_value="true"
             app:bar_spaces="0dp"
-            app:bar_text_color="#000000"
             app:bar_text_size="10sp"
             app:bar_type="vertical"
             app:bar_width="20dp" />
@@ -55,8 +54,7 @@
             <TextView
                 android:id="@+id/endDateC"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:layout_width="150dp"
@@ -67,8 +65,7 @@
             <TextView
                 android:id="@+id/startDateC"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content"/>
 
 
         </LinearLayout>
@@ -80,7 +77,6 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/graficoRecuperados"
-            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -95,7 +91,6 @@
             app:bar_show_auto_color="true"
             app:bar_show_value="true"
             app:bar_spaces="0dp"
-            app:bar_text_color="#000000"
             app:bar_text_size="10sp"
             app:bar_type="vertical"
             app:bar_width="20dp" />
@@ -109,8 +104,7 @@
             <TextView
                 android:id="@+id/endDateR"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:layout_width="150dp"
@@ -121,8 +115,7 @@
             <TextView
                 android:id="@+id/startDateR"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <TextView
@@ -131,7 +124,6 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/graficoObitos"
-            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -146,7 +138,6 @@
             app:bar_show_auto_color="true"
             app:bar_show_value="true"
             app:bar_spaces="0dp"
-            app:bar_text_color="#000000"
             app:bar_text_size="10sp"
             app:bar_type="vertical"
             app:bar_width="20dp" />
@@ -160,8 +151,7 @@
             <TextView
                 android:id="@+id/endDateO"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:layout_width="150dp"
@@ -172,8 +162,7 @@
             <TextView
                 android:id="@+id/startDateO"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <TextView
@@ -182,7 +171,6 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/graficoInternados"
-            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold" />
 
@@ -197,7 +185,6 @@
             app:bar_show_auto_color="true"
             app:bar_show_value="true"
             app:bar_spaces="0dp"
-            app:bar_text_color="#000000"
             app:bar_text_size="10sp"
             app:bar_type="vertical"
             app:bar_width="20dp" />
@@ -211,8 +198,7 @@
             <TextView
                 android:id="@+id/endDateI"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:layout_width="150dp"
@@ -223,8 +209,7 @@
             <TextView
                 android:id="@+id/startDateI"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
 

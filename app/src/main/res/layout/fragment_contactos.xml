@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.contactos.ContactosFragment">
+    tools:context=".ui.contactos.ContactosFragment"
+    android:theme="@style/AppTheme">
 
 
     <LinearLayout
@@ -18,7 +19,6 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="@string/contactosTitulo"
-            android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -42,7 +42,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/INFOcontactoSNS24"
-                    android:textColor="@color/black"
                     android:textAlignment="center"/>
                 <Button
                     android:layout_width="match_parent"
@@ -72,7 +71,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/INFOcontactoSeguSocial"
-                    android:textColor="@color/black"
                     android:textAlignment="center"/>
                 <Button
                     android:layout_width="match_parent"
@@ -102,7 +100,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/INFOEmergenciaConsular"
-                    android:textColor="@color/black"
                     android:textAlignment="center"/>
                 <Button
                     android:layout_width="match_parent"
@@ -138,7 +135,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/INFOemailCovid"
-                    android:textColor="@color/black"
                     android:textAlignment="center"/>
                 <Button
                     android:layout_width="match_parent"
@@ -169,7 +165,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/INFOemailCovidDuvidas"
-                    android:textColor="@color/black"
                     android:textAlignment="center"/>
                 <Button
                     android:layout_width="match_parent"
@@ -198,7 +193,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/INFOEmergenciaConsular"
-                    android:textColor="@color/black"
                     android:textAlignment="center"/>
                 <Button
                     android:layout_width="match_parent"
@@ -228,7 +222,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/INFOLegislacao"
-                    android:textColor="@color/black"
                     android:textAlignment="center"/>
                 <Button
                     android:layout_width="match_parent"

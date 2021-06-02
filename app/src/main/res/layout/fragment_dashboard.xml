@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:theme="@style/AppTheme">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +49,6 @@
                             android:layout_height="30dp"
                             android:text="@string/confirmados"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             />
 
@@ -62,7 +62,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="25sp" />
 
                         <TextView
@@ -70,7 +69,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/grey"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -100,7 +98,6 @@
                             android:layout_height="30dp"
                             android:text="@string/recuperados"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             />
 
@@ -114,7 +111,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="25sp" />
 
                         <TextView
@@ -122,7 +118,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/grey"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -162,7 +157,6 @@
                             android:layout_height="30dp"
                             android:text="@string/mortes"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="20sp" />
 
                         <View
@@ -175,7 +169,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="25sp" />
 
                         <TextView
@@ -183,7 +176,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/grey"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -213,7 +205,6 @@
                             android:layout_height="30dp"
                             android:text="@string/internados"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="20sp" />
 
                         <View
@@ -226,7 +217,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/black"
                             android:textSize="25sp" />
 
 
@@ -236,7 +226,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:textAlignment="center"
-                            android:textColor="@color/grey"
                             android:textSize="16sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -271,7 +260,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:textAlignment="center"
-                android:textColor="@color/black"
                 android:text="@string/casosRegiao"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -306,7 +294,6 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:text="@string/norte"
                         android:textStyle="bold" />
@@ -322,7 +309,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -330,7 +316,6 @@
                             android:id="@+id/casosTotaisPN"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -344,7 +329,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -352,7 +336,6 @@
                             android:id="@+id/novosCasosPN"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -382,7 +365,6 @@
                         android:text="@string/centro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -397,7 +379,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -405,7 +386,6 @@
                             android:id="@+id/casosTotaisC"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -419,7 +399,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -427,7 +406,6 @@
                             android:id="@+id/novosCasosC"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -458,7 +436,6 @@
                        android:text="@string/LVT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -473,7 +450,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -481,7 +457,6 @@
                             android:id="@+id/casosTotaisLVT"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -495,7 +470,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -503,7 +477,6 @@
                             android:id="@+id/novosCasosLVT"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -534,7 +507,6 @@
                       android:text="@string/alentejo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -549,7 +521,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -557,7 +528,6 @@
                             android:id="@+id/casosTotaisAlentejo"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -571,7 +541,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -579,7 +548,6 @@
                             android:id="@+id/novosCasosAlentejo"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -610,7 +578,6 @@
                         android:text="@string/algarve"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -625,7 +592,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -633,7 +599,6 @@
                             android:id="@+id/casosTotaisAlgarve"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -647,7 +612,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -655,7 +619,6 @@
                             android:id="@+id/novosCasosAlgarve"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -686,7 +649,6 @@
                         android:text="@string/acores"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -701,7 +663,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -709,7 +670,6 @@
                             android:id="@+id/casosTotaisAcores"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -723,7 +683,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -731,7 +690,6 @@
                             android:id="@+id/novosCasosAcores"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -762,7 +720,6 @@
                         android:text="@string/madeira"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -777,7 +734,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textColor="@color/black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -785,7 +741,6 @@
                             android:id="@+id/casosTotaisMadeira"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="18sp" />
                     </LinearLayout>
 
@@ -799,7 +754,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textColor="@color/black"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -807,7 +761,6 @@
                             android:id="@+id/novosCasosMadeira"
                             android:layout_width="70dp"
                             android:layout_height="25dp"
-                            android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
