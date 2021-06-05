@@ -11,10 +11,11 @@ abstract class Permissioned(private val requestCode: Int): AppCompatActivity() {
     fun onRequestPermissions(context: Context, permissions: Array<String>){
         var permissionsGive = 0
         permissions.forEach {
-            if(checkSelfPermission(context,it) != PackageManager.PERMISSION_GRANTED){
-                requestPermissions(permissions,requestCode)
-            }else{
+            if(checkSelfPermission(context,it) == PackageManager.PERMISSION_GRANTED){
                 permissionsGive++
+            }else{
+                requestPermissions((permissions),requestCode)
+                return
             }
         }
         if(permissionsGive == permissions.size){

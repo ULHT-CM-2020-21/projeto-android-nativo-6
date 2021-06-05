@@ -14,8 +14,7 @@ import java.util.*
 class CovidResponsePast {
 
 
-    @SerializedName("data")
-    var data: LinkedTreeMap<String, String> =  LinkedTreeMap()
+    @SerializedName("data") var data: LinkedTreeMap<String, String> =  LinkedTreeMap()
 
     @SerializedName("confirmados")
     var confirmados:  LinkedTreeMap<String, Int> =  LinkedTreeMap()

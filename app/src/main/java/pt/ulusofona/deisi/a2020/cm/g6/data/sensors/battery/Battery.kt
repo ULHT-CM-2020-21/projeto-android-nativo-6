@@ -16,7 +16,7 @@ class Battery private constructor(private val context: Context): Runnable{
     private val TAG = Battery::class.java.simpleName
 
     // Intervalo de tempo em que a thread será lançada
-    private val TIME_BETWEEN_UPDATES = 1*1000L
+    private val TIME_BETWEEN_UPDATES = 60*1000L
 
     companion object {
         private var listener: OnBatteryPercentageListener? = null
@@ -43,6 +43,8 @@ class Battery private constructor(private val context: Context): Runnable{
 
     private fun start(){
         // Agenda a execução da thread pela primeira vez
+        handler.post(this)
+        // adicionamos o delay depois de correr a primeira vez
         handler.postDelayed(this, TIME_BETWEEN_UPDATES)
     }
 

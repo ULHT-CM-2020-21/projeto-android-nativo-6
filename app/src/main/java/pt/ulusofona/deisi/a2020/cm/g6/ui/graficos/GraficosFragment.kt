@@ -44,10 +44,9 @@ class GraficosFragment : Fragment(), GraficoUIListener {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //viewModel.unregisterViewListener(this)
-    }
+
+
+
 
     override fun onUpdateUI(grafico: Grafico) {
         bar_chart_Confirmados.barMaxValue = grafico.maxConfirmados

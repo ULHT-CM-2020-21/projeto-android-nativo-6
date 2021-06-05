@@ -1,44 +1,39 @@
 package pt.ulusofona.deisi.a2020.cm.g6.ui
 
-import android.app.UiModeManager
-import android.app.UiModeManager.MODE_NIGHT_NO
-import android.app.UiModeManager.MODE_NIGHT_YES
-import android.content.Context
-import android.content.Intent
-import android.os.BatteryManager
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import com.google.android.gms.location.LocationResult
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import pt.ulusofona.deisi.a2020.cm.g6.R
-import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.CovidDatabase
-import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.Covid
+import pt.ulusofona.deisi.a2020.cm.g6.data.remote.LocalizacaoRemote
 import pt.ulusofona.deisi.a2020.cm.g6.data.sensors.battery.Battery
-import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.OnBatteryPercentageListener
 import pt.ulusofona.deisi.a2020.cm.g6.data.sensors.location.FusedLocation
 import pt.ulusofona.deisi.a2020.cm.g6.data.sensors.location.OnLocationChangedListener
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.FetchDanger
+import pt.ulusofona.deisi.a2020.cm.g6.ui.listener.OnBatteryPercentageListener
 import pt.ulusofona.deisi.a2020.cm.g6.ui.permissoes.Permissioned
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
-import java.util.jar.Manifest
+import java.util.*
+
 
 const val REQUEST_CODE = 100
 
 
-class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener, OnLocationChangedListener{
+class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener, OnLocationChangedListener, FetchDanger{
     override fun onRequestPermissionsSuccess() {
         FusedLocation.start(this)
         FusedLocation.registerListener(this)
     }
 
     override fun onRequestPermissionsFailure() {
-        println("ERRO Location")
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +48,16 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
 
     override fun onStart() {
         super.onStart()
-        super.onRequestPermissions(baseContext, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION))
+        super.onRequestPermissions(
+            baseContext, arrayOf(
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.CAMERA
+            )
+        )
+        LocalizacaoRemote.registerListener(this)
     }
+
 
     private fun setupDrawerMenu(){
         val toggle = ActionBarDrawerToggle(
@@ -79,17 +82,6 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
 
-    override fun onResume() {
-        super.onResume()
-        val rnds = (0..1).random()
-        if(rnds == 0){
-            text_perigo.setText(R.string.NOdanger)
-            imagePerigo.setImageResource(R.drawable.green)
-        }else{
-            text_perigo.setText(R.string.danger)
-            imagePerigo.setImageResource(R.drawable.red)
-        }
-    }
 
 
 
@@ -106,19 +98,50 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
     override fun onPercentageChanged(value: Float) {
-        println(value)
+        println("1")
         if(value <= 20.0){
-            println("tou dark")
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
-            println("tou claro")
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
     override fun onLocationChanged(locationResult: LocationResult) {
         val location = locationResult.lastLocation
-        println(location.altitude)
-        println(location.longitude)
+        val geocoder: Geocoder
+        val addresses: List<Address>
+        geocoder = Geocoder(this, Locale.getDefault())
+        addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        if( addresses[0].getAdminArea() != null){
+            val state: String = addresses[0].getAdminArea()
+            LocalizacaoRemote.getLocationDanger(state)
+        }
+
+    }
+
+    override fun onfecthDanger(resultado: String) {
+        when (resultado.toLowerCase()) {
+            "muito baixa" -> text_perigo.setText(R.string.muitobaixa)
+            "baixa" -> text_perigo.setText(R.string.baixa)
+
+            "baixo a moderado" -> text_perigo.setText(R.string.baixoModerado)
+            "moderado" -> text_perigo.setText(R.string.moderado)
+
+            "elevada" -> text_perigo.setText(R.string.elevada)
+            "muito elevada" -> text_perigo.setText(R.string.muitoElevada)
+            "extremamente elevada" -> text_perigo.setText(R.string.extraElevada)
+        }
+
+        when (resultado.toLowerCase()) {
+            "muito baixa" -> imagePerigo.setImageResource(R.drawable.green)
+            "baixa" -> imagePerigo.setImageResource(R.drawable.green)
+
+            "baixo a moderado" -> imagePerigo.setImageResource(R.drawable.yellow)
+            "moderado" -> imagePerigo.setImageResource(R.drawable.orange)
+
+            "elevada" -> imagePerigo.setImageResource(R.drawable.red)
+            "muito elevada" -> imagePerigo.setImageResource(R.drawable.red)
+            "extremamente elevada" -> imagePerigo.setImageResource(R.drawable.red)
+        }
     }
 
 

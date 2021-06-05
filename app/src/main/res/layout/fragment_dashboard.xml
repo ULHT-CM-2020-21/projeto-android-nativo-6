@@ -310,7 +310,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            />
 
                         <TextView
                             android:id="@+id/casosTotaisPN"
@@ -329,8 +329,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/novosCasosPN"
@@ -379,8 +378,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/casosTotaisC"
@@ -399,8 +397,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/novosCasosC"
@@ -450,8 +447,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/casosTotaisLVT"
@@ -470,8 +466,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/novosCasosLVT"
@@ -522,7 +517,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            />
 
                         <TextView
                             android:id="@+id/casosTotaisAlentejo"
@@ -542,7 +537,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            />
 
                         <TextView
                             android:id="@+id/novosCasosAlentejo"
@@ -592,8 +587,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/casosTotaisAlgarve"
@@ -613,7 +607,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            />
 
                         <TextView
                             android:id="@+id/novosCasosAlgarve"
@@ -664,7 +658,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
                             android:textSize="20sp"
-                            android:textStyle="bold" />
+                            />
 
                         <TextView
                             android:id="@+id/casosTotaisAcores"
@@ -683,8 +677,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/novosCasosAcores"
@@ -734,8 +727,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/casosTotais"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/casosTotaisMadeira"
@@ -755,7 +747,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/casos24"
                             android:textSize="15sp"
-                            android:textStyle="bold" />
+                            />
 
                         <TextView
                             android:id="@+id/novosCasosMadeira"

@@ -69,6 +69,18 @@
     <string name="semFoto">No Photo!</string>
     <string name="temFoto">It has a Photo!</string>
 
+    <string name="risco">RISK:</string>
+
+    <string name="muitobaixa">Very Low</string>
+    <string name="baixa">Low</string>
+    <string name="baixoModerado">Low to Moderate</string>
+    <string name="moderado">Moderate</string>
+    <string name="elevada">High</string>
+    <string name="muitoElevada">Very High</string>
+    <string name="extraElevada">Extremely High</string>
+
+
+
 
     <!-- Drawer -->
 

@@ -9,11 +9,11 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 
-class FusedLocation private constructor( context: Context): LocationCallback() {
+class FusedLocation private constructor(var context: Context): LocationCallback() {
 
     private val TAG = FusedLocation::class.java.simpleName
 
-    private val TIME_BETWEEN_UPDATES = 20* 1000L
+    private val TIME_BETWEEN_UPDATES = 60* 1000L
 
     private var locationRequest: LocationRequest? = null
 
@@ -55,17 +55,22 @@ class FusedLocation private constructor( context: Context): LocationCallback() {
 
 
 
-    @SuppressLint("MissingPermission")
     private fun startLocationUpdates(){
-        client.requestLocationUpdates(locationRequest,this, Looper.myLooper())
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }else{
+            client.requestLocationUpdates(locationRequest,this, Looper.myLooper())
+        }
     }
 
     override fun onLocationResult(locationResult: LocationResult?) {
         Log.i(TAG, locationResult?.lastLocation.toString())
         locationResult?.let { notifyListeners(it) }
         super.onLocationResult(locationResult)
-
-
     }
 
 }
