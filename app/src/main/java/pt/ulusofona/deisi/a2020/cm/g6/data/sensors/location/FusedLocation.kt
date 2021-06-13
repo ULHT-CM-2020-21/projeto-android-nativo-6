@@ -53,7 +53,6 @@ class FusedLocation private constructor(var context: Context): LocationCallback(
         fun start(context: Context){
           instance = if (instance == null) FusedLocation(context) else instance
                 instance?.startLocationUpdates()
-            println("start")
         }
     }
 
@@ -68,13 +67,11 @@ class FusedLocation private constructor(var context: Context): LocationCallback(
         ) {
             return
         }else{
-            println("tenho e vou")
             client.requestLocationUpdates(locationRequest,this, Looper.myLooper())
         }
     }
 
     override fun onLocationResult(locationResult: LocationResult?) {
-        println("oi")
 
         locationResult?.let { notifyListeners(it) }
         super.onLocationResult(locationResult)

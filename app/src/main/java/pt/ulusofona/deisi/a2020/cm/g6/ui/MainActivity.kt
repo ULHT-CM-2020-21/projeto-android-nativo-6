@@ -28,7 +28,6 @@ const val REQUEST_CODE = 100
 
 class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener, OnLocationChangedListener, FetchDanger {
     override fun onRequestPermissionsSuccess() {
-        println("comecie locatio")
         FusedLocation.start(this)
         FusedLocation.registerListener(this)
     }
