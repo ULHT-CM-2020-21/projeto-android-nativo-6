@@ -6,10 +6,16 @@ Numero Grupo: 6
 Realizado Por:  
 Martim Mourão 21805485  
 Gonçalo Évora 21805468  
-LINK YOUTUBE: https://youtu.be/y0EeB97Izkk  
-APK: https://drive.google.com/file/d/1QkIgsKDyEEmAxF0frCocGFpg2xcbpwWn/view?usp=sharing  
 
-## Autoavaliação  
+## PARTE 1
+LINK YOUTUBE PARTE 1: https://youtu.be/y0EeB97Izkk  
+APK PARTE 1: https://drive.google.com/file/d/1QkIgsKDyEEmAxF0frCocGFpg2xcbpwWn/view?usp=sharing  
+
+## PARTE 2
+LINK YOUTUBE PARTE 2: 
+APK PARTE 2:
+
+## Autoavaliação  PARTE 1
 Dashboard 3 - 3  
 Registo de testes 2 - 2  
 Listagem de testes 2 - 2  
@@ -21,6 +27,22 @@ Extra 3 - 2
 Participação no Piazza 1 - 1  
 Video 2 - 1,5  
 TOTAL: 18/20  
+
+## Autoavaliação  PARTE 2
+Dashboard 2 - 2  
+Registo de testes 2 - 2  
+Listagem de testes 1,5 - 1,5  
+Detalhe dos testes 1,5 - 1,5  
+Autonomia 1,5 - 1,5  
+Estou em perigo? 3,5 - 3  
+Modelo de navegação 2,5 - 2  
+Extra 2 - 1  
+Participação no Piazza 1 - 1  
+Video 2,5 - 2  
+TOTAL: 17,5/20  
+
+## Identificar as melhorias caso existam
+Em termos de UI não houve modificações.
 
 # Dicionario Dados
 
