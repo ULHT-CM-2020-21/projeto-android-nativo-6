@@ -36,12 +36,9 @@ class DashboardFragment : Fragment(), DashboardUIListener {
         viewModel.askDataCovid()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //viewModel.unregisterViewListener(this)
-    }
 
     fun deafultValuesforUI() {
+
         numero_internados.text = "0"
         numero_confirmados.text = "0"
         numero_obitos.text = "0"

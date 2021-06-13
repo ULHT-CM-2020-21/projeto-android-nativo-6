@@ -25,11 +25,18 @@
                  android:layout_height="wrap_content"
                  android:layout_gravity="end">
 
+                 <TextView
+                     android:id="@+id/risco"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginEnd="10dp"
+                     android:text="@string/risco"
+                     android:textColor="@color/white"
+                     android:textSize="15sp"/>
                  <ImageView
                      android:id="@+id/imagePerigo"
                      android:layout_width="20dp"
                      android:layout_height="20dp"
-                     android:src="@drawable/green"
                      android:layout_marginEnd="5dp"
                      android:layout_gravity="center"/>
                  <TextView
@@ -37,7 +44,6 @@
                      android:layout_width="wrap_content"
                      android:layout_height="wrap_content"
                      android:layout_marginEnd="10dp"
-                     android:text="@string/danger"
                      android:textColor="@color/white"
                      android:textSize="15sp"/>
              </LinearLayout>

@@ -82,7 +82,7 @@ class RegistoFragment : Fragment() {
         }
     }
 
-    val REQUEST_IMAGE_CAPTURE = 1
+    val REQUEST_TAKE_PHOTO = 1
      var photoURIFinal: Uri? = null
     private fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
@@ -92,7 +92,6 @@ class RegistoFragment : Fragment() {
                 val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
-                    // Error occurred while creating the File
                     null
                 }
                 // Continue only if the File was successfully created
@@ -104,7 +103,7 @@ class RegistoFragment : Fragment() {
                     )
                     photoURIFinal = photoURI
                     takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
                 }
             }
         }

@@ -13,6 +13,7 @@ import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.Grafico
 import retrofit2.Response
 import retrofit2.Retrofit
 import java.io.IOException
+import java.lang.Math.abs
 import java.net.InetAddress
 import java.text.SimpleDateFormat
 import java.util.*
@@ -353,18 +354,72 @@ class CovidRepository(private val local: CovidDao, private val remote: Retrofit)
     // Calcular dados entre duas datas (Covid 24 horas)
     private fun calcularDadosCovidEntreDatas(covidAtual: Covid, covidAntigo: Covid): Covid {
 
-        covidAtual.confirmados24 = (covidAtual.confirmadosTotais.minus(covidAntigo.confirmadosTotais))
-        covidAtual.internados24 = (covidAtual.internadosTotais.minus(covidAntigo.internadosTotais))
-        covidAtual.obitos24 = (covidAtual.obitosTotais.minus(covidAntigo.obitosTotais))
-        covidAtual.recuperados24 = (covidAtual.recuperadosTotais.minus(covidAntigo.recuperadosTotais))
+        if(covidAtual.confirmadosTotais == 0 || covidAntigo.confirmadosTotais == 0){
+            covidAtual.confirmados24 = 0
+        }else{
+            covidAtual.confirmados24 = (covidAtual.confirmadosTotais.minus(covidAntigo.confirmadosTotais))
+        }
+        if(covidAtual.internadosTotais == 0 || covidAntigo.confirmadosTotais == 0){
+            covidAtual.internados24 = 0
+        }else{
+            covidAtual.internados24 = (covidAtual.internadosTotais.minus(covidAntigo.internadosTotais))
+        }
 
-        covidAtual.norte24 = (covidAtual.norteTotal.minus(covidAntigo.norteTotal))
-        covidAtual.centro24 = (covidAtual.centroTotal.minus(covidAntigo.centroTotal))
-        covidAtual.lisboa24 = (covidAtual.lisboaTotal.minus(covidAntigo.lisboaTotal))
-        covidAtual.alentejo24 = (covidAtual.alentejoTotal.minus(covidAntigo.alentejoTotal))
-        covidAtual.algarve24 = (covidAtual.algarveTotal.minus(covidAntigo.algarveTotal))
-        covidAtual.acores24 = (covidAtual.acoresTotal.minus(covidAntigo.acoresTotal))
-        covidAtual.madeira24 = (covidAtual.madeiraTotal.minus(covidAntigo.madeiraTotal))
+        if(covidAtual.obitosTotais == 0 || covidAntigo.obitosTotais == 0){
+            covidAtual.obitos24 = 0
+        }else{
+            covidAtual.obitos24 = (covidAtual.obitosTotais.minus(covidAntigo.obitosTotais))
+        }
+
+        if(covidAtual.recuperadosTotais == 0 || covidAntigo.recuperadosTotais == 0 ){
+            covidAtual.recuperados24 = 0
+        }else{
+            covidAtual.recuperados24 = (covidAtual.recuperadosTotais.minus(covidAntigo.recuperadosTotais))
+        }
+
+
+        if(covidAtual.norteTotal == 0 || covidAntigo.norteTotal == 0 ){
+            covidAtual.norte24 = 0
+        }else{
+            covidAtual.norte24 = (covidAtual.norteTotal.minus(covidAntigo.norteTotal))
+        }
+
+        if(covidAtual.centroTotal == 0 || covidAntigo.centroTotal == 0 ){
+            covidAtual.centro24 = 0
+        }else{
+            covidAtual.centro24 = (covidAtual.centroTotal.minus(covidAntigo.centroTotal))
+        }
+
+        if(covidAtual.lisboaTotal == 0 || covidAntigo.lisboaTotal == 0 ){
+            covidAtual.lisboa24 = 0
+        }else{
+            covidAtual.lisboa24 = (covidAtual.lisboaTotal.minus(covidAntigo.lisboaTotal))
+        }
+
+        if(covidAtual.alentejoTotal == 0 || covidAntigo.alentejoTotal == 0 ){
+            covidAtual.alentejo24 = 0
+        }else{
+            covidAtual.alentejo24 = (covidAtual.alentejoTotal.minus(covidAntigo.alentejoTotal))
+        }
+
+        if(covidAtual.algarveTotal == 0 || covidAntigo.algarveTotal == 0 ){
+            covidAtual.algarve24 = 0
+        }else{
+            covidAtual.algarve24 = (covidAtual.algarveTotal.minus(covidAntigo.algarveTotal))
+        }
+
+        if(covidAtual.acoresTotal == 0 || covidAntigo.acoresTotal == 0 ){
+            covidAtual.acores24 = 0
+        }else{
+            covidAtual.acores24 = (covidAtual.acoresTotal.minus(covidAntigo.acoresTotal))
+        }
+
+        if(covidAtual.madeiraTotal == 0 || covidAntigo.madeiraTotal == 0 ){
+            covidAtual.madeira24 = 0
+        }else{
+            covidAtual.madeira24 = (covidAtual.madeiraTotal.minus(covidAntigo.madeiraTotal))
+        }
+
 
         return covidAtual
     }
