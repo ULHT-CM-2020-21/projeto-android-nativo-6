@@ -26,7 +26,7 @@ import java.util.*
 const val REQUEST_CODE = 100
 
 
-class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener, OnLocationChangedListener, FetchDanger{
+class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener, OnLocationChangedListener, FetchDanger {
     override fun onRequestPermissionsSuccess() {
         FusedLocation.start(this)
         FusedLocation.registerListener(this)
@@ -61,7 +61,7 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
 
-    private fun setupDrawerMenu(){
+    private fun setupDrawerMenu() {
         val toggle = ActionBarDrawerToggle(
             this,
             drawer,
@@ -84,11 +84,8 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
 
-
-
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.nav_dashboard -> NavigationManager.goToDashboardFragment(supportFragmentManager)
             R.id.nav_Test -> NavigationManager.goToRegisto(supportFragmentManager)
             R.id.list_tests -> NavigationManager.goToListTestes(supportFragmentManager)
@@ -100,19 +97,20 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
     override fun onPercentageChanged(value: Float) {
-        if(value <= 20.0){
+        if (value <= 20.0) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }
+
     override fun onLocationChanged(locationResult: LocationResult) {
         val location = locationResult.lastLocation
         val geocoder: Geocoder
         val addresses: List<Address>
         geocoder = Geocoder(this, Locale.getDefault())
         addresses = geocoder.getFromLocation(location.latitude, location.longitude, 1)
-        if( addresses[0].getAdminArea() != null){
+        if (addresses[0].getAdminArea() != null) {
             val state: String = addresses[0].getAdminArea()
             LocalizacaoRemote.getLocationDanger(state)
         }
