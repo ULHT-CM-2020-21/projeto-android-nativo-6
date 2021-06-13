@@ -12,8 +12,8 @@ LINK YOUTUBE PARTE 1: https://youtu.be/y0EeB97Izkk
 APK PARTE 1: https://drive.google.com/file/d/1QkIgsKDyEEmAxF0frCocGFpg2xcbpwWn/view?usp=sharing  
 
 ## PARTE 2
-LINK YOUTUBE PARTE 2: 
-APK PARTE 2:
+LINK YOUTUBE PARTE 2: https://youtu.be/cXLvk2J3foE
+APK PARTE 2: Entrega no moodle
 
 ## Autoavaliação  PARTE 1
 Dashboard 3 - 3  
@@ -38,8 +38,8 @@ Estou em perigo? 3,5 - 3
 Modelo de navegação 2,5 - 2  
 Extra 2 - 1  
 Participação no Piazza 1 - 1  
-Video 2,5 - 2  
-TOTAL: 17,5/20  
+Video 2,5 - 1,5  
+TOTAL: 17/20  
 
 ## Identificar as melhorias caso existam
 Em termos de UI não houve modificações.
