@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">COVID Info</string>
+    <string name="app_name">COVID</string>
     <string name="detalheTeste">Detalhe do teste</string>
     <string name="registoTeste">Registo do Teste</string>
     <string name="localTeste">Local do Teste</string>
@@ -48,7 +48,7 @@
     <string name="graficoConfirmados">Gráfico Confirmados</string>
     <string name="graficoRecuperados">Gráfico Recuperados</string>
     <string name="graficoObitos">Gráfico Obitos</string>
-    <string name="graficoInternados">Gráfico Internados</string>
+    <string name="graficoInternados">Gráfico Novos Internados</string>
 
     <string name="contactoSNS24">+351 808 24 24 24</string>
     <string name="contactoSeguSocial">+351 300 502 502</string>
@@ -70,6 +70,8 @@
     <string name="temFoto">Tem Fotografia!</string>
     <string name="semDados">Sem Dados</string>
     <string name="risco">RISCO:</string>
+
+    <string name="erroCamera">Sem Permissões</string>
 
     <string name="muitobaixa">Muito Baixo</string>
     <string name="baixa">Baixo</string>

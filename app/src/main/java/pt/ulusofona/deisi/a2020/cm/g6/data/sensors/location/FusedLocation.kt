@@ -8,6 +8,10 @@ import android.os.Looper
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.DisposableHandle
+import kotlinx.coroutines.launch
 
 class FusedLocation private constructor(var context: Context): LocationCallback() {
 
@@ -48,7 +52,8 @@ class FusedLocation private constructor(var context: Context): LocationCallback(
 
         fun start(context: Context){
           instance = if (instance == null) FusedLocation(context) else instance
-            instance?.startLocationUpdates()
+                instance?.startLocationUpdates()
+            println("start")
         }
     }
 
@@ -63,11 +68,14 @@ class FusedLocation private constructor(var context: Context): LocationCallback(
         ) {
             return
         }else{
+            println("tenho e vou")
             client.requestLocationUpdates(locationRequest,this, Looper.myLooper())
         }
     }
 
     override fun onLocationResult(locationResult: LocationResult?) {
+        println("oi")
+
         locationResult?.let { notifyListeners(it) }
         super.onLocationResult(locationResult)
     }

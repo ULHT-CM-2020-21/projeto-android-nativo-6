@@ -28,6 +28,7 @@ const val REQUEST_CODE = 100
 
 class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItemSelectedListener, OnBatteryPercentageListener, OnLocationChangedListener, FetchDanger {
     override fun onRequestPermissionsSuccess() {
+        println("comecie locatio")
         FusedLocation.start(this)
         FusedLocation.registerListener(this)
     }
@@ -118,7 +119,6 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
     override fun onfecthDanger(resultado: String) {
-
         when (resultado.toLowerCase()) {
             "muito baixa" -> text_perigo.setText(R.string.muitobaixa)
             "baixa" -> text_perigo.setText(R.string.baixa)
@@ -129,7 +129,7 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
             "elevada" -> text_perigo.setText(R.string.elevada)
             "muito elevada" -> text_perigo.setText(R.string.muitoElevada)
             "extremamente elevada" -> text_perigo.setText(R.string.extraElevada)
-            else -> text_perigo.setText("NA")
+            else -> text_perigo.setText("N/A")
         }
 
         when (resultado.toLowerCase()) {

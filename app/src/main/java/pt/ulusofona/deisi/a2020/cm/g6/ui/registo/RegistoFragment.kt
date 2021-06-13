@@ -1,8 +1,11 @@
 package pt.ulusofona.deisi.a2020.cm.g6.ui.registo
 
+import android.Manifest
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
@@ -14,6 +17,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -25,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_registo.view.*
 import pt.ulusofona.deisi.a2020.cm.g6.R
 import pt.ulusofona.deisi.a2020.cm.g6.data.local.room.entities.TesteCovid
 import pt.ulusofona.deisi.a2020.cm.g6.ui.MainActivity
+import pt.ulusofona.deisi.a2020.cm.g6.ui.REQUEST_CODE
 import pt.ulusofona.deisi.a2020.cm.g6.ui.utils.NavigationManager
 import java.io.File
 import java.io.IOException
@@ -55,7 +61,7 @@ class RegistoFragment : Fragment() {
         super.onStart()
 
         dataTeste.setOnClickListener {
-           hideKeyboard(dataTeste)
+            hideKeyboard(dataTeste)
             showPicker()
         }
 
@@ -83,35 +89,35 @@ class RegistoFragment : Fragment() {
     }
 
     val REQUEST_TAKE_PHOTO = 1
-     var photoURIFinal: Uri? = null
+    var photoURIFinal: Uri? = null
     private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            // Ensure that there's a camera activity to handle the intent
-            takePictureIntent.resolveActivity(activity?.packageManager!!)?.also {
-                // Create the File where the photo should go
-                val photoFile: File? = try {
-                    createImageFile()
-                } catch (ex: IOException) {
-                    null
-                }
-                // Continue only if the File was successfully created
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        requireContext(),
-                        "pt.ulusofona.deisi.a2020.cm.g6",
-                        it
-                    )
-                    photoURIFinal = photoURI
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
-                }
+        if(ActivityCompat.checkSelfPermission(activity as Context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ){
+            Toast.makeText(activity as Context,R.string.erroCamera,Toast.LENGTH_SHORT).show()
+        }else{
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val photoFile: File? = try {
+                createImageFile()
+            } catch (ex: IOException) {
+                null
+            }
+            photoFile?.also {
+                val photoURI: Uri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "pt.ulusofona.deisi.a2020.cm.g6",
+                    it
+                )
+                photoURIFinal = photoURI
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                startActivityForResult(intent, REQUEST_TAKE_PHOTO)
             }
         }
+
+
     }
 
 
     @OnClick(R.id.submeterTeste)
-    fun onSubmeterTesteNovoClick(){
+    fun onSubmeterTesteNovoClick() {
         var check = true
         val editLocal = localTeste
         val editData = dataTeste
@@ -143,7 +149,7 @@ class RegistoFragment : Fragment() {
         if (check) {
             testeSubmete.local = editLocalString
             testeSubmete.data = editDataString
-            if(photoURIFinal != null){
+            if (photoURIFinal != null) {
                 testeSubmete.fotoPath = photoURIFinal.toString()
                 testeSubmete.temFoto = true
             }
@@ -206,7 +212,7 @@ class RegistoFragment : Fragment() {
     }
 
 
-    fun hideKeyboard(view: View){
+    fun hideKeyboard(view: View) {
         val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
