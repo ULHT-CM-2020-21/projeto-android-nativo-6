@@ -13,7 +13,7 @@ class FusedLocation private constructor(var context: Context): LocationCallback(
 
     private val TAG = FusedLocation::class.java.simpleName
 
-    private val TIME_BETWEEN_UPDATES = 60* 1000L
+    private val TIME_BETWEEN_UPDATES = 5* 1000L
 
     private var locationRequest: LocationRequest? = null
 
@@ -68,7 +68,6 @@ class FusedLocation private constructor(var context: Context): LocationCallback(
     }
 
     override fun onLocationResult(locationResult: LocationResult?) {
-        Log.i(TAG, locationResult?.lastLocation.toString())
         locationResult?.let { notifyListeners(it) }
         super.onLocationResult(locationResult)
     }

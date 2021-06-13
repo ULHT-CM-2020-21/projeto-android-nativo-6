@@ -32,13 +32,11 @@ class LocalizacaoRemote {
             CoroutineScope(Dispatchers.IO).launch {
                 val remote = RetrofitBuilder.getInstance(ENDPOINT)
                 val service = remote.create(CovidService::class.java)
-                println(distrito)
                 val response = service.getDistritoInfo(distrito)
-                var resultado = response.execute().body()?.get(0)?.incidencia_risco
-                if (resultado != null) {
-                    println(resultado)
-                    notifyListeners(resultado)
-                }
+                var resultado = ""
+                resultado = response.execute().body()?.get(0)?.incidencia_risco.toString()
+                notifyListeners(resultado)
+
 
             }
         }

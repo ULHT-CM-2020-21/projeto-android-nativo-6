@@ -50,12 +50,14 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
         super.onStart()
         super.onRequestPermissions(
             baseContext, arrayOf(
+                android.Manifest.permission.CAMERA,
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                android.Manifest.permission.CAMERA
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
         LocalizacaoRemote.registerListener(this)
+        text_perigo.setText("N/A")
+        imagePerigo.setImageResource(R.drawable.error)
     }
 
 
@@ -98,7 +100,6 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
     override fun onPercentageChanged(value: Float) {
-        println("1")
         if(value <= 20.0){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
@@ -119,6 +120,7 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
     }
 
     override fun onfecthDanger(resultado: String) {
+
         when (resultado.toLowerCase()) {
             "muito baixa" -> text_perigo.setText(R.string.muitobaixa)
             "baixa" -> text_perigo.setText(R.string.baixa)
@@ -129,6 +131,7 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
             "elevada" -> text_perigo.setText(R.string.elevada)
             "muito elevada" -> text_perigo.setText(R.string.muitoElevada)
             "extremamente elevada" -> text_perigo.setText(R.string.extraElevada)
+            else -> text_perigo.setText("NA")
         }
 
         when (resultado.toLowerCase()) {
@@ -141,6 +144,7 @@ class MainActivity : Permissioned(REQUEST_CODE), NavigationView.OnNavigationItem
             "elevada" -> imagePerigo.setImageResource(R.drawable.red)
             "muito elevada" -> imagePerigo.setImageResource(R.drawable.red)
             "extremamente elevada" -> imagePerigo.setImageResource(R.drawable.red)
+            else -> imagePerigo.setImageResource(R.drawable.error)
         }
     }
 
