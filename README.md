@@ -9,7 +9,6 @@ Gonçalo Évora 21805468
 
 ## PARTE 1
 LINK YOUTUBE PARTE 1: https://youtu.be/y0EeB97Izkk  
-APK PARTE 1: https://drive.google.com/file/d/1QkIgsKDyEEmAxF0frCocGFpg2xcbpwWn/view?usp=sharing  
 
 ## PARTE 2
 LINK YOUTUBE PARTE 2: https://youtu.be/cXLvk2J3foE
